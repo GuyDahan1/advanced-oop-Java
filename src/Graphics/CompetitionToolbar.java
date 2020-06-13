@@ -10,7 +10,7 @@ import java.awt.*;
 public class CompetitionToolbar extends JPanel {
 
     private final JButton competitionBtn;
-    private final JButton addAnimalBtn;
+    private final JButton startBtn;
     private final JButton clearBtn;
     private final JButton eatBtn;
     private final JButton infoBtn;
@@ -32,8 +32,8 @@ public class CompetitionToolbar extends JPanel {
 
         competitionBtn = new JButton("Competition");
         competitionBtn.setPreferredSize(btnSize);
-        addAnimalBtn = new JButton("Add Animal");
-        addAnimalBtn.setPreferredSize(btnSize);
+        startBtn = new JButton("Start");
+        startBtn.setPreferredSize(btnSize);
         clearBtn = new JButton("Clear");
         clearBtn.setPreferredSize(btnSize);
         eatBtn = new JButton("Eat");
@@ -44,15 +44,15 @@ public class CompetitionToolbar extends JPanel {
         exitBtn.setPreferredSize(btnSize);
 
         add(competitionBtn);
-        add(addAnimalBtn);
+        add(startBtn);
         add(clearBtn);
         add(eatBtn);
         add(infoBtn);
         add(exitBtn);
     }
 
-    public JButton getAddAnimalBtn() {
-        return addAnimalBtn;
+    public JButton getStartBtn() {
+        return startBtn;
     }
 
     public JButton getClearBtn() {

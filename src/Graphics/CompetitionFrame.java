@@ -26,7 +26,9 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private final int maxAirAnimal = 5;
 
     static Point[] startPointWater;
+    static Point[] endPointWater;
     static Point[] startPoint;
+    static Point[] endPoint;
 
     String animalNameTemp;
 
@@ -46,7 +48,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private GameState gameState;
 
 
-
     /**
      * CompetitionFrame constructor.
      */
@@ -56,7 +57,9 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
 
         startPointWater = new Point[maxNonAirAnimal];
+        endPointWater = new Point[maxNonAirAnimal];
         startPoint = new Point[maxAirAnimal];
+        endPoint = new Point[maxAirAnimal];
 
         pointInit();
 
@@ -78,7 +81,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         competitionPanel.getCompetitionToolbar().getInfoBtn().addActionListener(this);
         competitionPanel.getCompetitionToolbar().getEatBtn().addActionListener(this);
         competitionPanel.getCompetitionToolbar().getClearBtn().addActionListener(this);
-        competitionPanel.getCompetitionToolbar().getAddAnimalBtn().addActionListener(this);
+        competitionPanel.getCompetitionToolbar().getStartBtn().addActionListener(this);
         competitionPanel.getCompetitionToolbar().getCompetitionBtn().addActionListener(this);
 
         gameState = GameState.CHOOSING_COMP_TYPE;
@@ -95,9 +98,11 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
         for (int i = 0; i < maxAirAnimal; i++) { ////set air & terrestrial animals points
             startPoint[i] = new Point(5, terStartY);
+            endPoint[i] = new Point(840, terStartY);
             terStartY += heightDiff;
             if (i < maxNonAirAnimal) { //set water animals points
                 startPointWater[i] = new Point(90, waterStartY);
+                endPointWater[i] = new Point(750, waterStartY);
                 waterStartY += heightDiff - i * 2;
             }
         }
@@ -113,21 +118,21 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
             airCurrentPosition++;
             if (airCurrentPosition == maxAirAnimal - 1) {
-                competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
             }
             animalNewIndex = airCurrentPosition;
         } else if (chosenCompetition.contains("Water") && waterCurrentPosition < maxNonAirAnimal) {
 
             waterCurrentPosition++;
             if (waterCurrentPosition == maxNonAirAnimal - 1) {
-                competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
             }
             animalNewIndex = waterCurrentPosition;
         } else if (chosenCompetition.contains("Terr") && terCurrentPosition < maxNonAirAnimal) {
 
             terCurrentPosition++;
             if (terCurrentPosition == maxNonAirAnimal - 1) {
-                competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
             }
             animalNewIndex = terCurrentPosition;
         }
@@ -162,8 +167,8 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getCompetitionBtn()) {// competition button chosen
 //            chosenCompetition = ActionMessageDialog.chooseCompTypeDialog(this);
-//
             addCompetition = new AddCompetition();
+            addCompetition.getAddAnimalButton().addActionListener(this);
             addCompetition.getOkBtn().addActionListener(this);
 
 
@@ -171,7 +176,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
             chosenTour = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox().getText() : addCompetition.getRegularTourRadioBox().getText();
             tourName = addCompetition.getTextField1().getText();
-            System.out.println(chosenCompetition + chosenTour + tourName);
             addCompetition.dispose();
 
             if (chosenCompetition != null) {
@@ -180,7 +184,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             }
 
 
-        } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
+        } else if (e.getSource() == addCompetition.getAddAnimalButton()) {
             addAnimalDialog = new AddAnimalDialog(this, "Add Animal ");
             addAnimalDialog.getOkButtonAddAnimal().addActionListener(this);
 
@@ -329,7 +333,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      * Creates an animal by the chosen animal type.
      *
      * @param animalType = A given animal type the matches one of the type
-    **/
+     **/
     private void createAnimalByType(String animalType) {
         String name = animalNameTemp;
         String imageChoice = addAnimalDialog.getAnimalKind();
@@ -338,15 +342,14 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         gen gender = addAnimalDialog.getAnimalGen();
 
         int startPointIndex = getPositionIndex();
-
         if (animalType.contains("Terr") && terCurrentPosition < maxNonAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, speed,cons, startPoint[startPointIndex], competitionPanel, imageChoice,gender));
+            animalVector.add(animalFactory.getAnimal(name, speed, cons, startPoint[startPointIndex], competitionPanel, imageChoice, gender));
             tempData.add(animalVector.get(terCurrentPosition).getAnimalInfo());
         } else if (animalType.contains("Air") && airCurrentPosition < maxAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, speed,cons, startPoint[startPointIndex], competitionPanel, imageChoice,gender));
+            animalVector.add(animalFactory.getAnimal(name, speed, cons, startPoint[startPointIndex], competitionPanel, imageChoice, gender));
             tempData.add(animalVector.get(airCurrentPosition).getAnimalInfo());
         } else if (animalType.contains("Water") && waterCurrentPosition < maxNonAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, speed,cons, startPointWater[startPointIndex], competitionPanel, imageChoice,gender));
+            animalVector.add(animalFactory.getAnimal(name, speed, cons, startPointWater[startPointIndex], competitionPanel, imageChoice, gender));
             tempData.add(animalVector.get(waterCurrentPosition).getAnimalInfo());
         } else
             throw new IllegalArgumentException();
@@ -354,7 +357,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         gameState = GameState.CHOOSING_COMP_ANIMALS;
         updateBtnStatus();
     }
-
 
 
     /**
@@ -366,13 +368,13 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             case CHOOSING_COMP_TYPE: {
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
-                competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
             break;
             case CHOOSING_COMP_FIRST_ANIMAL: {
-                competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
@@ -381,7 +383,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             break;
             case CHOOSING_COMP_ANIMALS: {
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
-                competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(false);
@@ -391,7 +393,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
-                competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(false);
             }
             break;
@@ -399,7 +401,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
-                competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
             break;

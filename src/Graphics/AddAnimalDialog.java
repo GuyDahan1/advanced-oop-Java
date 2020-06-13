@@ -53,7 +53,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         super(frame, name);
         setContentPane(addAnimalPanel);
         CompetitionFrame mainFrame = (CompetitionFrame) SwingUtilities.getWindowAncestor(this);
-        animalFamilyType = mainFrame.getChosenCompetition();
 
 
         ///slider setup///
@@ -62,13 +61,14 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         slider1.setMinorTickSpacing(1);
         slider1.setPaintTicks(true);
         slider1.setPaintLabels(true);
-        System.out.println(slider1.getValue());
         ///slider setup///
 
 
         animalDesignJcb.addActionListener(this);
         animalGen = gen.Male;
 
+
+        animalFamilyType = animalFamilyType == null ? "Water animals" : mainFrame.getChosenCompetition();
         chooseAddItemsToJcb();
         showImage();
 

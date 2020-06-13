@@ -19,6 +19,7 @@ public class AddCompetition extends JFrame implements ActionListener {
     private JTextField tourTextField;
     private JLabel tournamentNameLabel;
     private JButton tableButton;
+    private JButton addAnimalButton;
 
 
     public AddCompetition(){
@@ -28,7 +29,8 @@ public class AddCompetition extends JFrame implements ActionListener {
         cancelButton.addActionListener(this);
 
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(addCompetitionPanel);
         pack();
         setVisible(true);
@@ -36,11 +38,6 @@ public class AddCompetition extends JFrame implements ActionListener {
     }
 
 
-
-//    public static void main(String[] args) {
-//        AddCompetition a = new AddCompetition();
-//
-//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -73,6 +70,10 @@ public class AddCompetition extends JFrame implements ActionListener {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+    }
+
+    public JButton getAddAnimalButton() {
+        return addAnimalButton;
     }
 
     //
