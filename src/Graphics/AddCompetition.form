@@ -100,6 +100,14 @@
           <text value="Tournament name "/>
         </properties>
       </component>
+      <component id="5d971" class="javax.swing.JButton" binding="tableButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Table"/>
+        </properties>
+      </component>
     </children>
   </grid>
   <buttonGroups>

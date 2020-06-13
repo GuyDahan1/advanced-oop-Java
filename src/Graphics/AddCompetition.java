@@ -18,6 +18,7 @@ public class AddCompetition extends JFrame implements ActionListener {
     private JPanel addCompetitionPanel;
     private JTextField tourTextField;
     private JLabel tournamentNameLabel;
+    private JButton tableButton;
 
 
     public AddCompetition(){

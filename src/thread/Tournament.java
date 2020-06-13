@@ -9,5 +9,7 @@ public abstract class Tournament {
 
     public Tournament(){
     }
+
+
     public abstract void setup(Animal[][] animals);
 }

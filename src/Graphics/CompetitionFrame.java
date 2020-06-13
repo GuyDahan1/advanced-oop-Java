@@ -28,9 +28,13 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     static Point[] startPointWater;
     static Point[] startPoint;
 
-    private final Vector<Animal> animalVector = new Vector<>();
+    String animalNameTemp;
+
+    private Vector<Animal> animalVector = new Vector<>();
+    private Vector<Animal[]> animalGroupVector = new Vector<>();
     Vector<Object[]> tempData = new Vector<>();
     String[][] data;
+
 
     private int airCurrentPosition = -1; //max index = 4
     private int waterCurrentPosition = -1; //max index = 3
@@ -40,6 +44,8 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private String chosenTour = null;
     private String tourName = null;
     private GameState gameState;
+
+
 
     /**
      * CompetitionFrame constructor.
@@ -176,13 +182,13 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
             addAnimalDialog = new AddAnimalDialog(this, "Add Animal ");
-/*
-            addAnimalDialog.getCreateBtn().addActionListener(this);
-*/
+            addAnimalDialog.getOkButtonAddAnimal().addActionListener(this);
 
         } else if (e.getSource() == addAnimalDialog.getOkButtonAddAnimal()) { //if create button is activated
             String animalType = chosenCompetition;
+            animalNameTemp = addAnimalDialog.getAnimalNameTextField().getText();
             createAnimalByType(animalType);
+
             addAnimalDialog.dispose();
         }
         validate();
@@ -325,7 +331,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      * @param animalType = A given animal type the matches one of the type
     **/
     private void createAnimalByType(String animalType) {
-        String name = addAnimalDialog.getAnimalName();
+        String name = animalNameTemp;
         String imageChoice = addAnimalDialog.getAnimalKind();
         int speed = addAnimalDialog.getSpeed();
         int cons = addAnimalDialog.getEnergyConsumpt();
@@ -340,7 +346,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             animalVector.add(animalFactory.getAnimal(name, speed,cons, startPoint[startPointIndex], competitionPanel, imageChoice,gender));
             tempData.add(animalVector.get(airCurrentPosition).getAnimalInfo());
         } else if (animalType.contains("Water") && waterCurrentPosition < maxNonAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, speed,cons, startPoint[startPointIndex], competitionPanel, imageChoice,gender));
+            animalVector.add(animalFactory.getAnimal(name, speed,cons, startPointWater[startPointIndex], competitionPanel, imageChoice,gender));
             tempData.add(animalVector.get(waterCurrentPosition).getAnimalInfo());
         } else
             throw new IllegalArgumentException();

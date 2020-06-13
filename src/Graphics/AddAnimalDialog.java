@@ -33,7 +33,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
     private JLabel animalNameLabel;
     private JLabel genderLabel;
     private JLabel energyConLabel;
-    private JLabel imgLabel;
+    private JLabel imgLabelE;
 
     private JButton okButtonAddAnimal;
     private JButton cancelButtonAddAnimal;
@@ -107,9 +107,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         try {
             ImageIcon imageIcon = new ImageIcon(animalImgPath); // load the image to a imageIcon
             Image image = imageIcon.getImage(); // transform it
-            Image newImg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // scale it the smooth way
+            Image newImg = image.getScaledInstance(100, 80, Image.SCALE_SMOOTH); // scale it the smooth way
             imageIcon = new ImageIcon(newImg);// transform it back
-            imgLabel.setIcon(imageIcon);
+            imgLabelE.setIcon(imageIcon);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -136,8 +136,8 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         if (!source.getValueIsAdjusting()) {
             energyConsumpt = (int) source.getValue() * 10;
             speed = (int) source.getValue();
-            speedLabel.setText(String.valueOf(speed));
-            energyConLabel.setText(String.valueOf(energyConsumpt));
+            speedLabel.setText(String.valueOf(speed +"Km/h"));
+            energyConLabel.setText(String.valueOf(energyConsumpt+ "E/h"));
         }
     }
 
@@ -163,5 +163,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
 
     public gen getAnimalGen() {
         return animalGen;
+    }
+
+    public JTextField getAnimalNameTextField() {
+        return animalNameTextField;
     }
 }
