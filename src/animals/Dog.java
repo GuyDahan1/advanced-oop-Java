@@ -23,8 +23,8 @@ public class Dog extends TerrestrialAnimal {
      * @param position A given Point object of Dog's object location in space.
      * @see gen,Medal,Point
      */
-    public Dog(String name, double speed, Point position, CompetitionPanel pan, String choice ,int energyPerMeter) {
-        super(name, speed, position, pan, "dog", choice,energyPerMeter);
+    public Dog(String name, double speed, Point position, CompetitionPanel pan, String choice ,int energyPerMeter,gen gender) {
+        super(name, speed, position, pan, "dog", choice,energyPerMeter,gender);
         this.breed = "breed";
 
 

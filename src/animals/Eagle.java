@@ -22,8 +22,8 @@ public class Eagle extends AirAnimal {
      * @param pan      A given CompetitionPanel of Eagle object.
      * @see Point,CompetitionPanel
      */
-    public Eagle(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter) {
-        super(name, speed, position, pan, "eagle", choice,energyPerMeter);
+    public Eagle(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter,gen gender) {
+        super(name, speed, position, pan, "eagle", choice,energyPerMeter,gender);
         this.altitudeOfFlight = 800;
     }
 

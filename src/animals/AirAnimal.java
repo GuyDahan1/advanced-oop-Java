@@ -20,8 +20,8 @@ abstract public class AirAnimal extends Animal {
      * @param choice   A given image choice of AirAnimal object.
      * @see Point
      */
-    public AirAnimal(String name, double speed, Point position, CompetitionPanel pan, String type, String choice, int energyPerMeter) {
-        super(name, speed, position, pan, type, choice,energyPerMeter);
+    public AirAnimal(String name, double speed, Point position, CompetitionPanel pan, String type, String choice, int energyPerMeter,gen gender) {
+        super(name, speed, position, pan, type, choice,energyPerMeter,gender);
         this.setWingSpan(2);
 
     }

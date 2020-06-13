@@ -20,8 +20,8 @@ abstract public class  WaterAnimal extends Animal {
      * @param position A given Point object of WaterAnimal's object location in space.
      * @see gen,Medal,Point
      */
-    public WaterAnimal(String name, double speed, Point position, CompetitionPanel pan, String type, String choice, int energyPerMeter) {
-        super(name, speed, position, pan, type, choice,energyPerMeter);
+    public WaterAnimal(String name, double speed, Point position, CompetitionPanel pan, String type, String choice, int energyPerMeter,gen gender) {
+        super(name, speed, position, pan, type, choice,energyPerMeter,gender);
         this.diveDept = 0;
     }
 

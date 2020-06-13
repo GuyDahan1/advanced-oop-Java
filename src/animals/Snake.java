@@ -22,8 +22,8 @@ public class  Snake extends TerrestrialAnimal implements IReptile {
      * @param choice    A given image choice of Snake object.
      * @see Point
      */
-    public Snake(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter) {
-        super(name, speed,  position,  pan, "snake", choice,energyPerMeter);
+    public Snake(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter,gen gender) {
+        super(name, speed,  position,  pan, "snake", choice,energyPerMeter,gender);
         this.poisonous = Poisonous.Easy;
         setLength(20);
     }

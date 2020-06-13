@@ -20,7 +20,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private static final CompetitionPanel competitionPanel = new CompetitionPanel();
     AddCompetition addCompetition;
     private final CompetitionMenu competitionMenu = new CompetitionMenu();
-    private AddAnimalDialogT addAnimalDialog;
+    private AddAnimalDialog addAnimalDialog;
     private static AnimalFactory animalFactory;
     private final int maxNonAirAnimal = 4;
     private final int maxAirAnimal = 5;
@@ -175,16 +175,16 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
 
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
-            addAnimalDialog = new AddAnimalDialogT(this, "Add Animal ");
+            addAnimalDialog = new AddAnimalDialog(this, "Add Animal ");
 /*
             addAnimalDialog.getCreateBtn().addActionListener(this);
 */
 
-        } /*else if (e.getSource() == addAnimalDialog.getCreateBtn()) { //if create button is activated
-            String animalType = addAnimalDialog.getAnimalFamilyType();
+        } else if (e.getSource() == addAnimalDialog.getOkButtonAddAnimal()) { //if create button is activated
+            String animalType = chosenCompetition;
             createAnimalByType(animalType);
             addAnimalDialog.dispose();
-        }*/
+        }
         validate();
         repaint();
 
@@ -327,16 +327,20 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private void createAnimalByType(String animalType) {
         String name = addAnimalDialog.getAnimalName();
         String imageChoice = addAnimalDialog.getAnimalKind();
+        int speed = addAnimalDialog.getSpeed();
+        int cons = addAnimalDialog.getEnergyConsumpt();
+        gen gender = addAnimalDialog.getAnimalGen();
+
         int startPointIndex = getPositionIndex();
 
         if (animalType.contains("Terr") && terCurrentPosition < maxNonAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, 5, startPoint[startPointIndex], competitionPanel, imageChoice));
+            animalVector.add(animalFactory.getAnimal(name, speed,cons, startPoint[startPointIndex], competitionPanel, imageChoice,gender));
             tempData.add(animalVector.get(terCurrentPosition).getAnimalInfo());
         } else if (animalType.contains("Air") && airCurrentPosition < maxAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, 15, startPoint[startPointIndex], competitionPanel, imageChoice));
+            animalVector.add(animalFactory.getAnimal(name, speed,cons, startPoint[startPointIndex], competitionPanel, imageChoice,gender));
             tempData.add(animalVector.get(airCurrentPosition).getAnimalInfo());
         } else if (animalType.contains("Water") && waterCurrentPosition < maxNonAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, 5, startPointWater[startPointIndex], competitionPanel, imageChoice));
+            animalVector.add(animalFactory.getAnimal(name, speed,cons, startPoint[startPointIndex], competitionPanel, imageChoice,gender));
             tempData.add(animalVector.get(waterCurrentPosition).getAnimalInfo());
         } else
             throw new IllegalArgumentException();
