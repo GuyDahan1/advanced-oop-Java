@@ -323,7 +323,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      * Creates an animal by the chosen animal type.
      *
      * @param animalType = A given animal type the matches one of the type
-
+    **/
     private void createAnimalByType(String animalType) {
         String name = addAnimalDialog.getAnimalName();
         String imageChoice = addAnimalDialog.getAnimalKind();
@@ -344,7 +344,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         gameState = GameState.CHOOSING_COMP_ANIMALS;
         updateBtnStatus();
     }
-     */
+
 
 
     /**

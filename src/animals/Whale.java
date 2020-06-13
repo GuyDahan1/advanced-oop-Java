@@ -20,8 +20,8 @@ public class  Whale extends WaterAnimal {
      * @param position A given Point object of Whale'a object location in space.
      * @see gen,Medal,Point
      */
-    public Whale(String name,double speed, Point position, CompetitionPanel pan, String choice) {
-        super(name,speed, position, pan, "whale", choice);
+    public Whale(String name,double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter) {
+        super(name,speed, position, pan, "whale", choice,energyPerMeter);
         this.foodType = "ANYTHING !";
     }
 

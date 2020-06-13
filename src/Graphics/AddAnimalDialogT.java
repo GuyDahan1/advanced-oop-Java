@@ -1,11 +1,16 @@
 package Graphics;
 
+import animals.gen;
+
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddAnimalDialogT extends JDialog implements ActionListener {
+
+public class AddAnimalDialogT extends JDialog implements ActionListener, ChangeListener {
 
     String[] waterAnimals = {"dolphin1", "dolphin2", "dolphin3", "whale1", "whale2", "alligator1", "alligator2"};
     String[] airAnimals = {"eagle1", "eagle2", "eagle3", "pigeon1"};
@@ -13,31 +18,56 @@ public class AddAnimalDialogT extends JDialog implements ActionListener {
 
 
     private JPanel addAnimalPanel;
-    private JTextField animalNameTextField;
     private JComboBox animalDesignJcb;
+
     private JRadioButton femaleRadioButton;
     private JRadioButton maleRadioButton;
+    private JRadioButton hermaphroditeRadioButton;
+
+
+    private JLabel speedLabel;
     private JSlider slider1;
     private JLabel Enr;
-    private JRadioButton hermaphroditeRadioButton;
-    private JLabel speedLabel;
-    private JLabel addAnimalDialogLabel;
+
+    private JLabel titleAddAnimalDialog;
     private JLabel animalNameLabel;
     private JLabel genderLabel;
     private JLabel energyConLabel;
     private JLabel imgLabel;
+
     private JButton okButtonAddAnimal;
     private JButton cancelButtonAddAnimal;
+    private JTextField animalNameTextField;
+
 
     private String animalFamilyType;
     private String animalKind;
     private String animalImgPath;
 
-    public AddAnimalDialogT(Frame frame , String name){
-        super(frame,name);
+    int speed;
+    int energyConsumpt;
+    String animalName;
+    gen animalGen;
+
+    public AddAnimalDialogT(Frame frame, String name) {
+        super(frame, name);
         setContentPane(addAnimalPanel);
         CompetitionFrame mainFrame = (CompetitionFrame) SwingUtilities.getWindowAncestor(this);
         animalFamilyType = mainFrame.getChosenCompetition();
+
+
+        ///slider setup///
+        slider1.addChangeListener(this);
+        slider1.setMajorTickSpacing(14);
+        slider1.setMinorTickSpacing(1);
+        slider1.setPaintTicks(true);
+        slider1.setPaintLabels(true);
+        System.out.println(slider1.getValue());
+        ///slider setup///
+
+
+        animalDesignJcb.addActionListener(this);
+        animalGen = gen.Male;
 
         chooseAddItemsToJcb();
         showImage();
@@ -45,7 +75,6 @@ public class AddAnimalDialogT extends JDialog implements ActionListener {
         setVisible(true);
         pack();
     }
-
 
 
     /**
@@ -89,6 +118,50 @@ public class AddAnimalDialogT extends JDialog implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(cancelButtonAddAnimal))
+            dispose();
+        else if (e.getSource().equals(animalDesignJcb))
+            showImage();
+        else if (e.getSource().equals(femaleRadioButton))
+            animalGen = gen.Female;
+        else if (e.getSource().equals(maleRadioButton))
+            animalGen = gen.Male;
+        else if (e.getSource().equals(hermaphroditeRadioButton))
+            animalGen = gen.Hermaphrodite;
+        validate();
+    }
 
+    public void stateChanged(ChangeEvent e) {
+        JSlider source = (JSlider) e.getSource();
+        if (!source.getValueIsAdjusting()) {
+            energyConsumpt = (int) source.getValue() * 10;
+            speed = (int) source.getValue();
+            speedLabel.setText(String.valueOf(speed));
+            energyConLabel.setText(String.valueOf(energyConsumpt));
+        }
+    }
+
+    public String getAnimalName() {
+        return animalName;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getEnergyConsumpt() {
+        return energyConsumpt;
+    }
+
+    public String getAnimalKind() {
+        return animalKind;
+    }
+
+    public JButton getOkButtonAddAnimal() {
+        return okButtonAddAnimal;
+    }
+
+    public gen getAnimalGen() {
+        return animalGen;
     }
 }

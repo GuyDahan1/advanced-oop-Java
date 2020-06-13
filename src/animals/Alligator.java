@@ -21,9 +21,9 @@ public class Alligator extends TerrestrialAnimal implements IReptile {
      * @param position A given Point object of Alligator's object location in space.
      * @see gen,Medal,Point
      */
-    public Alligator(String name, double speed, Point position, CompetitionPanel pan, String choice) {
-        super(name, speed, position, pan, "alligator", choice);
-        waterAnimal = new WaterAnimal(name, speed, position, pan, "alligator", "alligator2") {
+    public Alligator(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter) {
+        super(name, speed, position, pan, "alligator", choice,energyPerMeter);
+        waterAnimal = new WaterAnimal(name, speed, position, pan, "alligator", "alligator2",energyPerMeter) {
             public String getSound() {
                 return sound;
             }

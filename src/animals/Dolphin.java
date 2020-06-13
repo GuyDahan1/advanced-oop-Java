@@ -19,8 +19,8 @@ public class Dolphin extends WaterAnimal {
      * @param position A given Point object of Dolphin's object location in space.
      * @see Medal,gen,Point
      */
-    public Dolphin(String name, double speed, Point position, CompetitionPanel pan, String choice) {
-        super(name, speed, position, pan, "dolphin", choice);
+    public Dolphin(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter) {
+        super(name, speed, position, pan, "dolphin", choice,energyPerMeter);
         this.WaterType = waterType.Sea;
     }
 

@@ -44,7 +44,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
      * @param type      A given animal type of Animal object.
      * @see gen,Medal,Point
      */
-    public Animal(String name, double speed, Point position, CompetitionPanel pan, String type, String imgChoice) {
+    public Animal(String name, double speed, Point position, CompetitionPanel pan, String type, String imgChoice , int energyPerMeter) {
         super(position);
         this.setName(name);
         this.setGender(gender);
@@ -56,8 +56,8 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
         Random rnd = new Random();
         this.orientation = Orientation.E;
         size = 65;
-        maxEnergy = rnd.nextInt(900) + 100;
-        energyPerMeter = rnd.nextInt(10) + 1;
+        this.energyPerMeter=energyPerMeter;
+        maxEnergy = rnd.nextInt(1200) + 300;
         currentEnergy = maxEnergy;
         this.pan = pan;
 

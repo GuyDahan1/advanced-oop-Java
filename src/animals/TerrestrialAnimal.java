@@ -22,8 +22,8 @@ abstract public class  TerrestrialAnimal extends Animal {
      * @param legs     A given number of legs of TerrestrialAnimal object.
      * @see gen,Medal,Point
      */
-    public TerrestrialAnimal(String name,double speed,Point position, CompetitionPanel pan, String type, String choice) {
-        super(name, speed,position, pan, type, choice);
+    public TerrestrialAnimal(String name,double speed,Point position, CompetitionPanel pan, String type, String choice, int energyPerMeter) {
+        super(name, speed,position, pan, type, choice,energyPerMeter);
         this.setNoLegs(4);
     }
 

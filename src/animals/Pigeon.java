@@ -22,8 +22,8 @@ public class Pigeon extends AirAnimal {
      * @param pan      A given CompetitionPanel of Pigeon object.
      * @see gen,Medal,Point
      */
-    public Pigeon(String name, double speed, Point position, CompetitionPanel pan,String choice) {
-        super(name,speed,position,pan,"pigeon",choice);
+    public Pigeon(String name, double speed, Point position, CompetitionPanel pan,String choice, int energyPerMeter) {
+        super(name,speed,position,pan,"pigeon",choice,energyPerMeter);
 
         this.family = "";
     }

@@ -19,8 +19,8 @@ public class Cat extends TerrestrialAnimal {
      * @param position A given Point object of Cat's object location in space.
      * @see Medal,Point,gen
      */
-    public Cat(String name, double speed, Point position, CompetitionPanel pan, String choice) {
-        super(name, speed, position, pan, "cat", choice);
+    public Cat(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter) {
+        super(name, speed, position, pan, "cat", choice,energyPerMeter);
         this.Castrated = true;
     }
 
