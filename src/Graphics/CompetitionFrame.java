@@ -20,7 +20,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private static final CompetitionPanel competitionPanel = new CompetitionPanel();
     AddCompetition addCompetition;
     private final CompetitionMenu competitionMenu = new CompetitionMenu();
-    private AddAnimalDialog addAnimalDialog;
+    private AddAnimalDialogT addAnimalDialog;
     private static AnimalFactory animalFactory;
     private final int maxNonAirAnimal = 4;
     private final int maxAirAnimal = 5;
@@ -156,31 +156,35 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getCompetitionBtn()) {// competition button chosen
 //            chosenCompetition = ActionMessageDialog.chooseCompTypeDialog(this);
-//            if (chosenCompetition != null) {
-//                gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
-//                updateBtnStatus();
-//            }
+//
             addCompetition = new AddCompetition();
             addCompetition.getOkBtn().addActionListener(this);
 
 
-        } else if (e.getSource() == addCompetition.getOkBtn()){
+        } else if (e.getSource() == addCompetition.getOkBtn()) {
             chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
-            chosenTour = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox().getText(): addCompetition.getRegularTourRadioBox().getText();
+            chosenTour = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox().getText() : addCompetition.getRegularTourRadioBox().getText();
             tourName = addCompetition.getTextField1().getText();
             System.out.println(chosenCompetition + chosenTour + tourName);
             addCompetition.dispose();
 
+            if (chosenCompetition != null) {
+                gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
+                updateBtnStatus();
+            }
 
-        }else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
-            addAnimalDialog = new AddAnimalDialog(this, "Add Animal ");
+
+        } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
+            addAnimalDialog = new AddAnimalDialogT(this, "Add Animal ");
+/*
             addAnimalDialog.getCreateBtn().addActionListener(this);
+*/
 
-        } else if (e.getSource() == addAnimalDialog.getCreateBtn()) { //if create button is activated
+        } /*else if (e.getSource() == addAnimalDialog.getCreateBtn()) { //if create button is activated
             String animalType = addAnimalDialog.getAnimalFamilyType();
             createAnimalByType(animalType);
             addAnimalDialog.dispose();
-        }
+        }*/
         validate();
         repaint();
 
@@ -207,7 +211,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      */
     private void clearCompetitionDialog() {
         int choice = ActionMessageDialog.createClrCompetitionDialog(this);
-        chosenCompetition=null;
+        chosenCompetition = null;
         gameState = (choice == 0 ? GameState.CHOOSING_COMP_FIRST_ANIMAL : GameState.CHOOSING_COMP_TYPE);
     }
 
@@ -319,7 +323,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      * Creates an animal by the chosen animal type.
      *
      * @param animalType = A given animal type the matches one of the type
-     */
+
     private void createAnimalByType(String animalType) {
         String name = addAnimalDialog.getAnimalName();
         String imageChoice = addAnimalDialog.getAnimalKind();
@@ -340,6 +344,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         gameState = GameState.CHOOSING_COMP_ANIMALS;
         updateBtnStatus();
     }
+     */
 
 
     /**

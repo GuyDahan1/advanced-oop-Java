@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 
 public class AddCompetition extends JFrame implements ActionListener {
+
+
     private JLabel title;
     private JRadioButton courierTourRadioBox;
     private JComboBox competitionTypeComboBox;
@@ -15,19 +17,14 @@ public class AddCompetition extends JFrame implements ActionListener {
     private JButton cancelButton;
     private JPanel addCompetitionPanel;
     private JTextField tourTextField;
-    private JLabel tourName;
+    private JLabel tournamentNameLabel;
+
 
     public AddCompetition(){
         super("Add Competition");
 
         okBtn.addActionListener(this);
         cancelButton.addActionListener(this);
-
-
-
-        competitionTypeComboBox.addItem("Water animals");
-        competitionTypeComboBox.addItem("Air animals");
-        competitionTypeComboBox.addItem("Terrestrial animals");
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +68,10 @@ public class AddCompetition extends JFrame implements ActionListener {
 
     public JButton getOkBtn() {
         return okBtn;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 
     //

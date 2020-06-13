@@ -7,13 +7,6 @@ import javax.swing.*;
  */
 public class ActionMessageDialog {
 
-    //just a test message when competition is over
-    public static void ShowVictoryDialog(CompetitionFrame frame, String goldName, String silverName, String bronzeName) {
-        JOptionPane.showMessageDialog(frame,
-                "first place\t" + goldName + "\nsecond place\t" + silverName + "\nfirst place\t" + bronzeName,
-                "VICTORY MESSAGE",
-                JOptionPane.PLAIN_MESSAGE);
-    }
 
     /**
      * Creates JDialog to get the user input whether or not a new competition should be chosen.
@@ -47,22 +40,6 @@ public class ActionMessageDialog {
                 JOptionPane.PLAIN_MESSAGE, null,
                 options, options[0]);
     }
-
-    /**
-     * Creates JDialog to get the chosen competition type.
-     *
-     * @param frame -A given CompetitionFrame on which the JDialog will be created.
-     * @return The chosen the chosen competition type.
-     */
-    public static String chooseCompTypeDialog(CompetitionFrame frame) {
-        ImageIcon imageIcon = frame.getImageIcon("Icons/competition.jpg");
-        Object[] options = {"Water animals", "Air animals", "Terrestrial animals"};
-
-        return (String) JOptionPane.showInputDialog(
-                frame, "Choose competition type", "Competition",
-                JOptionPane.PLAIN_MESSAGE, imageIcon, options, "Terrestrial animals");
-    }
-
 
 
 }

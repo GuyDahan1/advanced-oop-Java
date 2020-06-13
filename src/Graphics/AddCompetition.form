@@ -67,7 +67,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="bc4dd" class="javax.swing.JComboBox" binding="competitionTypeComboBox">
         <constraints>
@@ -75,6 +77,11 @@
         </constraints>
         <properties>
           <editable value="false"/>
+          <model>
+            <item value="Water animals"/>
+            <item value="Air animals"/>
+            <item value="Terrestrial animals"/>
+          </model>
         </properties>
       </component>
       <component id="c5074" class="javax.swing.JLabel">
@@ -85,7 +92,7 @@
           <text value="Competiotion Type"/>
         </properties>
       </component>
-      <component id="4892d" class="javax.swing.JLabel" binding="tourName">
+      <component id="a01cc" class="javax.swing.JLabel" binding="tournamentNameLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
