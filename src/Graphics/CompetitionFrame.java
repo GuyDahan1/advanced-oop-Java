@@ -18,6 +18,7 @@ import java.util.Vector;
  */
 public class CompetitionFrame extends JFrame implements ActionListener {
     private static final CompetitionPanel competitionPanel = new CompetitionPanel();
+    AddCompetition addCompetition;
     private final CompetitionMenu competitionMenu = new CompetitionMenu();
     private AddAnimalDialog addAnimalDialog;
     private static AnimalFactory animalFactory;
@@ -36,6 +37,8 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private int terCurrentPosition = -1; //max index  = 3
 
     private String chosenCompetition = null;
+    private String chosenTour = null;
+    private String tourName = null;
     private GameState gameState;
 
     /**
@@ -152,13 +155,24 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             clearCalled();
 
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getCompetitionBtn()) {// competition button chosen
-            chosenCompetition = ActionMessageDialog.chooseCompTypeDialog(this);
-            if (chosenCompetition != null) {
-                gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
-                updateBtnStatus();
-            }
+//            chosenCompetition = ActionMessageDialog.chooseCompTypeDialog(this);
+//            if (chosenCompetition != null) {
+//                gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
+//                updateBtnStatus();
+//            }
+            addCompetition = new AddCompetition();
+            addCompetition.getOkBtn().addActionListener(this);
 
-        } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
+
+        } else if (e.getSource() == addCompetition.getOkBtn()){
+            chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
+            chosenTour = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox().getText(): addCompetition.getRegularTourRadioBox().getText();
+            tourName = addCompetition.getTextField1().getText();
+            System.out.println(chosenCompetition + chosenTour + tourName);
+            addCompetition.dispose();
+
+
+        }else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
             addAnimalDialog = new AddAnimalDialog(this, "Add Animal ");
             addAnimalDialog.getCreateBtn().addActionListener(this);
 
