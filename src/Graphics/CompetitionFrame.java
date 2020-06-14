@@ -2,6 +2,7 @@ package Graphics;
 
 import animals.*;
 import designPatterns.AnimalFactory;
+import designPatterns.CompetitioinSingelton;
 import designPatterns.MainFrameSingelton;
 import mobility.Point;
 
@@ -167,16 +168,19 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getCompetitionBtn()) {// competition button chosen
 //            chosenCompetition = ActionMessageDialog.chooseCompTypeDialog(this);
-            addCompetition = new AddCompetition();
+            addCompetition = CompetitioinSingelton.getInstance();
             addCompetition.getAddAnimalButton().addActionListener(this);
             addCompetition.getOkBtn().addActionListener(this);
 
 
         } else if (e.getSource() == addCompetition.getOkBtn()) {
+
+           //TODO Singelton
             chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
             chosenTour = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox().getText() : addCompetition.getRegularTourRadioBox().getText();
             tourName = addCompetition.getTextField1().getText();
-            addCompetition.dispose();
+            addCompetition.getAddAnimalButton().setEnabled(true);
+
 
             if (chosenCompetition != null) {
                 gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
@@ -189,9 +193,9 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             addAnimalDialog.getOkButtonAddAnimal().addActionListener(this);
 
         } else if (e.getSource() == addAnimalDialog.getOkButtonAddAnimal()) { //if create button is activated
-            String animalType = chosenCompetition;
+            chosenCompetition = chosenCompetition == null ? "Water animals" : chosenCompetition;
             animalNameTemp = addAnimalDialog.getAnimalNameTextField().getText();
-            createAnimalByType(animalType);
+            createAnimalByType(chosenCompetition);
 
             addAnimalDialog.dispose();
         }
