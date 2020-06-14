@@ -68,7 +68,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         animalGen = gen.Male;
 
 
-        animalFamilyType = animalFamilyType == null ? "Water animals" : mainFrame.getChosenCompetition();
+        animalFamilyType =  mainFrame.getChosenCompetition();
         chooseAddItemsToJcb();
         showImage();
 

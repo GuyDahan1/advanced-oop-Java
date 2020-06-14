@@ -1,12 +1,11 @@
 package Graphics;
 
 import animals.*;
-import designPatterns.AnimalFactory;
-import designPatterns.CompetitioinSingelton;
-import designPatterns.MainFrameSingelton;
+import designPatterns.*;
 import mobility.Point;
 
 import javax.imageio.ImageIO;
+import javax.naming.spi.ObjectFactoryBuilder;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +21,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     AddCompetition addCompetition;
     private final CompetitionMenu competitionMenu = new CompetitionMenu();
     private AddAnimalDialog addAnimalDialog;
-    private static AnimalFactory animalFactory;
+    private static WaterAnimalFactory animalFactory;
     private final int maxNonAirAnimal = 4;
     private final int maxAirAnimal = 5;
 
@@ -31,23 +30,21 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     static Point[] startPoint;
     static Point[] endPoint;
 
-    String animalNameTemp;
-
     private Vector<Animal> animalVector = new Vector<>();
     private Vector<Animal[]> animalGroupVector = new Vector<>();
     Vector<Object[]> tempData = new Vector<>();
     String[][] data;
 
 
-    private int airCurrentPosition = -1; //max index = 4
-    private int waterCurrentPosition = -1; //max index = 3
-    private int terCurrentPosition = -1; //max index  = 3
+    private int currentPosition = -1;
 
     private String chosenCompetition = null;
     private String chosenTour = null;
     private String tourName = null;
     private GameState gameState;
     private boolean firstTime = true;
+
+
 
 
     /**
@@ -113,33 +110,27 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     /**
      * @return the current index that the new animal should be positioned on.
      */
-    public int getPositionIndex() {
-        int animalNewIndex = 0;
-
-        if (chosenCompetition.contains("Air") && airCurrentPosition < maxAirAnimal) {
-
-            airCurrentPosition++;
-            if (airCurrentPosition == maxAirAnimal - 1) {
-                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
+    public Point getPositionIndex() {
+        Point animalPoint = null;
+        currentPosition++;
+        if (chosenCompetition.contains("Air") && currentPosition < maxAirAnimal) {
+            if (currentPosition == maxAirAnimal - 1) {
+                addCompetition.getAddAnimalButton().setEnabled(false);
             }
-            animalNewIndex = airCurrentPosition;
-        } else if (chosenCompetition.contains("Water") && waterCurrentPosition < maxNonAirAnimal) {
-
-            waterCurrentPosition++;
-            if (waterCurrentPosition == maxNonAirAnimal - 1) {
-                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
+            animalPoint = startPoint[currentPosition];
+        } else if (chosenCompetition.contains("Water") && currentPosition < maxNonAirAnimal) {
+            if (currentPosition == maxNonAirAnimal - 1) {
+                addCompetition.getAddAnimalButton().setEnabled(false);
             }
-            animalNewIndex = waterCurrentPosition;
-        } else if (chosenCompetition.contains("Terr") && terCurrentPosition < maxNonAirAnimal) {
-
-            terCurrentPosition++;
-            if (terCurrentPosition == maxNonAirAnimal - 1) {
-                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
+            animalPoint = startPointWater[currentPosition];
+        } else if (chosenCompetition.contains("Terr") && currentPosition < maxNonAirAnimal) {
+            if (currentPosition == maxNonAirAnimal - 1) {
+                addCompetition.getAddAnimalButton().setEnabled(false);
             }
-            animalNewIndex = terCurrentPosition;
+            animalPoint = startPoint[currentPosition];
         }
 
-        return animalNewIndex;
+        return animalPoint;
     }
 
     /**
@@ -170,22 +161,40 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getCompetitionBtn()) {// competition button chosen
 
 
-                addCompetition = CompetitioinSingelton.getInstance();
-            if(firstTime)
+            addCompetition = CompetitioinSingelton.getInstance();
+
+            if (firstTime) {
                 addCompetition.getAddAnimalButton().addActionListener(this);
                 addCompetition.getOkBtn().addActionListener(this);
-            firstTime = false;
+            }
             addCompetition.setVisible(true);
+            centreWindow(addCompetition);
+            firstTime = false;
 
 
         } else if (e.getSource() == addCompetition.getOkBtn()) {
 
-           //TODO Singelton
-            chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
-            chosenTour = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox().getText() : addCompetition.getRegularTourRadioBox().getText();
-            tourName = addCompetition.getTextField1().getText();
-            addCompetition.getAddAnimalButton().setEnabled(true);
+            if (animalVector.isEmpty()) {
+                chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
+                addCompetition.getCompetitionTypeComboBox().setEnabled(false);
+                JRadioButton jRadioButton = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox()  : addCompetition.getRegularTourRadioBox();
+                if ((addCompetition.getCourierTourRadioBox().isSelected())) {
+                    addCompetition.getRegularTourRadioBox().setEnabled(false);
+                } else {
+                    addCompetition.getCourierTourRadioBox().setEnabled(false);
+                }
+                chosenTour = jRadioButton.getText();
 
+
+                tourName = addCompetition.getTextField1().getText();
+                addCompetition.getAddAnimalButton().setEnabled(true);
+                addCompetition.getOkBtn().setText("Add Competition");
+                addCompetition.getOkBtn().setEnabled(false);
+
+/*
+               addCompetition.getOkBtn().setText("");
+*/
+            }
 
             if (chosenCompetition != null) {
                 gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
@@ -194,32 +203,77 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
 
         } else if (e.getSource() == addCompetition.getAddAnimalButton()) {
+
             addAnimalDialog = new AddAnimalDialog(this, "Add Animal ");
+            centreWindow(addAnimalDialog);
             addAnimalDialog.getOkButtonAddAnimal().addActionListener(this);
 
         } else if (e.getSource() == addAnimalDialog.getOkButtonAddAnimal()) { //if create button is activated
             chosenCompetition = chosenCompetition == null ? "Water animals" : chosenCompetition;
-            animalNameTemp = addAnimalDialog.getAnimalNameTextField().getText();
-            createAnimalByType(chosenCompetition);
 
+
+            AbstractAnimalFactory abstractFactory = new AbstractAnimalFactory();
+
+            SpeciesFactory speciesFactory = abstractFactory.getSpeciesFactory(chosenCompetition);
+            String name = addAnimalDialog.getAnimalNameTextField().getText();
+            String imageChoice = addAnimalDialog.getAnimalKind();
+            int speed = addAnimalDialog.getSpeed();
+            int cons = addAnimalDialog.getEnergyConsumpt();
+            gen gender = addAnimalDialog.getAnimalGen();
+            Point startPoint = getPositionIndex();
+
+            animalVector.add(speciesFactory.getAnimal(name, speed, cons, startPoint, competitionPanel, imageChoice, gender));
+            tempData.add(animalVector.get(currentPosition).getAnimalInfo());
+
+            gameState = GameState.CHOOSING_COMP_ANIMALS;
+            updateBtnStatus();
+
+            addCompetition.requestFocus();
             addAnimalDialog.dispose();
-        }
+        }else if (e.getSource() == addAnimalDialog.getOkButtonAddAnimal() && !animalVector.isEmpty()) {
+            appendVectorToVectorGroup();
+        } //if create button is activated
+
         validate();
         repaint();
 
-        if (airCurrentPosition == maxAirAnimal - 1 || waterCurrentPosition == maxNonAirAnimal - 1 || terCurrentPosition == maxNonAirAnimal - 1) {
+        if (currentPosition == maxAirAnimal - 1 || currentPosition == maxNonAirAnimal - 1 || currentPosition == maxNonAirAnimal - 1) {
             gameState = GameState.COMPETING;
             updateBtnStatus();
         }
     }
 
+    private void appendVectorToVectorGroup() {
+        animalGroupVector.add(animalVector.toArray(Animal[]::new));
+        newCompetition();
+    }
+
+    private void newCompetition() {
+
+        firstTime =true;
+        chosenTour = null;
+        tourName = null;
+        chosenCompetition = null;
+        currentPosition = -1;
+        animalVector.clear();
+        addCompetition.getRegularTourRadioBox().setEnabled(true);
+        addCompetition.getCourierTourRadioBox().setEnabled(true);
+        addCompetition.getOkBtn().setText("Ok");
+        addCompetition.getOkBtn().setEnabled(true);
+        addCompetition.getAddAnimalButton().setEnabled(false);
+
+    }
+
+
+
     /**
      * Preforms the relevant function call , depending on the current state of the program.
      */
     private void clearCalled() {
-        if (animalVector.size() > 0)
+        if (animalVector.size() > 0) {
             ChooseAnimalToClr();
-        else
+            addCompetition.getAddAnimalButton().setEnabled(true);
+        } else
             clearCompetitionDialog();
 
         updateBtnStatus();
@@ -280,9 +334,9 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      */
     private void updateAnimalLocationPostClr() {
         String animalsType = chosenCompetition.contains("Water") ? "waterAnimals" : "otherAnimals";
+        currentPosition--;
         switch (animalsType) {
             case "waterAnimals":
-                waterCurrentPosition--;
 
                 for (int i = 0; i < animalVector.size(); i++)
                     animalVector.get(i).setPosition(startPointWater[i]);
@@ -290,34 +344,12 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
             case "otherAnimals":
 
-                if (chosenCompetition.contains("Air")) airCurrentPosition--;
-                else terCurrentPosition--;
-
                 for (int i = 0; i < animalVector.size(); i++)
                     animalVector.get(i).setPosition(startPoint[i]);
                 break;
         }
     }
 
-    /**
-     * Gets the ImageIcon's object that matches the ImagePath.
-     *
-     * @param ImagePath - A given image path the should match an image.
-     * @return the ImageIcon's object that matches the ImagePath.
-     */
-    public ImageIcon getImageIcon(String ImagePath) {
-        ImageIcon imageIcon = null;
-        try {
-            imageIcon = new ImageIcon(ImageIO.read(getClass().getResource(ImagePath)));
-            Image image = imageIcon.getImage(); // transform it
-            Image newImg = image.getScaledInstance(150, 80, Image.SCALE_SMOOTH); // scale it the smooth way
-            imageIcon = new ImageIcon(newImg);// transform it back
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-        return imageIcon;
-    }
 
     /**
      * Creates the Information table when the "Info" button is clicked.
@@ -336,35 +368,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     public Vector<Animal> getAnimalVector() {
         return animalVector;
-    }
-
-    /**
-     * Creates an animal by the chosen animal type.
-     *
-     * @param animalType = A given animal type the matches one of the type
-     **/
-    private void createAnimalByType(String animalType) {
-        String name = animalNameTemp;
-        String imageChoice = addAnimalDialog.getAnimalKind();
-        int speed = addAnimalDialog.getSpeed();
-        int cons = addAnimalDialog.getEnergyConsumpt();
-        gen gender = addAnimalDialog.getAnimalGen();
-
-        int startPointIndex = getPositionIndex();
-        if (animalType.contains("Terr") && terCurrentPosition < maxNonAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, speed, cons, startPoint[startPointIndex], competitionPanel, imageChoice, gender));
-            tempData.add(animalVector.get(terCurrentPosition).getAnimalInfo());
-        } else if (animalType.contains("Air") && airCurrentPosition < maxAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, speed, cons, startPoint[startPointIndex], competitionPanel, imageChoice, gender));
-            tempData.add(animalVector.get(airCurrentPosition).getAnimalInfo());
-        } else if (animalType.contains("Water") && waterCurrentPosition < maxNonAirAnimal) {
-            animalVector.add(animalFactory.getAnimal(name, speed, cons, startPointWater[startPointIndex], competitionPanel, imageChoice, gender));
-            tempData.add(animalVector.get(waterCurrentPosition).getAnimalInfo());
-        } else
-            throw new IllegalArgumentException();
-
-        gameState = GameState.CHOOSING_COMP_ANIMALS;
-        updateBtnStatus();
     }
 
 
@@ -412,6 +415,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
+
             }
             break;
             default:
@@ -423,8 +427,15 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         return chosenCompetition;
     }
 
+    public static void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 4);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
+    }
+
     public static void main(String[] args) {
-        animalFactory = new AnimalFactory();
+        animalFactory = new WaterAnimalFactory();
         MainFrameSingelton.getInstance();
     }
 }

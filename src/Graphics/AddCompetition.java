@@ -20,6 +20,7 @@ public class AddCompetition extends JFrame implements ActionListener {
     private JLabel tournamentNameLabel;
     private JButton tableButton;
     private JButton addAnimalButton;
+    private JButton newCompetitionButton;
 
 
     public AddCompetition(){
@@ -66,6 +67,10 @@ public class AddCompetition extends JFrame implements ActionListener {
 
     public JButton getOkBtn() {
         return okBtn;
+    }
+
+    public JButton getNewCompetitionButton() {
+        return newCompetitionButton;
     }
 
     private void createUIComponents() {
