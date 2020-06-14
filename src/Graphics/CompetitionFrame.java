@@ -35,7 +35,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
 
     String[][] data;
-    String[][] competitionTable;
     Vector<Object[]> competitionTableVector = new Vector<>();
 
 
@@ -206,10 +205,12 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                 arrOfString[0]=tourName;
                 arrOfString[1]=chosenCompetition;
                 arrOfString[2]=chosenTour;
-                for(int i =3 ; i<animalVector.size();i++){
-                    arrOfString[i]=animalVector.get(i).getName();
+                for(int i =0 ; i<animalVector.size();i++){
+                    arrOfString[i+3]=animalVector.get(i).getName();
                 }
+
                 competitionTableVector.add(arrOfString);
+                System.out.println(competitionTableVector.get(0).toString());
                 appendVectorToVectorGroup();
 
                 addCompetition.getTableButton().setEnabled(true);
@@ -393,13 +394,13 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void createCompetitionTable() {
-        competitionTable = new String[competitionTableVector.size()][];
+        String[][] competitionTable = new String[competitionTableVector.size()][];
         for (int i = 0; i < competitionTableVector.size(); i++)
             competitionTable[i] = (String[]) competitionTableVector.get(i);
 
         CompetitionsTable table = new CompetitionsTable(competitionTable);
         table.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        table.setSize(600, 200);
+        table.setSize(1000, 200);
         table.setVisible(true);
         table.setTitle("Competition Table");
     }
