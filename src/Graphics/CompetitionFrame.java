@@ -47,6 +47,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private String chosenTour = null;
     private String tourName = null;
     private GameState gameState;
+    private boolean firstTime = true;
 
 
     /**
@@ -167,10 +168,14 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             clearCalled();
 
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getCompetitionBtn()) {// competition button chosen
-//            chosenCompetition = ActionMessageDialog.chooseCompTypeDialog(this);
-            addCompetition = CompetitioinSingelton.getInstance();
-            addCompetition.getAddAnimalButton().addActionListener(this);
-            addCompetition.getOkBtn().addActionListener(this);
+
+
+                addCompetition = CompetitioinSingelton.getInstance();
+            if(firstTime)
+                addCompetition.getAddAnimalButton().addActionListener(this);
+                addCompetition.getOkBtn().addActionListener(this);
+            firstTime = false;
+            addCompetition.setVisible(true);
 
 
         } else if (e.getSource() == addCompetition.getOkBtn()) {

@@ -43,7 +43,7 @@ public class AddCompetition extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource().equals(cancelButton)){
-            dispose();
+            setVisible(false);
         }
 
     }

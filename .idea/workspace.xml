@@ -10,12 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61f2286c-994c-4448-b696-78cb6f29de0a" name="Default Changelist" comment="new GUI">
-      <change afterPath="$PROJECT_DIR$/src/designPatterns/CompetitioinSingelton.java" afterDir="false" />
+    <list default="true" id="61f2286c-994c-4448-b696-78cb6f29de0a" name="Default Changelist" comment="AddCompetitionSingleton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/AddCompetition.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/AddCompetition.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphics/AddCompetition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/AddCompetition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Graphics/CompetitionFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/CompetitionFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1592054571696</updated>
       <workItem from="1592054576773" duration="1368000" />
-      <workItem from="1592056875642" duration="26102000" />
+      <workItem from="1592056875642" duration="26900000" />
     </task>
     <task id="LOCAL-00001" summary="Excited repo upload">
       <created>1592055169043</created>
@@ -166,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592092136427</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="AddCompetitionSingleton">
+      <created>1592094388760</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1592094388760</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +192,8 @@
     <MESSAGE value="Excited repo upload" />
     <MESSAGE value="AddCompetition class" />
     <MESSAGE value="new GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="new GUI" />
+    <MESSAGE value="AddCompetitionSingleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="AddCompetitionSingleton" />
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1592070407853">
@@ -215,38 +220,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592069509569" />
-    <state width="1493" height="262" key="GridCell.Tab.0.bottom" timestamp="1592093864133">
+    <state width="1493" height="207" key="GridCell.Tab.0.bottom" timestamp="1592094635293">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="262" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592093864133" />
-    <state width="1493" height="262" key="GridCell.Tab.0.center" timestamp="1592093864133">
+    <state width="1493" height="207" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592094635293" />
+    <state width="1493" height="207" key="GridCell.Tab.0.center" timestamp="1592094635291">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="262" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592093864133" />
-    <state width="1493" height="262" key="GridCell.Tab.0.left" timestamp="1592093864133">
+    <state width="1493" height="207" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592094635291" />
+    <state width="1493" height="207" key="GridCell.Tab.0.left" timestamp="1592094635291">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="262" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592093864133" />
-    <state width="1493" height="262" key="GridCell.Tab.0.right" timestamp="1592093864133">
+    <state width="1493" height="207" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592094635291" />
+    <state width="1493" height="207" key="GridCell.Tab.0.right" timestamp="1592094635292">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="262" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592093864133" />
-    <state width="1493" height="262" key="GridCell.Tab.1.bottom" timestamp="1592093866639">
+    <state width="1493" height="207" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592094635292" />
+    <state width="1493" height="262" key="GridCell.Tab.1.bottom" timestamp="1592094295807">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="262" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592093866639" />
-    <state width="1493" height="262" key="GridCell.Tab.1.center" timestamp="1592093866638">
+    <state width="1493" height="262" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592094295807" />
+    <state width="1493" height="262" key="GridCell.Tab.1.center" timestamp="1592094295807">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="262" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592093866638" />
-    <state width="1493" height="262" key="GridCell.Tab.1.left" timestamp="1592093866638">
+    <state width="1493" height="262" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592094295807" />
+    <state width="1493" height="262" key="GridCell.Tab.1.left" timestamp="1592094295807">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="262" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592093866638" />
-    <state width="1493" height="262" key="GridCell.Tab.1.right" timestamp="1592093866638">
+    <state width="1493" height="262" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592094295807" />
+    <state width="1493" height="262" key="GridCell.Tab.1.right" timestamp="1592094295807">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="262" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592093866638" />
+    <state width="1493" height="262" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592094295807" />
     <state x="647" y="207" key="UIDesigner.ListEditorDialog" timestamp="1592092858954">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -281,7 +286,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/Graphics/CompetitionFrame.java</url>
-          <line>149</line>
+          <line>150</line>
           <properties class="Graphics.CompetitionFrame" method="actionPerformed">
             <option name="EMULATED" value="true" />
           </properties>
@@ -289,7 +294,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Graphics/CompetitionFrame.java</url>
-          <line>197</line>
+          <line>202</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
