@@ -4,13 +4,10 @@ import animals.*;
 import designPatterns.*;
 import mobility.Point;
 
-import javax.imageio.ImageIO;
-import javax.naming.spi.ObjectFactoryBuilder;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Vector;
 
 /**
@@ -21,7 +18,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     AddCompetition addCompetition;
     private final CompetitionMenu competitionMenu = new CompetitionMenu();
     private AddAnimalDialog addAnimalDialog;
-    private static WaterAnimalFactory animalFactory;
     private final int maxNonAirAnimal = 4;
     private final int maxAirAnimal = 5;
 
@@ -32,8 +28,15 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     private Vector<Animal> animalVector = new Vector<>();
     private Vector<Animal[]> animalGroupVector = new Vector<>();
+
+
+    Vector<String> vectorString = new Vector<>();
     Vector<Object[]> tempData = new Vector<>();
+
+
     String[][] data;
+    String[][] competitionTable;
+    Vector<Object[]> competitionTableVector = new Vector<>();
 
 
     private int currentPosition = -1;
@@ -43,8 +46,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private String tourName = null;
     private GameState gameState;
     private boolean firstTime = true;
-
-
 
 
     /**
@@ -165,40 +166,53 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
             if (firstTime) {
                 addCompetition.getAddAnimalButton().addActionListener(this);
-                addCompetition.getOkBtn().addActionListener(this);
+                addCompetition.getOkOrNewCompetitionBtn().addActionListener(this);
+                addCompetition.getNewCompetitionButton().addActionListener(this);
+                addCompetition.getTableButton().addActionListener(this);
             }
             addCompetition.setVisible(true);
             centreWindow(addCompetition);
             firstTime = false;
 
 
-        } else if (e.getSource() == addCompetition.getOkBtn()) {
+        } else if (e.getSource() == addCompetition.getOkOrNewCompetitionBtn()) {
 
             if (animalVector.isEmpty()) {
                 chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
                 addCompetition.getCompetitionTypeComboBox().setEnabled(false);
-                JRadioButton jRadioButton = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox()  : addCompetition.getRegularTourRadioBox();
-                if ((addCompetition.getCourierTourRadioBox().isSelected())) {
-                    addCompetition.getRegularTourRadioBox().setEnabled(false);
-                } else {
-                    addCompetition.getCourierTourRadioBox().setEnabled(false);
-                }
-                chosenTour = jRadioButton.getText();
+                vectorString.add(chosenCompetition);
 
+                JRadioButton jRadioButton = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox() : addCompetition.getRegularTourRadioBox();
+                addCompetition.getRegularTourRadioBox().setEnabled(false);
+                addCompetition.getCourierTourRadioBox().setEnabled(false);
+                chosenTour = jRadioButton.getText();
+                vectorString.add(chosenTour);
 
                 tourName = addCompetition.getTextField1().getText();
                 addCompetition.getAddAnimalButton().setEnabled(true);
-                addCompetition.getOkBtn().setText("Add Competition");
-                addCompetition.getOkBtn().setEnabled(false);
+                addCompetition.getOkOrNewCompetitionBtn().setText("Add Competition");
+                addCompetition.getOkOrNewCompetitionBtn().setEnabled(false);
+                vectorString.add(tourName);
 
 /*
                addCompetition.getOkBtn().setText("");
 */
-            }
+            } else {
+                if (chosenCompetition != null) {
+                    gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
+                    updateBtnStatus();
+                }
+                String[] arrOfString = new String[8];
+                arrOfString[0]=tourName;
+                arrOfString[1]=chosenCompetition;
+                arrOfString[2]=chosenTour;
+                for(int i =3 ; i<animalVector.size();i++){
+                    arrOfString[i]=animalVector.get(i).getName();
+                }
+                competitionTableVector.add(arrOfString);
+                appendVectorToVectorGroup();
 
-            if (chosenCompetition != null) {
-                gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
-                updateBtnStatus();
+                addCompetition.getTableButton().setEnabled(true);
             }
 
 
@@ -209,6 +223,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             addAnimalDialog.getOkButtonAddAnimal().addActionListener(this);
 
         } else if (e.getSource() == addAnimalDialog.getOkButtonAddAnimal()) { //if create button is activated
+
             chosenCompetition = chosenCompetition == null ? "Water animals" : chosenCompetition;
 
 
@@ -225,14 +240,21 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             animalVector.add(speciesFactory.getAnimal(name, speed, cons, startPoint, competitionPanel, imageChoice, gender));
             tempData.add(animalVector.get(currentPosition).getAnimalInfo());
 
+            if (!animalVector.isEmpty()) {
+                addCompetition.getNewCompetitionButton().setEnabled(true);
+            }
+
             gameState = GameState.CHOOSING_COMP_ANIMALS;
             updateBtnStatus();
 
             addCompetition.requestFocus();
             addAnimalDialog.dispose();
-        }else if (e.getSource() == addAnimalDialog.getOkButtonAddAnimal() && !animalVector.isEmpty()) {
-            appendVectorToVectorGroup();
-        } //if create button is activated
+            addCompetition.getOkOrNewCompetitionBtn().setEnabled(true);
+        } else if (e.getSource() == addCompetition.getNewCompetitionButton()) {
+            newCompetition();
+        } else if (e.getSource().equals(addCompetition.getTableButton())) {
+            createCompetitionTable();
+        }
 
         validate();
         repaint();
@@ -243,14 +265,16 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         }
     }
 
+
     private void appendVectorToVectorGroup() {
         animalGroupVector.add(animalVector.toArray(Animal[]::new));
+
         newCompetition();
     }
 
+
     private void newCompetition() {
 
-        firstTime =true;
         chosenTour = null;
         tourName = null;
         chosenCompetition = null;
@@ -258,12 +282,14 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         animalVector.clear();
         addCompetition.getRegularTourRadioBox().setEnabled(true);
         addCompetition.getCourierTourRadioBox().setEnabled(true);
-        addCompetition.getOkBtn().setText("Ok");
-        addCompetition.getOkBtn().setEnabled(true);
+        addCompetition.getOkOrNewCompetitionBtn().setText("Ok");
+        addCompetition.getOkOrNewCompetitionBtn().setEnabled(true);
         addCompetition.getAddAnimalButton().setEnabled(false);
+        addCompetition.getNewCompetitionButton().setEnabled(false);
+        addCompetition.getCompetitionTypeComboBox().setEnabled(true);
+
 
     }
-
 
 
     /**
@@ -366,6 +392,19 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         table.setTitle("InfoTable");
     }
 
+    private void createCompetitionTable() {
+        competitionTable = new String[competitionTableVector.size()][];
+        for (int i = 0; i < competitionTableVector.size(); i++)
+            competitionTable[i] = (String[]) competitionTableVector.get(i);
+
+        CompetitionsTable table = new CompetitionsTable(competitionTable);
+        table.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        table.setSize(600, 200);
+        table.setVisible(true);
+        table.setTitle("Competition Table");
+    }
+
+
     public Vector<Animal> getAnimalVector() {
         return animalVector;
     }
@@ -435,7 +474,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        animalFactory = new WaterAnimalFactory();
         MainFrameSingelton.getInstance();
     }
 }

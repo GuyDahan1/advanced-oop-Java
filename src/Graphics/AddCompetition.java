@@ -65,7 +65,7 @@ public class AddCompetition extends JFrame implements ActionListener {
         return tourTextField;
     }
 
-    public JButton getOkBtn() {
+    public JButton getOkOrNewCompetitionBtn() {
         return okBtn;
     }
 
@@ -73,12 +73,12 @@ public class AddCompetition extends JFrame implements ActionListener {
         return newCompetitionButton;
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
-
     public JButton getAddAnimalButton() {
         return addAnimalButton;
+    }
+
+    public JButton getTableButton() {
+        return tableButton;
     }
 
     //

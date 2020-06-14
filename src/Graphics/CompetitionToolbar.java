@@ -55,7 +55,8 @@ public class CompetitionToolbar extends JPanel {
         return startBtn;
     }
 
-    public JButton getClearBtn() {
+    public JButton
+    getClearBtn() {
         return clearBtn;
     }
 

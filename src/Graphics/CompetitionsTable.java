@@ -3,12 +3,11 @@ package Graphics;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * InfoTable
- */
-public class InfoTable extends JFrame {
-    private static final String[] columnNames = {"Animal", "Category", "Type",
-            "Speed", "Energy Amount", "Distance", "Energy Consumpt"};
+public class CompetitionsTable extends JFrame {
+
+
+    private static final String[] columnNames = {"Competition Name", "Competition Type", "Tournament Type",
+            "Animal Name", " Animal Name", "Animal Name", "Animal Name" , "Animal Name"};
 
     private static JTable table;
     private String[][] data;
@@ -18,8 +17,8 @@ public class InfoTable extends JFrame {
      *
      * @param data - A given matrix of data the will be inserted to the table.
      */
-    public InfoTable(String[][] data) {
-        super("Info Table");
+    public CompetitionsTable(String[][] data) {
+        super("Competition Table");
 
         this.data = data.clone();
 
@@ -33,13 +32,12 @@ public class InfoTable extends JFrame {
         this.add(sp);
 
         // Frame Size
-        this.setSize(500, 200);
+        this.setSize(700, 200);
     }
-
-
 
     public static int getColumnSize() {
         return columnNames.length;
     }
 
 }
+
