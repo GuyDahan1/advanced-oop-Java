@@ -4,6 +4,7 @@ import animals.Animal;
 
 public abstract class Tournament {
 
+    private String TourName;
     protected TournamentThread tournamentThread;
 
 
