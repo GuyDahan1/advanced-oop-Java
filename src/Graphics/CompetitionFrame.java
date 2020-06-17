@@ -3,6 +3,8 @@ package Graphics;
 import animals.*;
 import designPatterns.*;
 import mobility.Point;
+import thread.Referee;
+import thread.RegularTournament;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,6 +41,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
 
     private int currentPosition = -1;
+    private int currentTournament = -1;
 
     private String chosenCompetition = null;
     private String chosenTour = null;
@@ -144,10 +147,8 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         if (e.getSource() == competitionPanel.getCompetitionToolbar().getExitBtn()) // exit button chosen
             System.exit(0);
         else if (e.getSource() == competitionPanel.getCompetitionToolbar().getInfoBtn()) // info button chosen
-        {
             createInfoTable();
-
-        } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getEatBtn()) // info button chosen
+        else if (e.getSource() == competitionPanel.getCompetitionToolbar().getEatBtn()) // info button chosen
         {
             for (Animal animal : animalVector) {
                 int newX = animal.getPosition().getX() + 30;
@@ -179,11 +180,19 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             newCompetition();
         } else if (e.getSource().equals(addCompetition.getTableButton())) {
             createCompetitionTable();
-        }
+        } else if (e.getSource().equals(competitionPanel.getCompetitionToolbar().getStartBtn())) {
 
+            Animal[][] animals = new Animal[animalGroupVector.size()][];
+            for (int i = 0; i < animals.length; i++) {
+                animals[i] = new Animal[animalGroupVector.get(i).length];
+                for (int j = 0; j < animalGroupVector.get(i).length; j++) {
+                    animals[i][j] = animalGroupVector.get(i)[j];
+                }
+            }
+            new RegularTournament(animals.clone());
+        }
         validate();
         repaint();
-
         if (currentPosition == maxAirAnimal - 1 || currentPosition == maxNonAirAnimal - 1 || currentPosition == maxNonAirAnimal - 1) {
             gameState = GameState.COMPETING;
             updateBtnStatus();
@@ -213,8 +222,8 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         SpeciesFactory speciesFactory = abstractFactory.getSpeciesFactory(chosenCompetition);
         String name = addAnimalDialog.getAnimalNameTextField().getText();
         String imageChoice = addAnimalDialog.getAnimalKind();
-        int speed = addAnimalDialog.getSpeed();
-        int cons = addAnimalDialog.getEnergyConsumpt();
+        int speed = addAnimalDialog.getSlider1().getValue();
+        int cons = addAnimalDialog.getSlider1().getValue() * 7;
         gen gender = addAnimalDialog.getAnimalGen();
         Point startPoint = getPositionIndex();
 
@@ -234,18 +243,17 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
 
-
     private void addCompetitionNewBtn() {
         if (chosenCompetition != null) {
             gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
             updateBtnStatus();
         }
         String[] arrOfString = new String[8];
-        arrOfString[0]=tourName;
-        arrOfString[1]=chosenCompetition;
-        arrOfString[2]=chosenTour;
-        for(int i =0 ; i<animalVector.size();i++){
-            arrOfString[i+3]=animalVector.get(i).getName();
+        arrOfString[0] = tourName;
+        arrOfString[1] = chosenCompetition;
+        arrOfString[2] = chosenTour;
+        for (int i = 0; i < animalVector.size(); i++) {
+            arrOfString[i + 3] = animalVector.get(i).getName();
         }
 
         competitionTableVector.add(arrOfString);
@@ -259,7 +267,8 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         addCompetition.getCompetitionTypeComboBox().setEnabled(false);
         vectorString.add(chosenCompetition);
 
-        JRadioButton jRadioButton = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox() : addCompetition.getRegularTourRadioBox();
+        JRadioButton jRadioButton = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox() : addCompetition.getCourierTourRadioBox();
+
         addCompetition.getRegularTourRadioBox().setEnabled(false);
         addCompetition.getCourierTourRadioBox().setEnabled(false);
         chosenTour = jRadioButton.getText();
@@ -308,12 +317,11 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             addCompetition.getAddAnimalButton().setEnabled(true);
         } else
             clearCompetitionDialog();
-            newCompetition();
+        newCompetition();
 
 
         updateBtnStatus();
     }
-
 
 
     /**
@@ -324,7 +332,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         chosenCompetition = null;
         gameState = (choice == 0 ? GameState.CHOOSING_COMP_FIRST_ANIMAL : GameState.CHOOSING_COMP_TYPE);
     }
-
 
 
     /**

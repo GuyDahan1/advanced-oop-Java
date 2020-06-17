@@ -7,7 +7,7 @@ import mobility.Point;
 /**
  * Represents Alligator animal object
  */
-public class Alligator extends TerrestrialAnimal implements IReptile {
+public class Alligator extends TerrestrialAnimal implements IReptile,Cloneable {
 
     private static final String sound = "Roar";
     private String AreaOfLiving;

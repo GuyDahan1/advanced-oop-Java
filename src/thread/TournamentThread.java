@@ -1,16 +1,27 @@
 package thread;
 
-public class TournamentThread implements Runnable{
+import animals.Animal;
 
-    Scores scores;
-    Boolean startSignal;
-    int groups;
+public class TournamentThread implements Runnable {
 
-    public TournamentThread() {
+    private Scores scores;
+    private Boolean startSignal;
+    AnimalThread[][] animalsArray;
 
-
+    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, Boolean startSignal) {
+        this.animalsArray = animalsThreads;
+        this.scores = scores;
+        this.startSignal = startSignal;
     }
+
     public void run() {
 
+        startSignal=true;
+        System.out.println("TourThread startSignal True");
+
+        synchronized (animalsArray){
+        animalsArray.notifyAll();}
+        System.out.println("Notify TourThread");
     }
 }
+

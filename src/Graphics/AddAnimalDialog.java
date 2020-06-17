@@ -134,7 +134,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
     public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider) e.getSource();
         if (!source.getValueIsAdjusting()) {
-            energyConsumpt = (int) source.getValue() * 10;
+            energyConsumpt = (int) source.getValue() * 7;
             speed = (int) source.getValue();
             speedLabel.setText(String.valueOf(speed +"Km/h"));
             energyConLabel.setText(String.valueOf(energyConsumpt+ "E/h"));
@@ -167,5 +167,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
 
     public JTextField getAnimalNameTextField() {
         return animalNameTextField;
+    }
+
+    public JSlider getSlider1() {
+        return slider1;
     }
 }

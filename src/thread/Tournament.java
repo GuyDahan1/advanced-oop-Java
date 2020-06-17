@@ -4,13 +4,23 @@ import animals.Animal;
 
 public abstract class Tournament {
 
-    private String TourName;
     protected TournamentThread tournamentThread;
 
-
-    public Tournament(){
+    public Tournament(Animal[][] animals){
+        try {
+            setup(animals);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
+    public abstract void setup(Animal[][] animals) throws InterruptedException;
 
-    public abstract void setup(Animal[][] animals);
+    public TournamentThread getTournamentThread() {
+        return tournamentThread;
+    }
+
+    public void setTournamentThread(TournamentThread tournamentThread) {
+        this.tournamentThread = tournamentThread;
+    }
 }

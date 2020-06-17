@@ -17,7 +17,7 @@ import java.util.Random;
 /**
  * Represents animal object
  */
-public abstract class Animal extends Mobile implements IDrawable, IAnimal, Cloneable, ILocatable {
+public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILocatable {
     private String name;
     private gen gender;
     private double weight;
@@ -32,6 +32,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
     protected int energyPerMeter;
     protected CompetitionPanel pan;
     protected BufferedImage eastImg, westImg, southImg, northImg;
+    protected Graphics g;
 
     /**
      * Creates Animal object with the given arguments.
@@ -196,6 +197,10 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
         return false;
     }
 
+    public Orientation getOrientation() {
+        return orientation;
+    }
+
     public abstract String[] getAnimalInfo();
 
     /**
@@ -212,6 +217,10 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
         }
         this.medals = null;
         return false;
+    }
+
+    public Graphics getG() {
+        return g;
     }
 
     /**
@@ -272,6 +281,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
     }
 
     public void drawObject(Graphics g) {
+        this.g = g;
         if (orientation == Orientation.E)  // animal move to the east side
             g.drawImage(eastImg, super.getPosition().getX() - size / 10, super.getPosition().getY() - size / 10, size * 2, size, pan);
         else if (orientation == Orientation.W) // animal move to the south side
