@@ -17,11 +17,12 @@ import java.util.Vector;
  */
 public class CompetitionFrame extends JFrame implements ActionListener {
     private CompetitionPanel competitionPanel = new CompetitionPanel();
-    AddCompetition addCompetition;
+    private AddCompetition addCompetition;
     private final CompetitionMenu competitionMenu = new CompetitionMenu();
     private AddAnimalDialog addAnimalDialog;
     private final int maxNonAirAnimal = 4;
     private final int maxAirAnimal = 5;
+    private Animal[][] animalsArray=null;
 
     static Point[] startPointWater;
     static Point[] endPointWater;
@@ -182,14 +183,14 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             createCompetitionTable();
         } else if (e.getSource().equals(competitionPanel.getCompetitionToolbar().getStartBtn())) {
 
-            Animal[][] animals = new Animal[animalGroupVector.size()][];
-            for (int i = 0; i < animals.length; i++) {
-                animals[i] = new Animal[animalGroupVector.get(i).length];
+            animalsArray = new Animal[animalGroupVector.size()][];
+            for (int i = 0; i < animalsArray.length; i++) {
+                animalsArray[i] = new Animal[animalGroupVector.get(i).length];
                 for (int j = 0; j < animalGroupVector.get(i).length; j++) {
-                    animals[i][j] = animalGroupVector.get(i)[j];
+                    animalsArray[i][j] = animalGroupVector.get(i)[j];
                 }
             }
-            new RegularTournament(animals.clone(),this);
+            new RegularTournament(animalsArray.clone(),this);
         }
         validate();
         repaint();
@@ -515,5 +516,12 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     public static Point[] getEndPointWater() {
         return endPointWater;
+    }
+
+    public void setAnimalVector(Animal[] animals) {
+        this.animalVector.clear();
+        for (int i = 0; i < animals.length; i++) {
+            this.animalVector.add(animals[i]);
+        }
     }
 }

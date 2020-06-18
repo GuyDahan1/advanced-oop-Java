@@ -47,6 +47,7 @@ public class CompetitionPanel extends JPanel {
         if (!frame.getAnimalVector().isEmpty())
             for (int i = 0; i < frame.getAnimalVector().size(); ++i)
                 frame.getAnimalVector().get(i).drawObject(g);
+
     }
 
     /**

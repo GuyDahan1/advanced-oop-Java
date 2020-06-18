@@ -17,7 +17,6 @@ public class AnimalThread implements Runnable {
     private AtomicBoolean finishFlag;//Obj boolean
     private Random rnd;
     private CompetitionPanel myPanel;
-    private int animalIndex;
 
     public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, CompetitionPanel panel) {
         this.participant = participant;
@@ -72,7 +71,11 @@ public class AnimalThread implements Runnable {
                     }
                     if (participant.getTotalDistance() >= this.neededDistance) {
                         this.finishFlag.set(true);
-                        notify();
+                        try {
+                            wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                     double speed = participant.getSpeed();
@@ -88,12 +91,12 @@ public class AnimalThread implements Runnable {
                         participant.move(new Point(position.getX() - (int) speed, position.getY()));
                     }
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     System.out.println(participant.getPosition().toString());
-                    participant.drawObject(participant.getG());
+                    myPanel.repaint();
                 }
             }
         }//TODO sleep

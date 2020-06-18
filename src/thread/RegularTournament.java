@@ -51,6 +51,7 @@ public class RegularTournament extends Tournament {
                 Thread refThread = new Thread(ref);
                 refThread.start();
             }
+            super.frame.setAnimalVector(animals[i]);
             TournamentThread thread = new TournamentThread(animalThread, scores, startSignal);
             super.setTournamentThread(thread);
             Thread t = new Thread(thread);
