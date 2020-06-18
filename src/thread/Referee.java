@@ -1,12 +1,14 @@
 package thread;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class Referee implements Runnable{
 
     String name;
     Scores scores;
-    Boolean startSignal;
+    AtomicBoolean startSignal;
 
-    public Referee(String name , Scores scores , Boolean competitionLive){
+    public Referee(String name , Scores scores , AtomicBoolean competitionLive){
         this.name=name;
         this.scores=scores;
         startSignal = competitionLive;
@@ -15,7 +17,7 @@ public class Referee implements Runnable{
     @Override
     public void run() {
         synchronized (this){
-        while(startSignal)
+        while(startSignal.get())
         try {
             wait();
         } catch (InterruptedException e) {

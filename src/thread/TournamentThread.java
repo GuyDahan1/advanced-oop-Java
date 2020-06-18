@@ -2,13 +2,15 @@ package thread;
 
 import animals.Animal;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class TournamentThread implements Runnable {
 
     private Scores scores;
-    private Boolean startSignal;
+    private AtomicBoolean startSignal;
     AnimalThread[][] animalsArray;
 
-    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, Boolean startSignal) {
+    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal) {
         this.animalsArray = animalsThreads;
         this.scores = scores;
         this.startSignal = startSignal;
@@ -16,7 +18,7 @@ public class TournamentThread implements Runnable {
 
     public void run() {
         synchronized (startSignal) {
-            startSignal = Boolean.TRUE;
+            startSignal.set(true);
             System.out.println("TourThread startSignal True");
         }
         for (int i = 0; i <animalsArray.length ; i++) {

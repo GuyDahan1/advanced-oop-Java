@@ -290,6 +290,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
             g.drawImage(northImg, super.getPosition().getX() - size / 10, super.getPosition().getY() - size / 10, size * 2, size, pan);
         else if (orientation == Orientation.S) // animal move to the north side
             g.drawImage(southImg, super.getPosition().getX() - size / 10, super.getPosition().getY() - size / 10, size * 2, size, pan);
+        pan.repaint();
     }
 
     @Override
@@ -303,5 +304,9 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
     }
 
     abstract public String getFamilyType();
+
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
+    }
 }
 

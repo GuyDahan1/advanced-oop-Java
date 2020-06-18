@@ -10,16 +10,26 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61f2286c-994c-4448-b696-78cb6f29de0a" name="Default Changelist" comment="Working Competition Table">
+    <list default="true" id="61f2286c-994c-4448-b696-78cb6f29de0a" name="Default Changelist" comment="restore Obj with bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/animals/AirAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/AirAnimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/animals/AirAnimal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/animals/AirAnimal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/animals/Alligator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/animals/Alligator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/animals/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/animals/Animal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/animals/TerrestrialAnimal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/animals/TerrestrialAnimal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/animals/WaterAnimal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/animals/WaterAnimal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/AnimalThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/AnimalThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/CourierTournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/CourierTournament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/Referee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/Referee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/RegularTournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/RegularTournament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/Tournament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/TournamentThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/TournamentThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphics/CompetitionFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/CompetitionFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/animals/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/Animal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/animals/TerrestrialAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/TerrestrialAnimal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/animals/WaterAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/WaterAnimal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/thread/AnimalThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/AnimalThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thread/CourierTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/CourierTournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/thread/Referee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/Referee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/thread/RegularTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/RegularTournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thread/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/Tournament.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/thread/TournamentThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/TournamentThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -216,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592228324575</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="restore Obj with bugs">
+      <created>1592487399066</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1592487399066</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +260,8 @@
     <MESSAGE value="17:09" />
     <MESSAGE value="Table" />
     <MESSAGE value="Working Competition Table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working Competition Table" />
+    <MESSAGE value="restore Obj with bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="restore Obj with bugs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1592479393212">
@@ -278,22 +296,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" width="1536" height="824" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1592371923270" />
-    <state width="1493" height="246" key="GridCell.Tab.0.bottom" timestamp="1592487039467">
+    <state width="1493" height="206" key="GridCell.Tab.0.bottom" timestamp="1592495470097">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="246" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592487039467" />
-    <state width="1493" height="246" key="GridCell.Tab.0.center" timestamp="1592487039467">
+    <state width="1493" height="206" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592495470097" />
+    <state width="1493" height="206" key="GridCell.Tab.0.center" timestamp="1592495470097">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="246" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592487039467" />
-    <state width="1493" height="246" key="GridCell.Tab.0.left" timestamp="1592487039467">
+    <state width="1493" height="206" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592495470097" />
+    <state width="1493" height="206" key="GridCell.Tab.0.left" timestamp="1592495470096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="246" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592487039467" />
-    <state width="1493" height="246" key="GridCell.Tab.0.right" timestamp="1592487039467">
+    <state width="1493" height="206" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592495470096" />
+    <state width="1493" height="206" key="GridCell.Tab.0.right" timestamp="1592495470097">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="246" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592487039467" />
+    <state width="1493" height="206" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592495470097" />
     <state width="1493" height="246" key="GridCell.Tab.1.bottom" timestamp="1592487039468">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -338,10 +356,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="177" key="extract.method.dialog/0.0.1536.824@0.0.1536.824" timestamp="1592227392993" />
-    <state x="478" y="11" width="579" height="801" key="find.popup" timestamp="1592483161674">
+    <state x="478" y="11" width="579" height="801" key="find.popup" timestamp="1592495367101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="478" y="11" width="579" height="801" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1592483161674" />
+    <state x="478" y="11" width="579" height="801" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1592495367101" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1592416029603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -361,13 +379,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/thread/AnimalThread.java</url>
-          <line>73</line>
+          <line>61</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/animals/Animal.java</url>
           <line>283</line>
           <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/thread/AnimalThread.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/animals/Animal.java</url>

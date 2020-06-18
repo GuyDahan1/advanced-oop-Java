@@ -16,7 +16,7 @@ import java.util.Vector;
  * CompetitionFrame
  */
 public class CompetitionFrame extends JFrame implements ActionListener {
-    private static final CompetitionPanel competitionPanel = new CompetitionPanel();
+    private CompetitionPanel competitionPanel = new CompetitionPanel();
     AddCompetition addCompetition;
     private final CompetitionMenu competitionMenu = new CompetitionMenu();
     private AddAnimalDialog addAnimalDialog;
@@ -189,7 +189,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                     animals[i][j] = animalGroupVector.get(i)[j];
                 }
             }
-            new RegularTournament(animals.clone());
+            new RegularTournament(animals.clone(),this);
         }
         validate();
         repaint();
@@ -495,5 +495,25 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         MainFrameSingelton.getInstance();
+    }
+
+    public CompetitionPanel getCompetitionPanel() {
+        return competitionPanel;
+    }
+
+    public static Point[] getStartPointWater() {
+        return startPointWater;
+    }
+
+    public static Point[] getStartPoint() {
+        return startPoint;
+    }
+
+    public static Point[] getEndPoint() {
+        return endPoint;
+    }
+
+    public static Point[] getEndPointWater() {
+        return endPointWater;
     }
 }

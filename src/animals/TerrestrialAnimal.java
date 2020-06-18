@@ -62,10 +62,6 @@ abstract public class  TerrestrialAnimal extends Animal {
      */
     @Override
     public double move(Point p) {
-        if (p.getY() != this.getPosition().getY()) {
-            System.out.println("TerrestrialAnimals can't fly or dive");
-            return this.getTotalDistance();
-        }
         return super.move(p);
     }
 
