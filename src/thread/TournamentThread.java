@@ -15,13 +15,18 @@ public class TournamentThread implements Runnable {
     }
 
     public void run() {
-
-        startSignal=true;
-        System.out.println("TourThread startSignal True");
-
-        synchronized (animalsArray){
-        animalsArray.notifyAll();}
-        System.out.println("Notify TourThread");
+        synchronized (startSignal) {
+            startSignal = Boolean.TRUE;
+            System.out.println("TourThread startSignal True");
+        }
+        for (int i = 0; i <animalsArray.length ; i++) {
+            for (int j = 0; j <animalsArray[i].length ; j++) {
+                synchronized (animalsArray[i][j]) {
+                    animalsArray[i][j].notifyAll();
+                    System.out.println("Notify TourThread");
+                }
+            }
+        }
     }
 }
 

@@ -1,13 +1,14 @@
 package thread;
 
+import Graphics.CompetitionFrame;
 import animals.Animal;
 
 public class RegularTournament extends Tournament {
     Boolean startSignal;
     Scores scores;
 
-    public RegularTournament(Animal[][] animals) {
-        super(animals);
+    public RegularTournament(Animal[][] animals, CompetitionFrame frame) {
+        super(animals,frame);
     }
 
     @Override
@@ -23,10 +24,8 @@ public class RegularTournament extends Tournament {
             for (int j = 0; j < animals[i].length; j++) {
                 System.out.println("RegularTour setup Loop " + i + " " + j + "Build animal");
                 Boolean endSignal = false;
-
                 Animal tempAnimal = animals[i][j];
-                System.out.println(tempAnimal.getName());
-                animalThread[i][j] = new AnimalThread(tempAnimal, -1, startSignal, endSignal);
+                animalThread[i][j] = new AnimalThread(tempAnimal, -1, startSignal, endSignal,super.frame,j);
                 Thread animalThreads = new Thread(animalThread[i][j]);
                 animalThreads.start();
                 Referee ref = new Referee(animals[i][j].getName(), scores, endSignal);
@@ -35,7 +34,9 @@ public class RegularTournament extends Tournament {
             }
             TournamentThread thread = new TournamentThread(animalThread, scores, startSignal);
             super.setTournamentThread(thread);
-            super.tournamentThread.run();
+            Thread t = new Thread(thread);
+            t.start();
+//            super.tournamentThread.run();
         }
 
         System.out.println("RegularTour setup Loop End func");

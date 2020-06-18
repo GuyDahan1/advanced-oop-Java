@@ -301,5 +301,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
             return true;
         }
     }
+
+    abstract public String getFamilyType();
 }
 

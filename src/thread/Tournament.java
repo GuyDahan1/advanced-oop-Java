@@ -1,12 +1,14 @@
 package thread;
 
+import Graphics.CompetitionFrame;
 import animals.Animal;
 
 public abstract class Tournament {
 
     protected TournamentThread tournamentThread;
-
-    public Tournament(Animal[][] animals){
+    protected CompetitionFrame frame;
+    public Tournament(Animal[][] animals, CompetitionFrame frame){
+        this.frame=frame;
         try {
             setup(animals);
         } catch (InterruptedException e) {
