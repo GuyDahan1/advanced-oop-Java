@@ -3,6 +3,7 @@ package Graphics;
 import animals.*;
 import designPatterns.*;
 import mobility.Point;
+import thread.CourierTournament;
 import thread.Referee;
 import thread.RegularTournament;
 
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.util.Vector;
 
 /**
@@ -239,7 +241,8 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                     animalsArray[i][j] = animalGroupVector.get(i)[j];
                 }
             }
-            new RegularTournament(animalsArray.clone(), this);
+//            new CourierTournament(animalsArray.clone(), this);
+            new RegularTournament( animalsArray.clone(), this);
         }
         validate();
         repaint();
@@ -326,6 +329,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         vectorString.add(chosenTour);
 
         tourName = addCompetition.getTextField1().getText();
+
         addCompetition.getAddAnimalButton().setEnabled(true);
         addCompetition.getOkOrNewCompetitionBtn().setText("Add Competition");
         addCompetition.getOkOrNewCompetitionBtn().setEnabled(false);
@@ -335,7 +339,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     private void appendVectorToVectorGroup() {
         animalGroupVector.add(animalVector.toArray(Animal[]::new));
-
         newCompetition();
     }
 
@@ -354,6 +357,9 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         addCompetition.getAddAnimalButton().setEnabled(false);
         addCompetition.getNewCompetitionButton().setEnabled(false);
         addCompetition.getCompetitionTypeComboBox().setEnabled(true);
+        Random randomNum = new Random();
+        String randomTourName = "EmptyName#"+String.valueOf(randomNum.nextInt(1000));
+        addCompetition.getTextField1().setText(randomTourName);
 
 
     }

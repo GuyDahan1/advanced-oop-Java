@@ -44,10 +44,11 @@ public class RegularTournament extends Tournament {
                 AtomicBoolean endSignal = new AtomicBoolean(false);
                 endSignal.set(false);
                 Animal tempAnimal = animals[i][j];
-                animalThread[i][j] = new AnimalThread(tempAnimal,calcNeededDistance(tempAnimal,j), startSignal, endSignal,frame.getCompetitionPanel());
+                Referee ref = new Referee(animals[i][j].getName(), scores, endSignal);
+
+                animalThread[i][j] = new AnimalThread(tempAnimal,calcNeededDistance(tempAnimal,j), startSignal, endSignal,frame.getCompetitionPanel(),ref);
                 Thread animalThreads = new Thread(animalThread[i][j]);
                 animalThreads.start();
-                Referee ref = new Referee(animals[i][j].getName(), scores, endSignal);
                 Thread refThread = new Thread(ref);
                 refThread.start();
             }

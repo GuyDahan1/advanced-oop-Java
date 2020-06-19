@@ -17,16 +17,15 @@ public class AnimalThread implements Runnable {
     private AtomicBoolean finishFlag;//Obj boolean
     private Random rnd;
     private CompetitionPanel myPanel;
-
-    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, CompetitionPanel panel) {
+    private Referee ref;
+    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, CompetitionPanel panel,Referee ref) {
         this.participant = participant;
         this.neededDistance = neededDistance;
         startFlag = start;
         finishFlag = end;
         myPanel = panel;
         rnd = new Random();
-
-
+        this.ref = ref;
     }
 
     @Override
@@ -71,19 +70,19 @@ public class AnimalThread implements Runnable {
                     }
                     if (participant.getTotalDistance() >= this.neededDistance) {
                         this.finishFlag.set(true);
-                        synchronized (Referee.class) {
-                            Referee.class.notifyAll();
-                        }
+                        synchronized (ref){
+                        ref.notify();}
+                        synchronized (this){
                         try {
                             wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
-                        }
-
+                        }}
                     }
                     double speed = participant.getSpeed();
                     Point position = participant.getPosition();
                     Image img = null;
+
                     if (participant.getOrientation().equals(Orientation.E)) {
                         participant.move(new Point(position.getX() + (int) speed, position.getY()));
                     } else if (participant.getOrientation().equals(Orientation.N)) {
@@ -94,7 +93,7 @@ public class AnimalThread implements Runnable {
                         participant.move(new Point(position.getX() - (int) speed, position.getY()));
                     }
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(30);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

@@ -17,6 +17,7 @@ public class Scores {
     public synchronized void add(String name) {
         Date date = new Date();
         scores.put(name, date);
+        System.out.println(name + " " + date.toString() + " Scored added" );
     }
 
     public Map<String, Date> getScores() {
