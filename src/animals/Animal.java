@@ -24,6 +24,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
     private double speed;
     private Medal[] medals;
     protected String type;
+    protected String imgChoice;
 
     protected int currentEnergy;
     protected int size;
@@ -61,7 +62,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
         maxEnergy = rnd.nextInt(1200) + 300;
         currentEnergy = maxEnergy;
         this.pan = pan;
-
+        this.imgChoice =imgChoice;
         loadImages(imgChoice);
     }
 

@@ -6,25 +6,27 @@ public class Referee implements Runnable{
 
     String name;
     Scores scores;
-    AtomicBoolean startSignal;
+    AtomicBoolean endSignal;
 
-    public Referee(String name , Scores scores , AtomicBoolean competitionLive){
+    public Referee(String name , Scores scores , AtomicBoolean endSignal){
         this.name=name;
         this.scores=scores;
-        startSignal = competitionLive;
+        this.endSignal = endSignal;
     }
 
     @Override
     public void run() {
         synchronized (this){
-        while(startSignal.get())
+        while(endSignal.get())
         try {
+            System.out.println("Referee : " + name);
             wait();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }}
         synchronized (this) {
             scores.add(name);
+            System.out.println("score added");
             notify();
         }
     }

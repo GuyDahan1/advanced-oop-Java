@@ -7,7 +7,7 @@ import mobility.Point;
 /**
  * Represents Alligator animal object
  */
-public class Alligator extends TerrestrialAnimal implements IReptile,Cloneable {
+public class Alligator extends TerrestrialAnimal implements IReptile, Cloneable {
 
     private static final String sound = "Roar";
     private String AreaOfLiving;
@@ -21,9 +21,9 @@ public class Alligator extends TerrestrialAnimal implements IReptile,Cloneable {
      * @param position A given Point object of Alligator's object location in space.
      * @see gen,Medal,Point
      */
-    public Alligator(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter,gen gender) {
-        super(name, speed, position, pan, "alligator", choice,energyPerMeter,gender);
-        waterAnimal = new WaterAnimal(name, speed, position, pan, "alligator", "alligator2",energyPerMeter,gender) {
+    public Alligator(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter, gen gender) {
+        super(name, speed, position, pan, "alligator", choice, energyPerMeter, gender);
+        waterAnimal = new WaterAnimal(name, speed, position, pan, "alligator", "alligator2", energyPerMeter, gender) {
             public String getSound() {
                 return sound;
             }
@@ -57,12 +57,19 @@ public class Alligator extends TerrestrialAnimal implements IReptile,Cloneable {
         return this.AreaOfLiving;
     }
 
+    @Override
+    public double move(Point p) {
+        return super.move(p);
+    }
+
     /**
      * Speeds up a Alligator object, until a maximum amount of speed.
      *
      * @param speed A given speed that will increase this object's current speed.
      * @return boolean value if increasing speed succeeded or not.
      */
+
+
     @Override
     public boolean speedUp(int speed) {
         if ((super.getSpeed() + speed < MAX_SPEED) && speed > 0) {
@@ -104,5 +111,13 @@ public class Alligator extends TerrestrialAnimal implements IReptile,Cloneable {
             super.setCurrentEnergy(energy);
             return true;
         }
+    }
+
+    @Override
+    public String getFamilyType() {
+        if (super.imgChoice.contains("3"))
+            return super.getFamilyType();
+        else
+            return waterAnimal.getFamilyType();
     }
 }

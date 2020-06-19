@@ -71,6 +71,9 @@ public class AnimalThread implements Runnable {
                     }
                     if (participant.getTotalDistance() >= this.neededDistance) {
                         this.finishFlag.set(true);
+                        synchronized (Referee.class) {
+                            Referee.class.notifyAll();
+                        }
                         try {
                             wait();
                         } catch (InterruptedException e) {
@@ -96,7 +99,6 @@ public class AnimalThread implements Runnable {
                         e.printStackTrace();
                     }
                     System.out.println(participant.getPosition().toString());
-                    myPanel.repaint();
                 }
             }
         }//TODO sleep
