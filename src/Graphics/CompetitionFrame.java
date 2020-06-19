@@ -44,11 +44,13 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
 
     private int currentPosition = -1;
-    private int currentTournament = -1;
+    private int currentTournament = 0;
+    private int userChosenTour = 0 ;
 
-    private String chosenCompetition = null;
-    private String chosenTour = null;
-    private String tourName = null;
+
+    private Vector<String> chosenCompetition = new Vector<>();
+    private Vector<String> chosenTour = new Vector<>();
+    private Vector<String> tourName = new Vector<>();
     private GameState gameState;
     private boolean firstTime = true;
 
@@ -118,11 +120,11 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      */
     public Point getPositionIndex() {
         Point animalPoint = null;
-        if(chosenTour.contains("Regu")) {
+        if (chosenTour.get(currentTournament).contains("Regu")) {
 
             animalPoint = getRegularPoint(null);
 
-        }else{
+        } else {
             animalPoint = getCourierPoint(null);
 
         }
@@ -131,17 +133,17 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     private Point getRegularPoint(Point animalPoint) {
         currentPosition++;
-        if (chosenCompetition.contains("Air") && currentPosition < maxAirAnimal) {
+        if (chosenCompetition.get(currentTournament).contains("Air") && currentPosition < maxAirAnimal) {
             if (currentPosition == maxAirAnimal - 1) {
                 addCompetition.getAddAnimalButton().setEnabled(false);
             }
             animalPoint = startPoint[currentPosition];
-        } else if (chosenCompetition.contains("Water") && currentPosition < maxNonAirAnimal) {
+        } else if (chosenCompetition.get(currentTournament).contains("Water") && currentPosition < maxNonAirAnimal) {
             if (currentPosition == maxNonAirAnimal - 1) {
                 addCompetition.getAddAnimalButton().setEnabled(false);
             }
             animalPoint = startPointWater[currentPosition];
-        } else if (chosenCompetition.contains("Terr") && currentPosition < maxNonAirAnimal) {
+        } else if (chosenCompetition.get(currentTournament).contains("Terr") && currentPosition < maxNonAirAnimal) {
             if (currentPosition == maxNonAirAnimal - 1) {
                 addCompetition.getAddAnimalButton().setEnabled(false);
             }
@@ -152,28 +154,28 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     private Point getCourierPoint(Point animalPoint) {
         currentPosition++;
-        if (chosenCompetition.contains("Air") && currentPosition < maxAirAnimal) {
+        if (chosenCompetition.get(currentTournament).contains("Air") && currentPosition < maxAirAnimal) {
             if (currentPosition == maxAirAnimal - 1) {
                 addCompetition.getAddAnimalButton().setEnabled(false);
             }
             animalPoint = startPoint[currentPosition];
-            if(currentPosition%2!=0){
+            if (currentPosition % 2 != 0) {
                 animalPoint = endPoint[currentPosition];
             }
-        } else if (chosenCompetition.contains("Water") && currentPosition < maxNonAirAnimal) {
+        } else if (chosenCompetition.get(currentTournament).contains("Water") && currentPosition < maxNonAirAnimal) {
             if (currentPosition == maxNonAirAnimal - 1) {
                 addCompetition.getAddAnimalButton().setEnabled(false);
             }
             animalPoint = startPointWater[currentPosition];
-            if(currentPosition%2!=0){
+            if (currentPosition % 2 != 0) {
                 animalPoint = endPointWater[currentPosition];
             }
-        } else if (chosenCompetition.contains("Terr") && currentPosition < maxNonAirAnimal) {
+        } else if (chosenCompetition.get(currentTournament).contains("Terr") && currentPosition < maxNonAirAnimal) {
             if (currentPosition == maxNonAirAnimal - 1) {
                 addCompetition.getAddAnimalButton().setEnabled(false);
             }
             animalPoint = startPoint[currentPosition];
-            if(currentPosition%2!=0){
+            if (currentPosition % 2 != 0) {
                 animalPoint = endPoint[currentPosition];
             }
         }
@@ -234,15 +236,40 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
         } else if (e.getSource().equals(competitionPanel.getCompetitionToolbar().getStartBtn())) {
 
-            animalsArray = new Animal[animalGroupVector.size()][];
-            for (int i = 0; i < animalsArray.length; i++) {
-                animalsArray[i] = new Animal[animalGroupVector.get(i).length];
-                for (int j = 0; j < animalGroupVector.get(i).length; j++) {
-                    animalsArray[i][j] = animalGroupVector.get(i)[j];
+            Object[] possibilities = tourName.toArray();
+            String s = (String) JOptionPane.showInputDialog(
+                    this,
+                    "Choose Tournament from above",
+                    "Choose Tournament",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    possibilities,
+                    chosenTour.get(0));
+
+            if (s != null) {
+
+
+                for (int i = 0; i <tourName.size() ; i++) {
+                    if(tourName.get(i).equals(s)){
+                        userChosenTour = i;
+                    }
                 }
+                animalsArray = new Animal[animalGroupVector.size()][];
+                for (int i = 0; i < animalsArray.length; i++) {
+                    animalsArray[i] = new Animal[animalGroupVector.get(i).length];
+                    for (int j = 0; j < animalGroupVector.get(i).length; j++) {
+                        animalsArray[i][j] = animalGroupVector.get(i)[j];
+                    }
+                }
+
+
+                if (chosenTour.contains("Regula")) {
+                    new RegularTournament(animalsArray.clone(), this,userChosenTour);
+                } else {
+                    new CourierTournament(animalsArray.clone(), this,userChosenTour);
+                }
+
             }
-//            new CourierTournament(animalsArray.clone(), this);
-            new RegularTournament( animalsArray.clone(), this);
         }
         validate();
         repaint();
@@ -267,12 +294,12 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void addAnimalDialogOkBtnAction() {
-        chosenCompetition = chosenCompetition == null ? "Water animals" : chosenCompetition;
+        chosenCompetition.add(chosenCompetition.get(currentTournament) == null ? "Water animals" : chosenCompetition.get(currentTournament));
 
 
         AbstractAnimalFactory abstractFactory = new AbstractAnimalFactory();
 
-        SpeciesFactory speciesFactory = abstractFactory.getSpeciesFactory(chosenCompetition);
+        SpeciesFactory speciesFactory = abstractFactory.getSpeciesFactory(chosenCompetition.get(currentTournament));
         String name = addAnimalDialog.getAnimalNameTextField().getText();
         String imageChoice = addAnimalDialog.getAnimalKind();
         int speed = addAnimalDialog.getSlider1().getValue();
@@ -303,9 +330,9 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             updateBtnStatus();
         }
         String[] arrOfString = new String[8];
-        arrOfString[0] = tourName;
-        arrOfString[1] = chosenCompetition;
-        arrOfString[2] = chosenTour;
+        arrOfString[0] = tourName.get(currentTournament);
+        arrOfString[1] = chosenCompetition.get(currentTournament);
+        arrOfString[2] = chosenTour.get(currentTournament);
         for (int i = 0; i < animalVector.size(); i++) {
             arrOfString[i + 3] = animalVector.get(i).getName();
         }
@@ -314,26 +341,27 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         appendVectorToVectorGroup();
 
         addCompetition.getTableButton().setEnabled(true);
+        currentTournament++;
     }
 
     private void addCompetitionOkBtn() {
-        chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
+        chosenCompetition.add(addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString());
         addCompetition.getCompetitionTypeComboBox().setEnabled(false);
-        vectorString.add(chosenCompetition);
+        vectorString.add(chosenCompetition.get(currentTournament));
 
         JRadioButton jRadioButton = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox() : addCompetition.getRegularTourRadioBox();
 
         addCompetition.getRegularTourRadioBox().setEnabled(false);
         addCompetition.getCourierTourRadioBox().setEnabled(false);
-        chosenTour = jRadioButton.getText();
-        vectorString.add(chosenTour);
+        chosenTour.add(jRadioButton.getText());
+        vectorString.add(chosenTour.get(currentTournament));
 
-        tourName = addCompetition.getTextField1().getText();
+        tourName.add(addCompetition.getTextField1().getText());
 
         addCompetition.getAddAnimalButton().setEnabled(true);
         addCompetition.getOkOrNewCompetitionBtn().setText("Add Competition");
         addCompetition.getOkOrNewCompetitionBtn().setEnabled(false);
-        vectorString.add(tourName);
+        vectorString.add(tourName.get(currentTournament));
     }
 
 
@@ -345,9 +373,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     private void newCompetition() {
 
-        chosenTour = null;
-        tourName = null;
-        chosenCompetition = null;
         currentPosition = -1;
         animalVector.clear();
         addCompetition.getRegularTourRadioBox().setEnabled(true);
@@ -358,7 +383,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         addCompetition.getNewCompetitionButton().setEnabled(false);
         addCompetition.getCompetitionTypeComboBox().setEnabled(true);
         Random randomNum = new Random();
-        String randomTourName = "EmptyName#"+String.valueOf(randomNum.nextInt(1000));
+        String randomTourName = "EmptyName#" + String.valueOf(randomNum.nextInt(1000));
         addCompetition.getTextField1().setText(randomTourName);
 
 
@@ -436,7 +461,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      * Updates all animals' location after an animal was cleared from the competition .S
      */
     private void updateAnimalLocationPostClr() {
-        String animalsType = chosenCompetition.contains("Water") ? "waterAnimals" : "otherAnimals";
+        String animalsType = chosenCompetition.get(currentTournament).contains("Water") ? "waterAnimals" : "otherAnimals";
         currentPosition--;
         switch (animalsType) {
             case "waterAnimals":
@@ -540,7 +565,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     public String getChosenCompetition() {
-        return chosenCompetition;
+        return chosenCompetition.get(currentTournament);
     }
 
     public static void centreWindow(Window frame) {

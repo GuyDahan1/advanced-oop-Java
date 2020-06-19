@@ -13,8 +13,8 @@ public class CourierTournament extends Tournament {
     Scores scores;
 
 
-    public CourierTournament(Animal[][] animals, CompetitionFrame frame) {
-        super(animals, frame);
+    public CourierTournament(Animal[][] animals, CompetitionFrame frame,int index) {
+        super(animals, frame,index);
     }
 
 
