@@ -56,7 +56,9 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
         this.type = type;
 
         Random rnd = new Random();
-        this.orientation = Orientation.E;
+
+        orientation = getPosition().getX()>400 ? Orientation.W : Orientation.E;
+
         size = 65;
         this.energyPerMeter=energyPerMeter;
         maxEnergy = rnd.nextInt(1200) + 300;
