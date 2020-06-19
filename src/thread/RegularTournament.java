@@ -52,13 +52,13 @@ public class RegularTournament extends Tournament {
             refThread.start();
         }
         super.frame.setAnimalVector(animals[super.tourIndex]);
-        TournamentThread thread = new TournamentThread(animalThread, scores, startSignal);
+        TournamentThread thread = new TournamentThread(animalThread, scores, startSignal,tourIndex);
         super.setTournamentThread(thread);
         Thread t = new Thread(thread);
         t.start();
 //            super.tournamentThread.run();
 
-
+        t.stop();
         System.out.println("RegularTour setup Loop End func");
 
     }

@@ -60,7 +60,7 @@ public class CourierTournament extends Tournament {
                 refThread.start();
             }
             super.frame.setAnimalVector(animals[i]);
-            TournamentThread thread = new TournamentThread(animalThread, scores, startSignal);
+            TournamentThread thread = new TournamentThread(animalThread, scores, startSignal,3);
             super.setTournamentThread(thread);
             Thread t = new Thread(thread);
             t.start();

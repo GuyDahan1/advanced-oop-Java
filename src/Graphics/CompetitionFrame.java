@@ -4,7 +4,6 @@ import animals.*;
 import designPatterns.*;
 import mobility.Point;
 import thread.CourierTournament;
-import thread.Referee;
 import thread.RegularTournament;
 
 import javax.swing.*;
@@ -263,11 +262,13 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                 }
 
 
-                if (chosenTour.contains("Regula")) {
+                if (chosenTour.get(userChosenTour).contains("Reg")) {
                     new RegularTournament(animalsArray.clone(), this,userChosenTour);
                 } else {
                     new CourierTournament(animalsArray.clone(), this,userChosenTour);
                 }
+
+                tourName.remove(userChosenTour);
 
             }
         }
