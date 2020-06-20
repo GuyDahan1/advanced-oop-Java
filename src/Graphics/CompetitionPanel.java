@@ -32,7 +32,7 @@ public class CompetitionPanel extends JPanel {
      */
     public void paintComponent(Graphics g) {
         try {
-            backgroundImg = ImageIO.read(getClass().getResource("Icons/competitionBackground.png"));
+            backgroundImg = ImageIO.read(getClass().getResource("/competitionBackground.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -281,7 +281,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void competitionBtnAction() {
-        addCompetition = CompetitioinSingelton.getInstance();
+        addCompetition = CompetitionSingleton.getInstance();
 
         if (firstTime) {
             addCompetition.getAddAnimalButton().addActionListener(this);
