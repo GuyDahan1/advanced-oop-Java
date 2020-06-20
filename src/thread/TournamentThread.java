@@ -1,5 +1,7 @@
 package thread;
 
+import org.w3c.dom.ls.LSOutput;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.TimerTask;
@@ -27,12 +29,12 @@ public class TournamentThread implements Runnable {
         this.regularTournamentBool = regularTour;
     }
 
-    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index, boolean regularTour, AtomicBoolean[] booleans) {
+    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index, AtomicBoolean[] booleans) {
         this.animalsArray = animalsThreads;
         this.scores = scores;
         this.startSignal = startSignal;
         this.index = index;
-        this.regularTournamentBool = regularTour;
+        this.regularTournamentBool = false;
         this.booleans = booleans;
     }
 
@@ -91,7 +93,6 @@ public class TournamentThread implements Runnable {
 
         synchronized (startSignal) {
             if (!startSignal.get()) {
-                System.out.println("TourThread startSignal True");
                 this.startSignal.set(true);
             }
         }
@@ -100,21 +101,37 @@ public class TournamentThread implements Runnable {
             for (int j = 0; j < animalsArray[index].length; j++) {
                 synchronized (animalsArray[index][j]) {
                     animalsArray[index][j].notifyAll();
-                    System.out.println("Notify TourThread");
                 }
             }
             arrayOfScore[index] = new String[animalsArray[index].length];
             for (int j = 0; j < animalsArray[index].length; j++)
                 arrayOfScore[index][j] = scores.getScores().toString();
         } else {
-            for (int i = 0; i < animalsArray[index].length; i++) {
-                if (i % 2 == 0) {
+            int i = 0;
+            for (int j = 0; j < animalsArray[index].length; j++) {
+                synchronized (animalsArray[index][j]) {
+                    animalsArray[index][j].notifyAll();
+                }
+            }
+            while (true) {
+
+                if (booleans[i].get()) {
                     synchronized (animalsArray[index][i]) {
                         animalsArray[index][i].notifyAll();
-                        System.out.println("Notify TourThread");
                     }
+                }
+                if (i == animalsArray[index].length - 1) {
+                    synchronized (this) {
+                        try {
+                            wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    i = 0;
                 }
             }
         }
     }
+
 }

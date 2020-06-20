@@ -557,7 +557,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      * Updates the relevant buttons' enabling/disabling status by the current game state.
      */
     private void updateBtnStatus() {
-        System.out.println("******* " + gameState.toString() + " ******* ");
         switch (gameState) {
             case CHOOSING_COMP_TYPE -> {  // relevant state =   CHOOSING_COMP_TYPE
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);

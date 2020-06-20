@@ -13,7 +13,7 @@ public class Scores {
         scores = Collections.synchronizedMap(new HashMap<>());
     }
 
-    public synchronized void add(String name) {
+    public synchronized void addRegularTour(String name) {
         Date date = new Date();
         scores.put(name, date);
         System.out.println(name + " " + date.toString() + " Scored added" );

@@ -14,17 +14,17 @@ public class AnimalThread implements Runnable {
     private final AtomicBoolean startFlag;//Obj boolean
     private final AtomicBoolean finishFlag;//Obj boolean
     private final Referee ref;
+    private Tournament tour;
     private boolean regularTournamentBoolean;
-    private Thread thisThread;
 
-    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour) {
+    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour,Tournament tour) {
         this.participant = participant;
         this.neededDistance = neededDistance;
         startFlag = start;
         finishFlag = end;
         this.ref = ref;
         regularTournamentBoolean = regularTour;
-
+        this.tour = tour;
     }
 
     @Override
@@ -43,13 +43,12 @@ public class AnimalThread implements Runnable {
                 }
             }
         }
-        double tournamentValue=1;
+        double tournamentValue = 1;
         if (regularTournamentBoolean) {
             tournamentValue = 0.5;
         }
         while (startFlag.get()) {
             while (!finishFlag.get()) {
-                System.out.println(participant.getTotalDistance());
                 synchronized (this) {
                     if (participant.getFamilyType().contains("Air") || participant.getFamilyType().contains("Water")) {
                         if (participant.getTotalDistance() >= tournamentValue * neededDistance) {
@@ -69,15 +68,12 @@ public class AnimalThread implements Runnable {
                     }
                     if (participant.getTotalDistance() >= this.neededDistance) {
                         this.finishFlag.set(true);
-
                         synchronized (ref) {
                             ref.notify();
                         }
-                        synchronized (TournamentThread.class) {
-                            TournamentThread.class.notify();
-                            System.out.println("notifyTOuramnentTHraead");
-                        }
-                        thisThread=null;
+                        tour.notifyTournamentThread();
+                        System.out.println("nNOTIFY TOURNAMENTTHREAD");
+
                     }
                     double speed = participant.getSpeed();
                     Point position = participant.getPosition();
@@ -93,7 +89,7 @@ public class AnimalThread implements Runnable {
                     }
                     try {
                         //noinspection BusyWait
-                        Thread.sleep(15);
+                            Thread.sleep(15);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -101,12 +97,9 @@ public class AnimalThread implements Runnable {
                 }
             }
         }
-
+        startFlag.set(false);
     }
 
-    public void setThisThread(Thread thisThread) {
-        this.thisThread = thisThread;
-    }
 
     public AtomicBoolean getFinishFlag() {
         return finishFlag;

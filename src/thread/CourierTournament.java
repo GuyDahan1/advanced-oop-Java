@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CourierTournament extends Tournament {
 
+    Thread t;//TournamentThread Thread
     AtomicBoolean startSignal;
     AtomicBoolean endSignal;
     AtomicBoolean oddLocationEndSignal;
@@ -32,7 +33,6 @@ public class CourierTournament extends Tournament {
 
     @Override
     public void setup(Animal[][] animals) {
-        System.out.println("Courier setup");
         scores = new Scores();
         startSignal = new AtomicBoolean(false);
         endSignal = new AtomicBoolean(false);
@@ -41,7 +41,6 @@ public class CourierTournament extends Tournament {
 
         for (int i = 0; i < animals.length; i++) {
 
-            System.out.println(" animals in CourierTournament =  " + animals[i].length);// todo delete
 
             animalThread[i] = new AnimalThread[animals[i].length];
 
@@ -49,22 +48,19 @@ public class CourierTournament extends Tournament {
             booleansArray = new AtomicBoolean[animals[i].length];
 
             for (int j = 0; j < animals[i].length; j++) {
-
                 booleansArray[j] = new AtomicBoolean(false);
 
                 Animal currentAnimal = animals[i][j]; // syntax sugar
 
-                Referee ref = new Referee(currentAnimal.getName(), scores, endSignal); // make a referee for the current animal
+                Referee ref = new Referee(currentAnimal.getName(), scores, booleansArray[j]); // make a referee for the current animal
 
-                System.out.println("RegularTour setup Loop " + i + " " + j + "Build animal");
 
                 if (j % 2 == 0) {
-                    booleansArray[j+1] = endSignal;
                     animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
-                            startSignal, endSignal, ref, false);
+                            startSignal, booleansArray[j], ref, false, this);
                 } else {
-                    animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j)
-                            , booleansArray[j], animalThread[i][j - 1].getFinishFlag(), ref, false); // todo -check
+                    animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
+                            booleansArray[j - 1], endSignal, ref, false, this); //
                 }
 
                 Thread animalThreads = new Thread(animalThread[i][j], animals[i][j].getName());
@@ -73,13 +69,16 @@ public class CourierTournament extends Tournament {
                 refThread.start();
             }
             super.frame.setAnimalVector(animals[i]);
-            TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, i, false,booleansArray);
+            TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, i, booleansArray);
             super.setTournamentThread(tournamentThread);
-            Thread t = new Thread(tournamentThread, "TournamentThread");
+            t = new Thread(tournamentThread, "TournamentThread");
             t.start();
         }
+    }
 
-        System.out.println("RegularTour setup Loop End func");
-
+    public void notifyTournamentThread() {
+        synchronized (t) {
+            t.notify();
+        }
     }
 }
