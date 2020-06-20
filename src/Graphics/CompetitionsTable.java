@@ -9,9 +9,6 @@ public class CompetitionsTable extends JFrame {
     private static final String[] columnNames = {"Competition Name", "Competition Type", "Tournament Type",
             "Animal Name", " Animal Name", "Animal Name", "Animal Name" , "Animal Name"};
 
-    private static JTable table;
-    private String[][] data;
-
     /**
      * InfoTable constructor.
      *
@@ -20,9 +17,9 @@ public class CompetitionsTable extends JFrame {
     public CompetitionsTable(String[][] data) {
         super("Competition Table");
 
-        this.data = data.clone();
+        String[][] data1 = data.clone();
 
-        table = new JTable(this.data, columnNames);
+        JTable table = new JTable(data1, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 50));
 
         table.setFillsViewportHeight(true);
@@ -33,10 +30,6 @@ public class CompetitionsTable extends JFrame {
 
         // Frame Size
         this.setSize(700, 200);
-    }
-
-    public static int getColumnSize() {
-        return columnNames.length;
     }
 
 }

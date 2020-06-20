@@ -1,10 +1,8 @@
 package thread;
 
 import Graphics.CompetitionFrame;
-import Graphics.CompetitionPanel;
 import animals.Animal;
 
-import java.awt.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RegularTournament extends Tournament {
@@ -30,7 +28,7 @@ public class RegularTournament extends Tournament {
 
 
     @Override
-    public void setup(Animal[][] animals) throws InterruptedException {
+    public void setup(Animal[][] animals)  {
         System.out.println("RegularTour setup");
         scores = new Scores();
         startSignal = new AtomicBoolean(false);
@@ -45,7 +43,7 @@ public class RegularTournament extends Tournament {
             Animal tempAnimal = animals[super.tourIndex][j];
             Referee ref = new Referee(animals[super.tourIndex][j].getName(), scores, endSignal);
 
-            animalThread[super.tourIndex][j] = new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal, j), startSignal, endSignal, frame.getCompetitionPanel(), ref);
+            animalThread[super.tourIndex][j] = new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal, j), startSignal, endSignal, ref);
             Thread animalThreads = new Thread(animalThread[super.tourIndex][j]);
             animalThreads.start();
             Thread refThread = new Thread(ref);
@@ -56,11 +54,5 @@ public class RegularTournament extends Tournament {
         super.setTournamentThread(thread);
         Thread t = new Thread(thread);
         t.start();
-//            super.tournamentThread.run();
-
-//        t.stop();
-//        System.out.println(t.isAlive());
-//        System.out.println("RegularTour setup Loop End func");
-
     }
 }

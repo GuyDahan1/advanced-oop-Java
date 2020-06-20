@@ -1,7 +1,5 @@
 package Graphics;
 
-import mobility.Point;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -48,16 +46,6 @@ public class CompetitionPanel extends JPanel {
             for (int i = 0; i < frame.getAnimalVector().size(); ++i)
                 frame.getAnimalVector().get(i).drawObject(g);
 
-    }
-
-    /**
-     * Draw the given image on this Panel.
-     *
-     * @param img - A given Image object.
-     * @param p   -A given Point object the set the location of the image.
-     */
-    public void drawSome(Image img, Point p) {
-        g.drawImage(img, p.getX(), p.getY(), this);
     }
 
     public Graphics getG() {

@@ -1,7 +1,6 @@
 package designPatterns;
 
 import Graphics.AddCompetition;
-import Graphics.CompetitionFrame;
 
 public class CompetitionSingleton {
 

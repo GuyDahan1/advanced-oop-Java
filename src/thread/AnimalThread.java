@@ -1,30 +1,25 @@
 package thread;
 
-import Graphics.*;
+import Graphics.CompetitionFrame;
 import animals.Animal;
 import animals.Orientation;
 import mobility.Point;
 
-import java.awt.*;
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AnimalThread implements Runnable {
 
-    private Animal participant;//this Animal
-    private double neededDistance;//the distance between the start point to the end point
-    private AtomicBoolean startFlag;//Obj boolean
-    private AtomicBoolean finishFlag;//Obj boolean
-    private Random rnd;
-    private CompetitionPanel myPanel;
-    private Referee ref;
-    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, CompetitionPanel panel,Referee ref) {
+    private final Animal participant;//this Animal
+    private final double neededDistance;//the distance between the start point to the end point
+    private final AtomicBoolean startFlag;//Obj boolean
+    private final AtomicBoolean finishFlag;//Obj boolean
+    private final Referee ref;
+
+    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref) {
         this.participant = participant;
         this.neededDistance = neededDistance;
         startFlag = start;
         finishFlag = end;
-        myPanel = panel;
-        rnd = new Random();
         this.ref = ref;
     }
 
@@ -46,10 +41,7 @@ public class AnimalThread implements Runnable {
         }
         System.out.println("AnimalThread Wait Finish");
         while (startFlag.get()) {
-            System.out.println("STARTFLAGGG");
             while (!finishFlag.get()) {
-                //TODO boolean RegularTour/CourTour
-                System.out.println("FINISHFLAG");
                 System.out.println(participant.getTotalDistance());
                 synchronized (this) {
                     if (participant.getFamilyType().contains("Air") || participant.getFamilyType().contains("Water")) {
@@ -70,18 +62,19 @@ public class AnimalThread implements Runnable {
                     }
                     if (participant.getTotalDistance() >= this.neededDistance) {
                         this.finishFlag.set(true);
-                        synchronized (ref){
-                        ref.notify();}
-                        synchronized (this){
-                        try {
-                            wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }}
+                        synchronized (ref) {
+                            ref.notify();
+                        }
+                        synchronized (this) {
+                            try {
+                                wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                     double speed = participant.getSpeed();
                     Point position = participant.getPosition();
-                    Image img = null;
 
                     if (participant.getOrientation().equals(Orientation.E)) {
                         participant.move(new Point(position.getX() + (int) speed, position.getY()));
@@ -93,6 +86,7 @@ public class AnimalThread implements Runnable {
                         participant.move(new Point(position.getX() - (int) speed, position.getY()));
                     }
                     try {
+                        //noinspection BusyWait
                         Thread.sleep(30);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -100,6 +94,6 @@ public class AnimalThread implements Runnable {
                     System.out.println(participant.getPosition().toString());
                 }
             }
-        }//TODO sleep
+        }
     }
 }

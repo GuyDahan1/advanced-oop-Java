@@ -10,9 +10,6 @@ public class InfoTable extends JFrame {
     private static final String[] columnNames = {"Animal", "Category", "Type",
             "Speed", "Energy Amount", "Distance", "Energy Consumpt"};
 
-    private static JTable table;
-    private String[][] data;
-
     /**
      * InfoTable constructor.
      *
@@ -21,9 +18,9 @@ public class InfoTable extends JFrame {
     public InfoTable(String[][] data) {
         super("Info Table");
 
-        this.data = data.clone();
+        String[][] data1 = data.clone();
 
-        table = new JTable(this.data, columnNames);
+        JTable table = new JTable(data1, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 50));
 
         table.setFillsViewportHeight(true);
@@ -34,12 +31,6 @@ public class InfoTable extends JFrame {
 
         // Frame Size
         this.setSize(500, 200);
-    }
-
-
-
-    public static int getColumnSize() {
-        return columnNames.length;
     }
 
 }

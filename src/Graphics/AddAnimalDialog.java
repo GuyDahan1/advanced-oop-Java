@@ -41,12 +41,11 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
     private JTextField animalNameTextField;
 
 
-    private String animalFamilyType;
+    private final String animalFamilyType;
     private String animalKind;
-    private String animalImgPath;
 
     private int speed;
-    private int energyConsumpt;
+    private int energyConsumption;
     private String animalName;
     private gen animalGen;
 
@@ -77,7 +76,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
     }
 
     private String getRandomName() {
-       String names[] = {"Guy","Lior","Avihay","Dudi","Eden","Rexi","Dexi","Zex","Dan","Nofar","Yarin","Dana","Lavan","DaniDin","Luck","Tony","Pablo","Ugly"};
+       String[] names = {"Guy","Lior","Avihay","Dudi","Eden","Rexi","Dexi","Zex","Dan","Nofar","Yarin","Dana","Lavan","DaniDin","Luck","Tony","Pablo","Ugly"};
         Random rnd = new Random();
        return names[rnd.nextInt(names.length)]+"#"+rnd.nextInt(100);
     }
@@ -108,7 +107,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
      */
     private void showImage() {
         this.animalKind = (String) animalDesignJcb.getSelectedItem();
-        this.animalImgPath = IDrawable.PICTURE_PATH + animalKind + "E.png";
         try {
             ImageIcon imageIcon = new ImageIcon(getClass().getResource("/" + animalKind + "E.png")); // load the image to a imageIcon
             Image image = imageIcon.getImage(); // transform it
@@ -139,10 +137,10 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
     public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider) e.getSource();
         if (!source.getValueIsAdjusting()) {
-            energyConsumpt = (int) source.getValue() * 7;
-            speed = (int) source.getValue();
-            speedLabel.setText(String.valueOf(speed +"Km/h"));
-            energyConLabel.setText(String.valueOf(energyConsumpt+ "E/h"));
+            energyConsumption = source.getValue() * 7;
+            speed = source.getValue();
+            speedLabel.setText(speed + "Km/h");
+            energyConLabel.setText(energyConsumption + "E/h");
         }
     }
 
@@ -154,8 +152,8 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         return speed;
     }
 
-    public int getEnergyConsumpt() {
-        return energyConsumpt;
+    public int getEnergyConsumption() {
+        return energyConsumption;
     }
 
     public String getAnimalKind() {
