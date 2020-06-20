@@ -87,7 +87,7 @@ public class AnimalThread implements Runnable {
                     }
                     try {
                         //noinspection BusyWait
-                        Thread.sleep(30);
+                        Thread.sleep(300);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -95,5 +95,14 @@ public class AnimalThread implements Runnable {
                 }
             }
         }
+    }
+
+
+    public AtomicBoolean getFinishFlag() {
+        return finishFlag;
+    }
+
+    public AtomicBoolean getStartFlag() {
+        return startFlag;
     }
 }

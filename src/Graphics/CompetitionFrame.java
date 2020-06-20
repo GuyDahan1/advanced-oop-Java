@@ -254,45 +254,50 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
         } else if (e.getSource().equals(competitionPanel.getCompetitionToolbar().getStartBtn())) {
 
-            Object[] possibilities = tourName.toArray();
-            String s = (String) JOptionPane.showInputDialog(
-                    this,
-                    "Choose Tournament from above",
-                    "Choose Tournament",
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    possibilities,
-                    chosenTour.get(0));
-
-            if (s != null) {
-
-
-                for (int i = 0; i < tourName.size(); i++) {
-                    if (tourName.get(i).equals(s)) {
-                        userChosenTour = i;
-                    }
-                }
-                Animal[][] animalsArray = new Animal[animalGroupVector.size()][];
-                for (int i = 0; i < animalsArray.length; i++) {
-                    animalsArray[i] = new Animal[animalGroupVector.get(i).length];
-                    System.arraycopy(animalGroupVector.get(i), 0, animalsArray[i], 0, animalGroupVector.get(i).length);
-                }
-
-                if (chosenTour.get(userChosenTour).contains("Reg")) {
-                    new RegularTournament(animalsArray.clone(), this, userChosenTour);
-                } else {
-                    new CourierTournament(animalsArray.clone(), this, userChosenTour);
-                }
-
-                tourName.remove(userChosenTour);
-
+            if (animalGroupVector.size() > 1) {
+                pickATournamentToStart();
             }
+            Animal[][] animalsArray = new Animal[animalGroupVector.size()][];
+            System.out.println("animalsArray in competitionFrame size = " + animalGroupVector.size());
+            for (int i = 0; i < animalsArray.length; i++) {
+                animalsArray[i] = new Animal[animalGroupVector.get(i).length];
+                System.arraycopy(animalGroupVector.get(i), 0, animalsArray[i], 0, animalGroupVector.get(i).length);
+            }
+
+            if (chosenTour.get(userChosenTour).contains("Reg")) {
+                new RegularTournament(animalsArray.clone(), this, userChosenTour);
+            } else {
+                new CourierTournament(animalsArray.clone(), this, userChosenTour);
+            }
+            System.out.println("userChosenTour in CompetitionFrame is " + userChosenTour);
+            tourName.remove(userChosenTour);
+
         }
+
         validate();
         repaint();
         if (currentPosition == maxAirAnimal - 1 || currentPosition == maxNonAirAnimal - 1) {
             gameState = GameState.COMPETING;
             updateBtnStatus();
+        }
+
+    }
+
+    private void pickATournamentToStart() {
+        Object[] possibilities = tourName.toArray();
+        String s = (String) JOptionPane.showInputDialog(
+                this,
+                "Choose Tournament from above",
+                "Choose Tournament",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                possibilities,
+                chosenTour.get(0));
+
+        if (s != null) {
+            for (int i = 0; i < tourName.size(); i++)
+                if (tourName.get(i).equals(s))
+                    userChosenTour = i;
         }
     }
 
@@ -391,7 +396,10 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
 
     private void appendVectorToVectorGroup() {
+        System.out.println("animalVector size in CompetitionFrame = " + animalVector.size());
         animalGroupVector.add(animalVector.toArray(Animal[]::new));
+        System.out.println("animalGroupVector size in CompetitionFrame = " + animalGroupVector.size());
+
         newCompetition();
     }
 

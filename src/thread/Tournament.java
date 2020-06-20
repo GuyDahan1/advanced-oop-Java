@@ -11,14 +11,10 @@ public abstract class Tournament {
     public Tournament(Animal[][] animals, CompetitionFrame frame,int index){
         this.frame=frame;
         tourIndex = index;
-        try {
-            setup(animals);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        setup(animals);
     }
 
-    public abstract void setup(Animal[][] animals) throws InterruptedException;
+    public abstract void setup(Animal[][] animals) ;
 
     public void setTournamentThread(TournamentThread tournamentThread) {
         this.tournamentThread = tournamentThread;
