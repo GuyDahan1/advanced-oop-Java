@@ -8,7 +8,6 @@ import mobility.Point;
  * Presents  Dolphin object
  */
 public class Dolphin extends WaterAnimal {
-    private waterType WaterType;
     private static final String sound = "Click-click";
 
     /**
@@ -21,29 +20,6 @@ public class Dolphin extends WaterAnimal {
      */
     public Dolphin(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter,gen gender) {
         super(name, speed, position, pan, "dolphin", choice,energyPerMeter,gender);
-        this.WaterType = waterType.Sea;
-    }
-
-    /**
-     * Sets this Dolphin's WaterType.
-     *
-     * @param type A given waterType enum value that is used to initialize this WaterType.
-     * @return A boolean if this WaterType enum was initialized or not.
-     * @see waterType
-     */
-    protected boolean setWaterType(waterType type) {
-        this.WaterType = type;
-        return true;
-    }
-
-    /**
-     * Gets this Dolphin object's WaterType enum.
-     *
-     * @return this object's WaterType enum using toString() method.
-     * @see waterType
-     */
-    public String getWaterType() {
-        return this.WaterType.toString();
     }
 
     /**
@@ -51,7 +27,7 @@ public class Dolphin extends WaterAnimal {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nWaterType : " + this.WaterType.toString();
+        return super.toString();
     }
 
     /**

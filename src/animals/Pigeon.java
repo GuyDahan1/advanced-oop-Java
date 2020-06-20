@@ -9,8 +9,7 @@ import mobility.Point;
  */
 public class Pigeon extends AirAnimal {
 
-    private final String family;
-    private final String sound = "Arr-rar-rar-rar-raah";
+    private static final String sound = "Arr-rar-rar-rar-raah";
 
     /**
      * Creates Pigeon object with the given arguments.
@@ -24,17 +23,6 @@ public class Pigeon extends AirAnimal {
      */
     public Pigeon(String name, double speed, Point position, CompetitionPanel pan,String choice, int energyPerMeter,gen gender) {
         super(name,speed,position,pan,"pigeon",choice,energyPerMeter,gender);
-
-        this.family = "";
-    }
-
-    /**
-     * Gets this Pigeon object's family.
-     *
-     * @return this object's family.
-     */
-    public String getFamily() {
-        return this.family;
     }
 
     /**
@@ -42,7 +30,7 @@ public class Pigeon extends AirAnimal {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nFamily  : " + this.family;
+        return super.toString();
     }
 
     /**
@@ -52,7 +40,7 @@ public class Pigeon extends AirAnimal {
      */
     @Override
     public String getSound() {
-        return this.sound;
+        return sound;
     }
 }
 

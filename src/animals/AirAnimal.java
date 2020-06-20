@@ -7,7 +7,6 @@ import mobility.Point;
  * Represents AirAnimal object
  */
 abstract public class AirAnimal extends Animal {
-      private double wingspan;
 
     /***
      * Creates AirAnimal object with the given arguments.
@@ -22,33 +21,9 @@ abstract public class AirAnimal extends Animal {
      */
     public AirAnimal(String name, double speed, Point position, CompetitionPanel pan, String type, String choice, int energyPerMeter,gen gender) {
         super(name, speed, position, pan, type, choice,energyPerMeter,gender);
-        this.setWingSpan(2);
 
     }
 
-    /**
-     * Sets this AirAnimal's wingspan.
-     *
-     * @param wings A given value that is used to initialize this wingspan.
-     * @return A boolean if the wingspan was initialized or not.
-     */
-    protected boolean setWingSpan(double wings) {
-        if (wings > 0) {
-            this.wingspan = wings;
-            return true;
-        }
-        this.wingspan = 0;
-        return false;
-    }
-
-    /**
-     * Gets this AirAnimal's object wingspan.
-     *
-     * @return this object's wingspan.
-     */
-    public double getWingspan() {
-        return this.wingspan;
-    }
 
     @Override
     public String getType() {

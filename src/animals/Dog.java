@@ -12,7 +12,6 @@ import java.text.AttributedCharacterIterator;
  * Presents Dog object
  */
 public class Dog extends TerrestrialAnimal {
-    private final String breed;
     private static final String sound = "Woof Woof";
 
     /**
@@ -25,20 +24,9 @@ public class Dog extends TerrestrialAnimal {
      */
     public Dog(String name, double speed, Point position, CompetitionPanel pan, String choice ,int energyPerMeter,gen gender) {
         super(name, speed, position, pan, "dog", choice,energyPerMeter,gender);
-        this.breed = "breed";
 
 
         super.drawObject(this.pan.getG());
-    }
-
-
-    /**
-     * Gets this Dog object's breed.
-     *
-     * @return this object's breed.
-     */
-    public String getBreed() {
-        return breed;
     }
 
     /**
@@ -46,7 +34,7 @@ public class Dog extends TerrestrialAnimal {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nbreed : " + this.getBreed();
+        return super.toString();
     }
 
     /**

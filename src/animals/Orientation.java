@@ -6,7 +6,7 @@ public enum Orientation {
      */
     W,
     /**
-     * EST
+     * EAST
      */
     E,
     /**

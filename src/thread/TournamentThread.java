@@ -86,7 +86,7 @@ public class TournamentThread implements Runnable {
 
         System.out.println("here 94 line");
 
-        arrayOfScore = new String[animalsArray.length][];
+//        arrayOfScore = new String[animalsArray.length][];
         for (int j = 0; j < animalsArray[index].length; j++) {
             synchronized (animalsArray[index][j]) {
                 animalsArray[index][j].notifyAll();

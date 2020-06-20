@@ -8,8 +8,7 @@ import mobility.Point;
  * Presents Cat object
  */
 public class Cat extends TerrestrialAnimal {
-    private Boolean Castrated;
-    private final String sound = "Meow";
+    private static final String sound = "Meow";
 
     /**
      * Creates Cat object with the given arguments.
@@ -21,7 +20,6 @@ public class Cat extends TerrestrialAnimal {
      */
     public Cat(String name, double speed, Point position, CompetitionPanel pan, String choice, int energyPerMeter,gen gender) {
         super(name, speed, position, pan, "cat", choice,energyPerMeter,gender);
-        this.Castrated = true;
     }
 
     /**
@@ -29,30 +27,9 @@ public class Cat extends TerrestrialAnimal {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nCastrated  : " + this.Castrated;
+        return super.toString() ;
     }
 
-    /**
-     * Returns a boolean if Cat is castrated.
-     *
-     * @return this Cat's object Castrated boolean .
-     */
-    public boolean isCastrated() {
-        return this.Castrated;
-    }
-
-    /**
-     * Sets this Cat's Castrated.
-     *
-     * @param cast A given boolean value that is used to initialize this Castrated.
-     * @return A boolean if the area was initialized or not.
-     */
-    public boolean setCastrated(boolean cast) {
-        if (this.isCastrated())
-            return false;
-        this.Castrated = true;
-        return true;
-    }
 
     /**
      * Gets this Cat's object sound.
