@@ -12,6 +12,7 @@ public class CourierTournament extends Tournament {
     AtomicBoolean endSignal;
     AtomicBoolean oddLocationEndSignal;
     Scores scores;
+    Thread[][] animalThreads;
 
     public CourierTournament(Animal[][] animals, CompetitionFrame frame, int index) {
         super(animals, frame, index);
@@ -38,47 +39,54 @@ public class CourierTournament extends Tournament {
         endSignal = new AtomicBoolean(false);
 
         AnimalThread[][] animalThread = new AnimalThread[animals.length][];
-
-        for (int i = 0; i < animals.length; i++) {
-
-
-            animalThread[i] = new AnimalThread[animals[i].length];
-
-            AtomicBoolean[] booleansArray;
-            booleansArray = new AtomicBoolean[animals[i].length];
-
-            for (int j = 0; j < animals[i].length; j++) {
-                booleansArray[j] = new AtomicBoolean(false);
-
-                Animal currentAnimal = animals[i][j]; // syntax sugar
-
-                Referee ref = new Referee(currentAnimal.getName(), scores, booleansArray[j]); // make a referee for the current animal
+        animalThreads = new Thread[animals.length][];
 
 
-                if (j % 2 == 0) {
-                    animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
-                            startSignal, booleansArray[j], ref, false, this);
-                } else {
-                    animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
-                            booleansArray[j - 1], endSignal, ref, false, this); //
-                }
+        animalThread[tourIndex] = new AnimalThread[animals[tourIndex].length];
+        animalThreads[tourIndex] = new Thread[animals[tourIndex].length];
+        AtomicBoolean[] booleansArray;
+        booleansArray = new AtomicBoolean[animals[tourIndex].length];
 
-                Thread animalThreads = new Thread(animalThread[i][j], animals[i][j].getName());
-                animalThreads.start();
-                Thread refThread = new Thread(ref, animals[i][j].getName() + "REF");
-                refThread.start();
+        for (int j = 0; j < animals[tourIndex].length; j++) {
+            booleansArray[j] = new AtomicBoolean(false);
+
+            Animal currentAnimal = animals[tourIndex][j]; // syntax sugar
+
+            Referee ref = new Referee(currentAnimal.getName(), scores, booleansArray[j]); // make a referee for the current animal
+
+
+            if (j % 2 == 0) {
+                animalThread[tourIndex][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
+                        startSignal, endSignal, ref, false, this, j);
+            } else {
+                animalThread[tourIndex][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
+                        startSignal, endSignal, ref, false, this); //
             }
-            super.frame.setAnimalVector(animals[i]);
-            TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, i, booleansArray);
-            super.setTournamentThread(tournamentThread);
-            t = new Thread(tournamentThread, "TournamentThread");
-            t.start();
+
+            animalThreads[tourIndex][j] = new Thread(animalThread[tourIndex][j], animals[tourIndex][j].getName());
+            animalThreads[tourIndex][j].start();
+            Thread refThread = new Thread(ref, animals[tourIndex][j].getName() + "REF");
+            refThread.start();
         }
+        super.frame.setAnimalVector(animals[tourIndex]);
+        TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, tourIndex, booleansArray);
+        super.setTournamentThread(tournamentThread);
+        t = new Thread(tournamentThread, "TournamentThread");
+        t.start();
     }
+
 
     public void notifyTournamentThread() {
         synchronized (t) {
             t.notify();
         }
     }
+
+    public void notifyNextAnimal(int index) {
+        synchronized (animalThreads[tourIndex][index + 1]) {
+            animalThreads[tourIndex][index + 1].notify();
+        }
+    }
+
+
 }

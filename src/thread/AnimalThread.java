@@ -16,6 +16,8 @@ public class AnimalThread implements Runnable {
     private final Referee ref;
     private Tournament tour;
     private boolean regularTournamentBoolean;
+    private boolean firstAnimal=false;
+    private int firstAnimalIndex;
 
     public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour,Tournament tour) {
         this.participant = participant;
@@ -26,6 +28,13 @@ public class AnimalThread implements Runnable {
         regularTournamentBoolean = regularTour;
         this.tour = tour;
     }
+
+    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour,Tournament tour,int index) {
+        this(participant,neededDistance,start,end,ref,regularTour,tour);
+        firstAnimal = true;
+        firstAnimalIndex =index;
+    }
+
 
     @Override
     public void run() {
@@ -71,8 +80,10 @@ public class AnimalThread implements Runnable {
                         synchronized (ref) {
                             ref.notify();
                         }
-                        tour.notifyTournamentThread();
-                        System.out.println("nNOTIFY TOURNAMENTTHREAD");
+                        if (firstAnimal){
+                            tour.notifyNextAnimal(firstAnimalIndex);
+
+                        }
 
                     }
                     double speed = participant.getSpeed();

@@ -90,13 +90,13 @@ public class TournamentThread implements Runnable {
                 e.printStackTrace();
             }
         }
-
-        synchronized (startSignal) {
-            if (!startSignal.get()) {
-                this.startSignal.set(true);
-            }
-        }
         if (regularTournamentBool) {
+            synchronized (startSignal) {
+                if (!startSignal.get()) {
+                    this.startSignal.set(true);
+                }
+            }
+
             arrayOfScore = new String[animalsArray.length][];
             for (int j = 0; j < animalsArray[index].length; j++) {
                 synchronized (animalsArray[index][j]) {
@@ -107,31 +107,20 @@ public class TournamentThread implements Runnable {
             for (int j = 0; j < animalsArray[index].length; j++)
                 arrayOfScore[index][j] = scores.getScores().toString();
         } else {
-            int i = 0;
-            for (int j = 0; j < animalsArray[index].length; j++) {
-                synchronized (animalsArray[index][j]) {
-                    animalsArray[index][j].notifyAll();
+            synchronized (startSignal) {
+                if (!startSignal.get()) {
+                    this.startSignal.set(true);
                 }
             }
-            while (true) {
-
-                if (booleans[i].get()) {
-                    synchronized (animalsArray[index][i]) {
-                        animalsArray[index][i].notifyAll();
-                    }
-                }
-                if (i == animalsArray[index].length - 1) {
-                    synchronized (this) {
-                        try {
-                            wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                arrayOfScore = new String[animalsArray.length][];
+                for (int j = 0; j < animalsArray[index].length; j++) {
+                    if (j % 2 == 0) {
+                        synchronized (animalsArray[index][j]) {
+                            animalsArray[index][j].notifyAll();
                         }
                     }
-                    i = 0;
                 }
             }
+
         }
     }
-
-}

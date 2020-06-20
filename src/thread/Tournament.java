@@ -16,9 +16,9 @@ public abstract class Tournament {
 
     public abstract void setup(Animal[][] animals) ;
 
+    public abstract void notifyNextAnimal(int index);
+
     public abstract void notifyTournamentThread();
-
-
         public void setTournamentThread(TournamentThread tournamentThread) {
         this.tournamentThread = tournamentThread;
     }
