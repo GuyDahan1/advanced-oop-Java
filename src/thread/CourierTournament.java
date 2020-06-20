@@ -33,7 +33,7 @@ public class CourierTournament extends Tournament {
 
 
     @Override
-    public void setup(Animal[][] animals) throws InterruptedException {
+    public void setup(Animal[][] animals) {
         System.out.println("RegularTour setup");
         scores = new Scores();
         startSignal = new AtomicBoolean(false);
@@ -52,7 +52,9 @@ public class CourierTournament extends Tournament {
 
                 Animal tempAnimal = animals[i][j];
                 Referee ref = new Referee(animals[i][j].getName(), scores, endSignal);
-                animalThread[i][j] = j % 2 == 0 ? new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal, j), startSignal, endSignal, frame.getCompetitionPanel(),ref) : new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal, j), firstAnimalEndSignal, endSignal, frame.getCompetitionPanel(),ref);
+                animalThread[i][j] = j % 2 == 0 ? new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal,j),
+                        startSignal, endSignal,ref) :
+                        new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal, j), firstAnimalEndSignal, endSignal,ref);
 
                 Thread animalThreads = new Thread(animalThread[i][j]);
                 animalThreads.start();
@@ -64,7 +66,6 @@ public class CourierTournament extends Tournament {
             super.setTournamentThread(thread);
             Thread t = new Thread(thread);
             t.start();
-//            super.tournamentThread.run();
         }
 
         System.out.println("RegularTour setup Loop End func");

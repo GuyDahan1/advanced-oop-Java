@@ -20,10 +20,6 @@ public abstract class Tournament {
 
     public abstract void setup(Animal[][] animals) throws InterruptedException;
 
-    public TournamentThread getTournamentThread() {
-        return tournamentThread;
-    }
-
     public void setTournamentThread(TournamentThread tournamentThread) {
         this.tournamentThread = tournamentThread;
     }

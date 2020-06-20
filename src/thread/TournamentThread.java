@@ -74,7 +74,7 @@ public class TournamentThread implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }  // todo -  fix bug
+        }
 
         synchronized (startSignal) {
             if (!startSignal.get()) {
@@ -82,20 +82,20 @@ public class TournamentThread implements Runnable {
                 this.startSignal.set(true);
             }
         }
+        try { // can produce null because no usages yet
 
-//        arrayOfScore = new String[animalsArray.length][];
-        for (int j = 0; j < animalsArray[index].length; j++) {
-            synchronized (animalsArray[index][j]) {
-                animalsArray[index][j].notifyAll();
-                System.out.println("Notify TourThread");
+            arrayOfScore = new String[animalsArray.length][];
+            for (int j = 0; j < animalsArray[index].length; j++) {
+                synchronized (animalsArray[index][j]) {
+                    animalsArray[index][j].notifyAll();
+                    System.out.println("Notify TourThread");
+                }
             }
-        }
-        try {
             arrayOfScore[index] = new String[animalsArray[index].length];
             for (int j = 0; j < animalsArray[index].length; j++)
                 arrayOfScore[index][j] = scores.getScores().toString();
         } catch (NullPointerException nullPointerException) {
-            System.out.println("***     arrarrayOfScore[" + index + "] is null      ***");
+            System.out.println("***     arrayOfScore[" + index + "] is null      ***");
             nullPointerException.printStackTrace();
         }
 

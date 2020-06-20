@@ -15,7 +15,6 @@ public interface ILocatable {
      * this method should be implements if a class is "move-able".
      *
      * @param p A given Point object which used to initialize this Point object.
-     * @return A boolean value if initialization succeeded or not.
      */
-    boolean setPosition(Point p);
+    void setPosition(Point p);
 }

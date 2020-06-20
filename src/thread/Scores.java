@@ -4,14 +4,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 public class Scores {
 
-    private Map<String, Date> scores;//queue that contain STRING<>DATE
+    private final Map<String, Date> scores;//queue that contain STRING<>DATE
 
     public Scores() {
-        scores = Collections.synchronizedMap(new HashMap<String, Date>());
+        scores = Collections.synchronizedMap(new HashMap<>());
     }
 
     public synchronized void add(String name) {

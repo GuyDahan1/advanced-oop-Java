@@ -5,13 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-
 public class AddCompetition extends JFrame implements ActionListener {
 
 
     private JLabel title;
     private JRadioButton courierTourRadioBox;
-    private JComboBox competitionTypeComboBox;
+    private JComboBox<String> competitionTypeComboBox;
     private JRadioButton regularTourRadioBox;
     private JButton okBtn;
     private JButton cancelButton;
@@ -24,14 +23,14 @@ public class AddCompetition extends JFrame implements ActionListener {
     String randomTourName;
 
 
-    public AddCompetition(){
+    public AddCompetition() {
         super("Add Competition");
 
         okBtn.addActionListener(this);
         cancelButton.addActionListener(this);
 
         Random randomNum = new Random();
-        randomTourName = "EmptyName#"+String.valueOf(randomNum.nextInt(1000));
+        randomTourName = "EmptyName#" + randomNum.nextInt(1000);
 
         tourTextField.setText(randomTourName);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -41,18 +40,16 @@ public class AddCompetition extends JFrame implements ActionListener {
 
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource().equals(cancelButton)){
+        if (e.getSource().equals(cancelButton)) {
             setVisible(false);
         }
 
     }
 
-    public JComboBox getCompetitionTypeComboBox() {
+    public JComboBox<String> getCompetitionTypeComboBox() {
         return competitionTypeComboBox;
     }
 
@@ -88,5 +85,12 @@ public class AddCompetition extends JFrame implements ActionListener {
 
     }
 
-    //
+    public String getTitle() {
+        return title.getText();
+    }
+
+    public JLabel getTournamentNameLabel() {
+        return tournamentNameLabel;
+    }
+
 }

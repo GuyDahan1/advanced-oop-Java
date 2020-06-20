@@ -33,14 +33,11 @@ public abstract class Mobile implements ILocatable {
      * Sets the mobile's object total of distance traveled.
      *
      * @param Dis A given distance of Mobile object.
-     * @return A boolean value if a given distance is a non-negative ot not.
      */
-    protected boolean setTotalDistance(double Dis) {
+    protected void setTotalDistance(double Dis) {
         if (Dis >= 0) {
             this.totalDistance = Dis;
-            return true;
         }
-        return false;
     }
 
     /**
@@ -66,12 +63,10 @@ public abstract class Mobile implements ILocatable {
      * Sets the mobile's location.
      *
      * @param p A given Point object that is used to initialize this location.
-     * @return A boolean value if a given distance is a non-negative ot not.
      * @see Point
      */
-    public boolean setPosition(Point p) {
+    public void setPosition(Point p) {
         this.Position = p;
-        return true;
     }
 
     /**
