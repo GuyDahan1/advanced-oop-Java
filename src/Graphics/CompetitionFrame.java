@@ -1,7 +1,11 @@
 package Graphics;
 
-import animals.*;
-import designPatterns.*;
+import animals.Animal;
+import animals.gen;
+import designPatterns.AbstractAnimalFactory;
+import designPatterns.CompetitionSingleton;
+import designPatterns.MainFrameSingelton;
+import designPatterns.SpeciesFactory;
 import mobility.Point;
 import thread.CourierTournament;
 import thread.RegularTournament;
@@ -10,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Vector;
 
@@ -44,7 +49,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     private int currentPosition = -1;
     private int currentTournament = 0;
-    private int userChosenTour = 0 ;
+    private int userChosenTour = 0;
 
 
     private Vector<String> chosenCompetition = new Vector<>();
@@ -118,7 +123,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      * @return the current index that the new animal should be positioned on.
      */
     public Point getPositionIndex() {
-        Point animalPoint = null;
+        Point animalPoint;
         if (chosenTour.get(currentTournament).contains("Regu")) {
 
             animalPoint = getRegularPoint(null);
@@ -248,24 +253,22 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             if (s != null) {
 
 
-                for (int i = 0; i <tourName.size() ; i++) {
-                    if(tourName.get(i).equals(s)){
+                for (int i = 0; i < tourName.size(); i++) {
+                    if (tourName.get(i).equals(s)) {
                         userChosenTour = i;
                     }
                 }
                 animalsArray = new Animal[animalGroupVector.size()][];
                 for (int i = 0; i < animalsArray.length; i++) {
                     animalsArray[i] = new Animal[animalGroupVector.get(i).length];
-                    for (int j = 0; j < animalGroupVector.get(i).length; j++) {
-                        animalsArray[i][j] = animalGroupVector.get(i)[j];
-                    }
+                    System.arraycopy(animalGroupVector.get(i), 0, animalsArray[i], 0, animalGroupVector.get(i).length);
                 }
 
 
                 if (chosenTour.get(userChosenTour).contains("Reg")) {
-                    new RegularTournament(animalsArray.clone(), this,userChosenTour);
+                    new RegularTournament(animalsArray.clone(), this, userChosenTour);
                 } else {
-                    new CourierTournament(animalsArray.clone(), this,userChosenTour);
+                    new CourierTournament(animalsArray.clone(), this, userChosenTour);
                 }
 
                 tourName.remove(userChosenTour);
@@ -274,7 +277,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         }
         validate();
         repaint();
-        if (currentPosition == maxAirAnimal - 1 || currentPosition == maxNonAirAnimal - 1 || currentPosition == maxNonAirAnimal - 1) {
+        if (currentPosition == maxAirAnimal - 1 ||  currentPosition == maxNonAirAnimal - 1) {
             gameState = GameState.COMPETING;
             updateBtnStatus();
         }
@@ -329,26 +332,35 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         if (chosenCompetition != null) {
             gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
             updateBtnStatus();
-        }
-        String[] arrOfString = new String[8];
-        arrOfString[0] = tourName.get(currentTournament);
-        arrOfString[1] = chosenCompetition.get(currentTournament);
-        arrOfString[2] = chosenTour.get(currentTournament);
-        for (int i = 0; i < animalVector.size(); i++) {
-            arrOfString[i + 3] = animalVector.get(i).getName();
-        }
+            String[] arrOfString = new String[8];
+            arrOfString[0] = tourName.get(currentTournament);
+            arrOfString[1] = chosenCompetition.get(currentTournament);
+            arrOfString[2] = chosenTour.get(currentTournament);
+            for (int i = 0; i < animalVector.size(); i++) {
+                arrOfString[i + 3] = animalVector.get(i).getName();
+            }
 
-        competitionTableVector.add(arrOfString);
-        appendVectorToVectorGroup();
+            competitionTableVector.add(arrOfString);
+            appendVectorToVectorGroup();
 
-        addCompetition.getTableButton().setEnabled(true);
-        currentTournament++;
+            addCompetition.getTableButton().setEnabled(true);
+            currentTournament++;
+        }
+        else
+            throw new NullPointerException() {
+                @Override
+                public void printStackTrace() {
+                    super.printStackTrace();
+                }
+            };
     }
 
     private void addCompetitionOkBtn() {
-        chosenCompetition.add(addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString());
-        addCompetition.getCompetitionTypeComboBox().setEnabled(false);
-        vectorString.add(chosenCompetition.get(currentTournament));
+        if (addCompetition.getCompetitionTypeComboBox().getSelectedItem() != null) {
+            chosenCompetition.add(addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString());
+            addCompetition.getCompetitionTypeComboBox().setEnabled(false);
+            vectorString.add(chosenCompetition.get(currentTournament));
+        }
 
         JRadioButton jRadioButton = addCompetition.getCourierTourRadioBox().isSelected() ? addCompetition.getCourierTourRadioBox() : addCompetition.getRegularTourRadioBox();
 
@@ -384,7 +396,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         addCompetition.getNewCompetitionButton().setEnabled(false);
         addCompetition.getCompetitionTypeComboBox().setEnabled(true);
         Random randomNum = new Random();
-        String randomTourName = "EmptyName#" + String.valueOf(randomNum.nextInt(1000));
+        String randomTourName = "EmptyName#" + randomNum.nextInt(1000);
         addCompetition.getTextField1().setText(randomTourName);
 
 
@@ -455,7 +467,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             return true;
         } else
             return false;
-
     }
 
     /**
@@ -519,39 +530,35 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private void updateBtnStatus() {
         System.out.println("******* " + gameState.toString() + " ******* ");
         switch (gameState) {
-            case CHOOSING_COMP_TYPE: {
+            case CHOOSING_COMP_TYPE -> {
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
-            break;
-            case CHOOSING_COMP_FIRST_ANIMAL: {
+            case CHOOSING_COMP_FIRST_ANIMAL -> {
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
-            break;
-            case CHOOSING_COMP_ANIMALS: {
+            case CHOOSING_COMP_ANIMALS -> {
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
             }
-            break;
-            case COMPETING: {
+            case COMPETING -> {
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(false);
             }
-            break;
-            case CLEARED: {
+            case CLEARED -> {
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
@@ -559,9 +566,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
 
             }
-            break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + gameState);
+            default -> throw new IllegalStateException("Unexpected value: " + gameState);
         }
     }
 
@@ -598,9 +603,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     public void setAnimalVector(Animal[] animals) {
         this.animalVector.clear();
-        for (int i = 0; i < animals.length; i++) {
-            this.animalVector.add(animals[i]);
-        }
+        Collections.addAll(this.animalVector, animals);
     }
 
 

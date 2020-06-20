@@ -7,15 +7,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static Graphics.CompetitionFrame.centreWindow;
 
+
 public class TournamentThread implements Runnable {
 
     private final Scores scores;
     private final AtomicBoolean startSignal;
-    private Boolean isDone = Boolean.FALSE;
     AnimalThread[][] animalsArray;
     private static int count = 3;
-    private String[][] arrayOfScore;
-    private int index;
+    String[][] arrayOfScore;
+    private final int index;
 
     public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index) {
         this.animalsArray = animalsThreads;
@@ -60,19 +60,19 @@ public class TournamentThread implements Runnable {
             }
         }, 1000, 1000);
 
-        synchronized (this){
-        notify();}
+        synchronized (this) {
+            notify();
+        }
     }
 
     public void run() {
         startCompetitionDialog();
 
-
         synchronized (this) {
-                try {
-                    this.wait(4000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            try {
+                this.wait(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }  // todo -  fix bug
         System.out.println("here 85 line");
@@ -97,10 +97,7 @@ public class TournamentThread implements Runnable {
         System.out.println("here 105 line");
 
         arrayOfScore[index] = new String[animalsArray[index].length];
-        for (int j = 0; j < animalsArray[index].length; j++) {
+        for (int j = 0; j < animalsArray[index].length; j++)
             arrayOfScore[index][j] = scores.getScores().toString();
-
-        }
-
     }
 }
