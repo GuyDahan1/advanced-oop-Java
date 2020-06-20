@@ -98,15 +98,5 @@ public class TournamentThread implements Runnable {
             System.out.println("***     arrayOfScore[" + index + "] is null      ***");
             nullPointerException.printStackTrace();
         }
-        catch (ArrayIndexOutOfBoundsException exception)
-        {
-            System.out.println("***   array out of bound    ***");
-            System.out.println("index "+index);
-            System.out.println("animalsArray[index].length "+animalsArray[index].length);
-            System.out.println("arrayOfScore[index][j] "+arrayOfScore[index][0]);
-            System.out.println("arrayOfScore[index][j] "+arrayOfScore[index][1]);
-            exception.printStackTrace();
-        }
-
     }
 }

@@ -31,6 +31,14 @@ abstract public class  WaterAnimal extends Animal {
         return new String[]{getName(), "Water Animal", getType(), String.valueOf(getSpeed()), String.valueOf(maxEnergy), String.valueOf(getTotalDistance()), String.valueOf(energyPerMeter)};
     }
 
+    public double move(Point p) {
+        if(currentEnergy>0){
+            return super.move(p);
+        }
+        else return super.move(getPosition());
+    }
+
+
     public String getFamilyType(){
         return "WaterAnimal";
     }

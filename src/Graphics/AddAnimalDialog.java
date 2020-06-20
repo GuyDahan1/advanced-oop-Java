@@ -76,9 +76,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
     }
 
     private String getRandomName() {
-       String[] names = {"Guy","Lior","Avihay","Dudi","Eden","Rexi","Dexi","Zex","Dan","Nofar","Yarin","Dana","Lavan","DaniDin","Luck","Tony","Pablo","Ugly"};
+       String[] names = {"Guy","Lior","Avihay","Dudi","Eden","Rexi","Dexi","Zex","Dan","Nofar","Yarin","Dana","Lavan","DaniDin","Luck","Tony","Pablo","Ugly","Tamar","Sicsic"};
         Random rnd = new Random();
-       return names[rnd.nextInt(names.length)]+"#"+rnd.nextInt(100);
+       return names[rnd.nextInt(names.length)]+"#"+rnd.nextInt(1000);
     }
 
 
@@ -137,7 +137,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
     public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider) e.getSource();
         if (!source.getValueIsAdjusting()) {
-            energyConsumption = source.getValue() * 7;
+            energyConsumption = source.getValue() * 2;
             speed = source.getValue();
             speedLabel.setText(speed + "Km/h");
             energyConLabel.setText(energyConsumption + "E/h");

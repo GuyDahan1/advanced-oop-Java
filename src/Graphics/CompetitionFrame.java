@@ -284,7 +284,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         Animal[][] AnimalCompetitions = ConvertGroupVecToArrays(); //converts vector of animal vectors to Arrays of animals
 
         if (chosenTournament.get(userChosenTour).contains("Reg")) {
-            new RegularTournament(AnimalCompetitions.clone(), this, userChosenTour);
+            new RegularTournament(AnimalCompetitions, this, userChosenTour);
         } else {
             new CourierTournament(AnimalCompetitions.clone(), this, userChosenTour);
         }
@@ -339,7 +339,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void addAnimalDialogOkBtnAction() {
-        chosenCompetition.add(chosenCompetition.get(currentTournament) == null ? "Water animals" : chosenCompetition.get(currentTournament));
 
         AbstractAnimalFactory abstractFactory = new AbstractAnimalFactory();
         SpeciesFactory speciesFactory = abstractFactory.getSpeciesFactory(chosenCompetition.get(currentTournament));
@@ -347,7 +346,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         String name = addAnimalDialog.getAnimalNameTextField().getText();
         String imageChoice = addAnimalDialog.getAnimalKind();
         int speed = addAnimalDialog.getSlider1().getValue();
-        int cons = addAnimalDialog.getSlider1().getValue() * 7;
+        int cons = addAnimalDialog.getSlider1().getValue() * 2;
         gen gender = addAnimalDialog.getAnimalGen();
         Point startPoint = getPositionIndex();
 
@@ -396,6 +395,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void addCompetitionOkBtn() {
+
         if (addCompetition.getCompetitionTypeComboBox().getSelectedItem() != null) {
             chosenCompetition.add(addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString());
             addCompetition.getCompetitionTypeComboBox().setEnabled(false);
@@ -462,7 +462,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      */
     private void clearCompetitionDialog() {
         int choice = ActionMessageDialog.createClrCompetitionDialog(this);
-        chosenCompetition = null;
         gameState = (choice == 0 ? GameState.CHOOSING_COMP_FIRST_ANIMAL : GameState.CHOOSING_COMP_TYPE);
     }
 
@@ -643,6 +642,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         MainFrameSingelton.getInstance();
+
     }
 
 

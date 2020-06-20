@@ -31,7 +31,10 @@ abstract public class  TerrestrialAnimal extends Animal {
      */
     @Override
     public double move(Point p) {
-        return super.move(p);
+        if(currentEnergy>0){
+            return super.move(p);
+        }
+        else return super.move(getPosition());
     }
 
     @Override

@@ -26,11 +26,16 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
     protected String type;
     protected String imgChoice;
 
-    protected int currentEnergy;
+    private Thread thisThread;
+
     protected int size;
     protected Orientation orientation;
-    protected int maxEnergy;
+
+    protected final static int maxEnergy = 2000;
     protected int energyPerMeter;
+    protected int currentEnergy;
+
+
     protected CompetitionPanel pan;
     protected BufferedImage eastImg, westImg, southImg, northImg;
     protected Graphics g;
@@ -46,7 +51,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
      * @param type      A given animal type of Animal object.
      * @see gen,Medal,Point
      */
-    public Animal(String name, double speed, Point position, CompetitionPanel pan, String type, String imgChoice , int energyPerMeter,gen gender) {
+    public Animal(String name, double speed, Point position, CompetitionPanel pan, String type, String imgChoice, int energyPerMeter, gen gender) {
         super(position);
         this.setName(name);
         this.setGender(gender);
@@ -55,16 +60,14 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
         this.setMedals(null);
         this.type = type;
 
-        Random rnd = new Random();
 
-        orientation = getPosition().getX()>400 ? Orientation.W : Orientation.E;
+        orientation = getPosition().getX() > 400 ? Orientation.W : Orientation.E;
 
         size = 65;
-        this.energyPerMeter=energyPerMeter;
-        maxEnergy = rnd.nextInt(1200) + 300;
+        this.energyPerMeter = energyPerMeter;
         currentEnergy = maxEnergy;
         this.pan = pan;
-        this.imgChoice =imgChoice;
+        this.imgChoice = imgChoice;
         loadImages(imgChoice);
     }
 
@@ -264,7 +267,12 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
     }
 
     public void setCurrentEnergy(int Energy) {
-        this.currentEnergy = Energy;
+        synchronized (this) {
+            this.currentEnergy = Energy;
+            if (Energy < 0) {
+                currentEnergy = 0;
+            }
+        }
     }
 
     @Override
@@ -303,10 +311,14 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
 
     @Override
     public boolean eat(int energy) {
-        if (energy <= 0 || energy >= maxEnergy)
+        if (energy < 0 || energy > maxEnergy)
             return false;
         else {
             setCurrentEnergy(energy);
+            synchronized (thisThread){
+                thisThread.notify();
+                System.out.println(thisThread.isAlive());
+            }
             return true;
         }
     }
@@ -315,6 +327,22 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
 
     public void setOrientation(Orientation orientation) {
         this.orientation = orientation;
+    }
+
+    public void energyConsumption() {
+        this.setCurrentEnergy(currentEnergy - energyPerMeter);
+    }
+
+    public int getCurrentEnergy() {
+        return currentEnergy;
+    }
+
+    public void setThread(Thread t){
+        this.thisThread = t;
+    }
+
+    public Thread getThisThread() {
+        return thisThread;
     }
 }
 

@@ -28,6 +28,8 @@ public class Referee implements Runnable {
             synchronized (this) {
                 scores.add(name);
                 System.out.println("score added");
+                System.out.println(Thread.activeCount());
+                System.out.println(Thread.currentThread());
                 notify();
             }
         }

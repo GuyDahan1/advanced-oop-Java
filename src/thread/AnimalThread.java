@@ -8,7 +8,7 @@ import mobility.Point;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AnimalThread implements Runnable {
-
+    private static int currentFinish = 0;
     private final Animal participant;//this Animal
     private final double neededDistance;//the distance between the start point to the end point
     private final AtomicBoolean startFlag;//Obj boolean
@@ -21,6 +21,7 @@ public class AnimalThread implements Runnable {
         startFlag = start;
         finishFlag = end;
         this.ref = ref;
+
     }
 
     @Override
@@ -64,6 +65,7 @@ public class AnimalThread implements Runnable {
                         this.finishFlag.set(true);
                         synchronized (ref) {
                             ref.notify();
+                            this.participant.getThisThread().stop();
                         }
                         synchronized (this) {
                             try {
@@ -87,11 +89,11 @@ public class AnimalThread implements Runnable {
                     }
                     try {
                         //noinspection BusyWait
-                        Thread.sleep(100);
+                        Thread.sleep(15);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    System.out.println(participant.getPosition().toString());
+                    participant.energyConsumption();
                 }
             }
         }

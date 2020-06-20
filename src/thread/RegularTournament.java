@@ -28,7 +28,8 @@ public class RegularTournament extends Tournament {
 
 
     @Override
-    public void setup(Animal[][] animals)  {
+    public void setup(Animal[][] animals) {
+        KillThreads killThreads = new KillThreads();
         System.out.println("RegularTour setup");
         scores = new Scores();
         startSignal = new AtomicBoolean(false);
@@ -44,15 +45,18 @@ public class RegularTournament extends Tournament {
             Referee ref = new Referee(animals[super.tourIndex][j].getName(), scores, endSignal);
 
             animalThread[super.tourIndex][j] = new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal, j), startSignal, endSignal, ref);
-            Thread animalThreads = new Thread(animalThread[super.tourIndex][j]);
+            Thread animalThreads = new Thread(animalThread[super.tourIndex][j],tempAnimal.getName());
             animalThreads.start();
             Thread refThread = new Thread(ref);
             refThread.start();
+            tempAnimal.setThread(animalThreads);
+
         }
         super.frame.setAnimalVector(animals[super.tourIndex]);
-        TournamentThread thread = new TournamentThread(animalThread, scores, startSignal,tourIndex);
+        TournamentThread thread = new TournamentThread(animalThread, scores, startSignal, tourIndex);
         super.setTournamentThread(thread);
         Thread t = new Thread(thread);
         t.start();
     }
+
 }
