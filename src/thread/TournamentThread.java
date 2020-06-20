@@ -14,11 +14,14 @@ public class TournamentThread implements Runnable {
     private Boolean isDone = Boolean.FALSE;
     AnimalThread[][] animalsArray;
     private static int index = 3;
+    private String[][] arrayOfScore;
+    private int index;
 
-    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal) {
+    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index) {
         this.animalsArray = animalsThreads;
         this.scores = scores;
         this.startSignal = startSignal;
+        this.index = index;
     }
 
     public void startCompetitionDialog() {
@@ -85,12 +88,18 @@ public class TournamentThread implements Runnable {
                 this.startSignal.set(true);
             }
         }
-
-        for (int i = 0; i < animalsArray.length; i++) {
-            for (int j = 0; j < animalsArray[i].length; j++) {
-                animalsArray[i][j].notifyAll();
+        arrayOfScore = new String[animalsArray.length][];
+        for (int j = 0; j < animalsArray[index].length; j++) {
+            synchronized (animalsArray[index][j]) {
+                animalsArray[index][j].notifyAll();
                 System.out.println("Notify TourThread");
             }
         }
+        arrayOfScore[index] = new String[animalsArray[index].length];
+        for (int j = 0; j < animalsArray[index].length; j++) {
+            arrayOfScore[index][j] = scores.getScores().toString();
+
+        }
+
     }
 }

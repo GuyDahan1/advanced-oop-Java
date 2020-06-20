@@ -10,258 +10,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61f2286c-994c-4448-b696-78cb6f29de0a" name="Default Changelist" comment="delegator fixed">
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator1E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator1N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator1S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator1W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator2E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator2N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator2S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator2W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator3E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator3N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator3S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/alligator3W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/cat1E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/cat1N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/cat1S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/cat1W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/cat2E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/cat2N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/cat2S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/cat2W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/competitionBackground.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog1E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog1N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog1S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog1W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog2E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog2N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog2S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog2W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog3E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog3N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog3S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog3W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog4E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog4N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog4S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog4W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog5E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog5N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog5W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog6E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog6N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog6S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dog6W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dolphin1E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dolphin1W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dolphin2E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dolphin2W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dolphin3E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/dolphin3W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/eagle1E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/eagle1W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/eagle2E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/eagle2W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/eagle3E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/eagle3W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/pigeon1E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/pigeon1W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake1E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake1N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake1S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake1W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake2E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake2N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake2S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake2W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake3E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake3N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake3S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/snake3W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/start0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/start1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/start2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/start3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/whale1E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/whale1W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/whale2E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Icons/whale2W.png" afterDir="false" />
+    <list default="true" id="61f2286c-994c-4448-b696-78cb6f29de0a" name="Default Changelist" comment="adjustment Frame to TournamentType">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Repo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/AddAnimalDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/AddAnimalDialog.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator1N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator1S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator2N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator3N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator3S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/alligator3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/cat1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/cat1N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/cat1S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/cat1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/cat2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/cat2N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/cat2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/cat2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/competition.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/competitionBackground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/competitionBackgroundOld.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog1N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog1S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog2N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog3N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog3S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog4E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog4N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog4S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog4W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog5E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog5N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog5S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog5W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog6E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog6N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog6S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dog6W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dolphin1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dolphin1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dolphin2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dolphin2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dolphin3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/dolphin3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/eagle1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/eagle1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/eagle2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/eagle2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/eagle3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/eagle3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/pigeon1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/pigeon1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake1N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake1S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake2N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake3N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake3S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/snake3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/whale1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/whale1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/whale2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/Icons/whale2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/animals/Alligator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/animals/Alligator$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/animals/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/animals/Animal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/AnimalThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/AnimalThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/CourierTournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/CourierTournament.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/RegularTournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/RegularTournament.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/Tournament.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/TournamentThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/TournamentThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/AddAnimalDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/AddAnimalDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/AddCompetition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/AddCompetition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Graphics/CompetitionFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/CompetitionFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/CompetitionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/CompetitionPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator1N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator1S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator2N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator3N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator3S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/alligator3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/cat1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/cat1N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/cat1S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/cat1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/cat2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/cat2N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/cat2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/cat2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/competition.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/competitionBackground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/competitionBackgroundOld.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog1N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog1S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog2N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog3N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog3S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog4E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog4N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog4S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog4W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog5E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog5N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog5S.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Icons/dog5S.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog5W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog6E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog6N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog6S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dog6W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dolphin1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dolphin1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dolphin2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dolphin2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dolphin3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/dolphin3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/eagle1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/eagle1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/eagle2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/eagle2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/eagle3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/eagle3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/pigeon1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/pigeon1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake1N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake1S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake2N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake3E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake3N.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake3S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/snake3W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/whale1E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/whale1W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/whale2E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphics/Icons/whale2W.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/animals/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/designPatterns/CompetitioinSingelton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/designPatterns/CompetitionSingleton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thread/AnimalThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/AnimalThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/thread/CourierTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/CourierTournament.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/thread/RegularTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/RegularTournament.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/thread/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/Tournament.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/thread/TournamentThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/TournamentThread.java" afterDir="false" />
@@ -296,17 +54,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Graphics" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Graphics/AddAnimalDialog.java" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/Graphics/AddAnimalDialog.java" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\liore\OneDrive\Desktop\AdvancedOop\src\Graphics" />
-    </key>
   </component>
   <component name="RunManager" selected="Application.CompetitionFrame">
     <configuration name="AddAnimalDialog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -370,8 +120,6 @@
       <workItem from="1592125405885" duration="55160000" />
       <workItem from="1592371746312" duration="17128000" />
       <workItem from="1592516034329" duration="7510000" />
-      <workItem from="1592571131507" duration="6548000" />
-      <workItem from="1592630968727" duration="6793000" />
     </task>
     <task id="LOCAL-00001" summary="Excited repo upload">
       <created>1592055169043</created>
@@ -499,7 +247,21 @@
       <option name="project" value="LOCAL" />
       <updated>1592565918052</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="CourierTournament()">
+      <created>1592581538688</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1592581538691</updated>
+    </task>
+    <task id="LOCAL-00020" summary="adjustment Frame to TournamentType">
+      <created>1592584768353</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1592584768353</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,19 +272,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -541,13 +291,15 @@
     <MESSAGE value="restore Obj with bugs" />
     <MESSAGE value="restore Obj bug fixed" />
     <MESSAGE value="delegator fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="delegator fixed" />
+    <MESSAGE value="CourierTournament()" />
+    <MESSAGE value="adjustment Frame to TournamentType" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjustment Frame to TournamentType" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1592479393212">
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1592594348300">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1592479393212" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1592594348300" />
     <state x="498" y="202" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1592064574851">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -560,10 +312,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1592130273786" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592411262256">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592583702814">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592411262256" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592583702814" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1592069569557">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -576,42 +328,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" width="1536" height="824" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1592371923270" />
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1592637749636">
+    <state width="1493" height="156" key="GridCell.Tab.0.bottom" timestamp="1592596899142">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592637749636" />
-    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1592637749636">
+    <state width="1493" height="156" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592596899142" />
+    <state width="1493" height="156" key="GridCell.Tab.0.center" timestamp="1592596899142">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592637749636" />
-    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1592637749636">
+    <state width="1493" height="156" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592596899142" />
+    <state width="1493" height="156" key="GridCell.Tab.0.left" timestamp="1592596899141">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592637749636" />
-    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1592637749636">
+    <state width="1493" height="156" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592596899141" />
+    <state width="1493" height="156" key="GridCell.Tab.0.right" timestamp="1592596899142">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592637749636" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1592634396199">
+    <state width="1493" height="156" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592596899142" />
+    <state width="1493" height="248" key="GridCell.Tab.1.bottom" timestamp="1592595488725">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592634396199" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1592634396199">
+    <state width="1493" height="248" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592595488725" />
+    <state width="1493" height="248" key="GridCell.Tab.1.center" timestamp="1592595488725">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592634396199" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1592634396199">
+    <state width="1493" height="248" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592595488725" />
+    <state width="1493" height="248" key="GridCell.Tab.1.left" timestamp="1592595488725">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592634396199" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1592634396199">
+    <state width="1493" height="248" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592595488725" />
+    <state width="1493" height="248" key="GridCell.Tab.1.right" timestamp="1592595488725">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592634396199" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1592571696661">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592571696661" />
+    <state width="1493" height="248" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592595488725" />
     <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1592223524772">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -620,14 +368,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="647" y="207" key="UIDesigner.ListEditorDialog/0.0.1536.824@0.0.1536.824" timestamp="1592092858954" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592637765656">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592584931035">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592637765656" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592584931035" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1592373325936">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1592373325936" />
+    <state x="369" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1592596773777">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="369" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1592596773777" />
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592570467650">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -636,14 +388,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="555" y="292" key="com.intellij.uiDesigner.propertyInspector.editors.string.StringEditorDialog/0.0.1536.824@0.0.1536.824" timestamp="1592328668034" />
-    <state x="499" y="177" key="extract.method.dialog" timestamp="1592574188767">
+    <state x="499" y="177" key="extract.method.dialog" timestamp="1592569505043">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="177" key="extract.method.dialog/0.0.1536.824@0.0.1536.824" timestamp="1592574188767" />
-    <state x="827" y="22" width="579" height="801" key="find.popup" timestamp="1592577196811">
+    <state x="499" y="177" key="extract.method.dialog/0.0.1536.824@0.0.1536.824" timestamp="1592569505043" />
+    <state x="478" y="11" width="579" height="801" key="find.popup" timestamp="1592597026875">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="827" y="22" width="579" height="801" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1592577196811" />
+    <state x="478" y="11" width="579" height="801" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1592597026875" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1592416029603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -666,13 +418,23 @@
           <line>59</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/thread/AnimalThread.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Graphics/CompetitionFrame.java</url>
+          <line>264</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="participant" language="JAVA" />
-        <watch expression="super.imgChoice.contains(&quot;2&quot;)" language="JAVA" />
-        <watch expression="super.imgChoice" language="JAVA" />
+        <watch expression="animals[i][j]" language="JAVA" />
+        <watch expression="chosenTour.contains(&quot;Regu&quot;)" language="JAVA" />
+        <watch expression="chosenTour" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

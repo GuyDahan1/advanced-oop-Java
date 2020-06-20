@@ -8,6 +8,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 
 public class AddAnimalDialog extends JDialog implements ActionListener, ChangeListener {
@@ -69,8 +70,16 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         chooseAddItemsToJcb();
         showImage();
 
+        animalNameTextField.setText(getRandomName());
+
         setVisible(true);
         pack();
+    }
+
+    private String getRandomName() {
+       String names[] = {"Guy","Lior","Avihay","Dudi","Eden","Rexi","Dexi","Zex","Dan","Nofar","Yarin","Dana","Lavan","DaniDin","Luck","Tony","Pablo","Ugly"};
+        Random rnd = new Random();
+       return names[rnd.nextInt(names.length)]+"#"+rnd.nextInt(100);
     }
 
 

@@ -3,12 +3,15 @@ package Graphics;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+
 
 public class AddCompetition extends JFrame implements ActionListener {
 
+
     private JLabel title;
     private JRadioButton courierTourRadioBox;
-    private JComboBox<String> competitionTypeComboBox;
+    private JComboBox competitionTypeComboBox;
     private JRadioButton regularTourRadioBox;
     private JButton okBtn;
     private JButton cancelButton;
@@ -18,28 +21,38 @@ public class AddCompetition extends JFrame implements ActionListener {
     private JButton tableButton;
     private JButton addAnimalButton;
     private JButton newCompetitionButton;
+    String randomTourName;
 
-    public AddCompetition() {
+
+    public AddCompetition(){
         super("Add Competition");
 
         okBtn.addActionListener(this);
         cancelButton.addActionListener(this);
 
+        Random randomNum = new Random();
+        randomTourName = "EmptyName#"+String.valueOf(randomNum.nextInt(1000));
+
+        tourTextField.setText(randomTourName);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(addCompetitionPanel);
         pack();
         setVisible(true);
+
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource().equals(cancelButton)) {
+        if (e.getSource().equals(cancelButton)){
             setVisible(false);
         }
+
     }
 
-    public JComboBox<String> getCompetitionTypeComboBox() {
+    public JComboBox getCompetitionTypeComboBox() {
         return competitionTypeComboBox;
     }
 
@@ -70,4 +83,10 @@ public class AddCompetition extends JFrame implements ActionListener {
     public JButton getTableButton() {
         return tableButton;
     }
+
+    private void createUIComponents() {
+
+    }
+
+    //
 }
