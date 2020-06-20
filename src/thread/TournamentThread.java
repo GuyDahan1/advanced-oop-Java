@@ -13,7 +13,7 @@ public class TournamentThread implements Runnable {
     private final AtomicBoolean startSignal;
     private Boolean isDone = Boolean.FALSE;
     AnimalThread[][] animalsArray;
-    private static int index = 3;
+    private static int count = 3;
     private String[][] arrayOfScore;
     private int index;
 
@@ -38,13 +38,13 @@ public class TournamentThread implements Runnable {
                 f.add(p);
                 p.add(lbl);
 
-                if (index >= 0) {
+                if (count >= 0) {
                     f.setVisible(true);
-                    ImageIcon imageIcon = new ImageIcon(getClass().getResource("/start" + index-- + ".png")); // load the image to a imageIcon
+                    ImageIcon imageIcon = new ImageIcon(getClass().getResource("/start" + count-- + ".png")); // load the image to a imageIcon
                     Image image = imageIcon.getImage(); // transform it
 
                     Image newImg;
-                    if (index + 1 != 0)
+                    if (count + 1 != 0)
                         newImg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // scale it the smooth way
                     else
                         newImg = image.getScaledInstance(220, 220, Image.SCALE_SMOOTH); // scale it the smooth way
