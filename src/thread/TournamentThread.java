@@ -60,27 +60,22 @@ public class TournamentThread implements Runnable {
             }
         }, 1000, 1000);
 
-
-        synchronized (isDone) {
-            if (!isDone) {
-                isDone = true;
-                notifyAll();
-            }
-        }//todo - fix bug
+        synchronized (this){
+        notify();}
     }
 
     public void run() {
         startCompetitionDialog();
 
-        synchronized (isDone) {
-            while (!isDone) {
+
+        synchronized (this) {
                 try {
-                    this.wait();
+                    this.wait(4000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
             }
         }  // todo -  fix bug
+        System.out.println("here 85 line");
 
         synchronized (startSignal) {
             if (!startSignal.get()) {
@@ -88,6 +83,9 @@ public class TournamentThread implements Runnable {
                 this.startSignal.set(true);
             }
         }
+
+        System.out.println("here 94 line");
+
         arrayOfScore = new String[animalsArray.length][];
         for (int j = 0; j < animalsArray[index].length; j++) {
             synchronized (animalsArray[index][j]) {
@@ -95,6 +93,9 @@ public class TournamentThread implements Runnable {
                 System.out.println("Notify TourThread");
             }
         }
+
+        System.out.println("here 105 line");
+
         arrayOfScore[index] = new String[animalsArray[index].length];
         for (int j = 0; j < animalsArray[index].length; j++) {
             arrayOfScore[index][j] = scores.getScores().toString();

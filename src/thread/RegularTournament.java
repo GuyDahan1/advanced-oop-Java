@@ -58,8 +58,9 @@ public class RegularTournament extends Tournament {
         t.start();
 //            super.tournamentThread.run();
 
-        t.stop();
-        System.out.println("RegularTour setup Loop End func");
+//        t.stop();
+//        System.out.println(t.isAlive());
+//        System.out.println("RegularTour setup Loop End func");
 
     }
 }
