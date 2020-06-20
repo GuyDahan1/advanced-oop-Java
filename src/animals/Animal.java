@@ -267,14 +267,15 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
     public void loadImages(String nm) {
 
         try {
-            this.eastImg = ImageIO.read(new File(PICTURE_PATH + nm + "E.png"));
-            this.westImg = ImageIO.read(new File(PICTURE_PATH + nm + "W.png"));
-            this.northImg = ImageIO.read(new File(PICTURE_PATH + nm + "N.png"));
-            this.southImg = ImageIO.read(new File(PICTURE_PATH + nm + "S.png"));
-        } catch (IOException e) {
+            this.eastImg = ImageIO.read(getClass().getResource("/" + nm + "E.png"));
+            this.westImg = ImageIO.read(getClass().getResource("/" + nm + "W.png"));
+            this.northImg = ImageIO.read(getClass().getResource("/" + nm + "N.png"));
+            this.southImg = ImageIO.read(getClass().getResource("/" + nm + "S.png"));
+        } catch (Exception e) {
             try {
-                this.eastImg = ImageIO.read(new File(PICTURE_PATH + nm + "E.png"));
-                this.westImg = ImageIO.read(new File(PICTURE_PATH + nm + "W.png"));
+                this.eastImg = ImageIO.read(getClass().getResource("/" + nm + "E.png"));
+                this.westImg = ImageIO.read(getClass().getResource("/" + nm + "W.png"));
+
 
             } catch (IOException ioException) {
                 ioException.printStackTrace();

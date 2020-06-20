@@ -3,13 +3,14 @@ package Graphics;
 import animals.*;
 import designPatterns.*;
 import mobility.Point;
-import thread.Referee;
 import thread.RegularTournament;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Vector;
 
 /**
@@ -115,8 +116,8 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      * @return the current index that the new animal should be positioned on.
      */
     public Point getPositionIndex() {
-        Point animalPoint = null;
-        if(chosenTour.contains("Regu")) {
+        Point animalPoint ;
+        if(chosenTour.contains("Regular")) {
 
             animalPoint = getRegularPoint(null);
 
@@ -235,9 +236,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             animalsArray = new Animal[animalGroupVector.size()][];
             for (int i = 0; i < animalsArray.length; i++) {
                 animalsArray[i] = new Animal[animalGroupVector.get(i).length];
-                for (int j = 0; j < animalGroupVector.get(i).length; j++) {
-                    animalsArray[i][j] = animalGroupVector.get(i)[j];
-                }
+                System.arraycopy(animalGroupVector.get(i), 0, animalsArray[i], 0, animalGroupVector.get(i).length);
             }
             new RegularTournament(animalsArray.clone(), this);
         }
@@ -250,7 +249,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void competitionBtnAction() {
-        addCompetition = CompetitioinSingelton.getInstance();
+        addCompetition = CompetitionSingleton.getInstance();
 
         if (firstTime) {
             addCompetition.getAddAnimalButton().addActionListener(this);
@@ -265,7 +264,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     private void addAnimalDialogOkBtnAction() {
         chosenCompetition = chosenCompetition == null ? "Water animals" : chosenCompetition;
-
 
         AbstractAnimalFactory abstractFactory = new AbstractAnimalFactory();
 
@@ -314,7 +312,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void addCompetitionOkBtn() {
-        chosenCompetition = addCompetition.getCompetitionTypeComboBox().getSelectedItem().toString();
+        chosenCompetition = Objects.requireNonNull(addCompetition.getCompetitionTypeComboBox().getSelectedItem()).toString();
         addCompetition.getCompetitionTypeComboBox().setEnabled(false);
         vectorString.add(chosenCompetition);
 
@@ -487,39 +485,35 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private void updateBtnStatus() {
         System.out.println("******* " + gameState.toString() + " ******* ");
         switch (gameState) {
-            case CHOOSING_COMP_TYPE: {
+            case CHOOSING_COMP_TYPE -> {
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
-            break;
-            case CHOOSING_COMP_FIRST_ANIMAL: {
+            case CHOOSING_COMP_FIRST_ANIMAL -> {
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
-            break;
-            case CHOOSING_COMP_ANIMALS: {
+            case CHOOSING_COMP_ANIMALS -> {
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
             }
-            break;
-            case COMPETING: {
+            case COMPETING -> {
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(false);
             }
-            break;
-            case CLEARED: {
+            case CLEARED -> {
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
@@ -527,9 +521,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
 
             }
-            break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + gameState);
+            default -> throw new IllegalStateException("Unexpected value: " + gameState);
         }
     }
 
@@ -570,8 +562,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     public void setAnimalVector(Animal[] animals) {
         this.animalVector.clear();
-        for (int i = 0; i < animals.length; i++) {
-            this.animalVector.add(animals[i]);
-        }
+        this.animalVector.addAll(Arrays.asList(animals));
     }
 }

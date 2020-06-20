@@ -7,16 +7,14 @@ public abstract class Tournament {
 
     protected TournamentThread tournamentThread;
     protected CompetitionFrame frame;
-    public Tournament(Animal[][] animals, CompetitionFrame frame){
-        this.frame=frame;
-        try {
+
+
+    public Tournament(Animal[][] animals, CompetitionFrame frame) {
+        this.frame = frame;
             setup(animals);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
-    public abstract void setup(Animal[][] animals) throws InterruptedException;
+    public abstract void setup(Animal[][] animals);
 
     public TournamentThread getTournamentThread() {
         return tournamentThread;
@@ -25,4 +23,5 @@ public abstract class Tournament {
     public void setTournamentThread(TournamentThread tournamentThread) {
         this.tournamentThread = tournamentThread;
     }
+
 }

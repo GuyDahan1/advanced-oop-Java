@@ -30,12 +30,12 @@ public class RegularTournament extends Tournament {
 
 
     @Override
-    public void setup(Animal[][] animals) throws InterruptedException {
+    public void setup(Animal[][] animals) {
         System.out.println("RegularTour setup");
         scores = new Scores();
         startSignal = new AtomicBoolean(false);
-        AnimalThread[][] animalThread = new AnimalThread[animals.length][];
 
+        AnimalThread[][] animalThread = new AnimalThread[animals.length][];
 
         for (int i = 0; i < animals.length; i++) {
             animalThread[i]= new AnimalThread[animals[i].length];
@@ -56,7 +56,6 @@ public class RegularTournament extends Tournament {
             super.setTournamentThread(thread);
             Thread t = new Thread(thread);
             t.start();
-//            super.tournamentThread.run();
         }
 
         System.out.println("RegularTour setup Loop End func");

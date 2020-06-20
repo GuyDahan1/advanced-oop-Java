@@ -18,7 +18,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
 
 
     private JPanel addAnimalPanel;
-    private JComboBox animalDesignJcb;
+    private JComboBox<String> animalDesignJcb;
 
     private JRadioButton femaleRadioButton;
     private JRadioButton maleRadioButton;
@@ -54,7 +54,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         setContentPane(addAnimalPanel);
         CompetitionFrame mainFrame = (CompetitionFrame) SwingUtilities.getWindowAncestor(this);
 
-
         ///slider setup///
         slider1.addChangeListener(this);
         slider1.setMajorTickSpacing(14);
@@ -63,10 +62,8 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         slider1.setPaintLabels(true);
         ///slider setup///
 
-
         animalDesignJcb.addActionListener(this);
         animalGen = gen.Male;
-
 
         animalFamilyType =  mainFrame.getChosenCompetition();
         chooseAddItemsToJcb();
@@ -97,7 +94,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         }
     }
 
-
     /**
      * Shows the image that match the user's choices.
      */
@@ -105,7 +101,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
         this.animalKind = (String) animalDesignJcb.getSelectedItem();
         this.animalImgPath = IDrawable.PICTURE_PATH + animalKind + "E.png";
         try {
-            ImageIcon imageIcon = new ImageIcon(animalImgPath); // load the image to a imageIcon
+            ImageIcon imageIcon = new ImageIcon(getClass().getResource("/" + animalKind + "E.png")); // load the image to a imageIcon
             Image image = imageIcon.getImage(); // transform it
             Image newImg = image.getScaledInstance(100, 80, Image.SCALE_SMOOTH); // scale it the smooth way
             imageIcon = new ImageIcon(newImg);// transform it back
