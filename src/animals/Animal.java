@@ -170,6 +170,10 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
         return true;
     }
 
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
     /**
      * Sets this Animal's weight.
      *
