@@ -576,10 +576,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         frame.setLocation(x, y);
     }
 
-    public static void main(String[] args) {
-        MainFrameSingelton.getInstance();
-    }
-
     public CompetitionPanel getCompetitionPanel() {
         return competitionPanel;
     }
@@ -606,4 +602,12 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             this.animalVector.add(animals[i]);
         }
     }
+
+
+    public static void main(String[] args) {
+        MainFrameSingelton.getInstance();
+    }
+
+
 }
+
