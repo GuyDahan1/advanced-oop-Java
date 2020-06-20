@@ -14,13 +14,16 @@ public class AnimalThread implements Runnable {
     private final AtomicBoolean startFlag;//Obj boolean
     private final AtomicBoolean finishFlag;//Obj boolean
     private final Referee ref;
+    private boolean regularTournamentBoolean;
+    private Thread thisThread;
 
-    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref) {
+    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour) {
         this.participant = participant;
         this.neededDistance = neededDistance;
         startFlag = start;
         finishFlag = end;
         this.ref = ref;
+        regularTournamentBoolean = regularTour;
 
     }
 
@@ -40,13 +43,16 @@ public class AnimalThread implements Runnable {
                 }
             }
         }
-        System.out.println("AnimalThread Wait Finish");
+        double tournamentValue=1;
+        if (regularTournamentBoolean) {
+            tournamentValue = 0.5;
+        }
         while (startFlag.get()) {
             while (!finishFlag.get()) {
                 System.out.println(participant.getTotalDistance());
                 synchronized (this) {
                     if (participant.getFamilyType().contains("Air") || participant.getFamilyType().contains("Water")) {
-                        if (participant.getTotalDistance() >= 0.5 * neededDistance) {
+                        if (participant.getTotalDistance() >= tournamentValue * neededDistance) {
                             participant.setOrientation(Orientation.W);
                         }
                     } else if (participant.getFamilyType().contains("Terr")) {
@@ -63,17 +69,15 @@ public class AnimalThread implements Runnable {
                     }
                     if (participant.getTotalDistance() >= this.neededDistance) {
                         this.finishFlag.set(true);
+
                         synchronized (ref) {
                             ref.notify();
-                            this.participant.getThisThread().stop();
                         }
-                        synchronized (this) {
-                            try {
-                                wait();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                        synchronized (TournamentThread.class) {
+                            TournamentThread.class.notify();
+                            System.out.println("notifyTOuramnentTHraead");
                         }
+                        thisThread=null;
                     }
                     double speed = participant.getSpeed();
                     Point position = participant.getPosition();
@@ -97,14 +101,16 @@ public class AnimalThread implements Runnable {
                 }
             }
         }
+
     }
 
+    public void setThisThread(Thread thisThread) {
+        this.thisThread = thisThread;
+    }
 
     public AtomicBoolean getFinishFlag() {
         return finishFlag;
     }
 
-    public AtomicBoolean getStartFlag() {
-        return startFlag;
-    }
+
 }

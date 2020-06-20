@@ -14,15 +14,28 @@ public class TournamentThread implements Runnable {
     private final AtomicBoolean startSignal;
     AnimalThread[][] animalsArray;
     private static int count = 3;
-    String[][] arrayOfScore;
+    private String[][] arrayOfScore;
     private final int index;
+    private boolean regularTournamentBool;
+    private AtomicBoolean[] booleans;
 
-    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index) {
+    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index, boolean regularTour) {
         this.animalsArray = animalsThreads;
         this.scores = scores;
         this.startSignal = startSignal;
         this.index = index;
+        this.regularTournamentBool = regularTour;
     }
+
+    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index, boolean regularTour, AtomicBoolean[] booleans) {
+        this.animalsArray = animalsThreads;
+        this.scores = scores;
+        this.startSignal = startSignal;
+        this.index = index;
+        this.regularTournamentBool = regularTour;
+        this.booleans = booleans;
+    }
+
 
     public void startCompetitionDialog() {
         JFrame f = new JFrame();
@@ -82,8 +95,7 @@ public class TournamentThread implements Runnable {
                 this.startSignal.set(true);
             }
         }
-        try { // can produce null because no usages yet
-
+        if (regularTournamentBool) {
             arrayOfScore = new String[animalsArray.length][];
             for (int j = 0; j < animalsArray[index].length; j++) {
                 synchronized (animalsArray[index][j]) {
@@ -94,9 +106,15 @@ public class TournamentThread implements Runnable {
             arrayOfScore[index] = new String[animalsArray[index].length];
             for (int j = 0; j < animalsArray[index].length; j++)
                 arrayOfScore[index][j] = scores.getScores().toString();
-        } catch (NullPointerException nullPointerException) {
-            System.out.println("***     arrayOfScore[" + index + "] is null      ***");
-            nullPointerException.printStackTrace();
+        } else {
+            for (int i = 0; i < animalsArray[index].length; i++) {
+                if (i % 2 == 0) {
+                    synchronized (animalsArray[index][i]) {
+                        animalsArray[index][i].notifyAll();
+                        System.out.println("Notify TourThread");
+                    }
+                }
+            }
         }
     }
 }

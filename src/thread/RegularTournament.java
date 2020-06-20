@@ -44,16 +44,17 @@ public class RegularTournament extends Tournament {
             Animal tempAnimal = animals[super.tourIndex][j];
             Referee ref = new Referee(animals[super.tourIndex][j].getName(), scores, endSignal);
 
-            animalThread[super.tourIndex][j] = new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal, j), startSignal, endSignal, ref);
+            animalThread[super.tourIndex][j] = new AnimalThread(tempAnimal, calcNeededDistance(tempAnimal, j), startSignal, endSignal, ref,true);
             Thread animalThreads = new Thread(animalThread[super.tourIndex][j],tempAnimal.getName());
             animalThreads.start();
             Thread refThread = new Thread(ref);
             refThread.start();
             tempAnimal.setThread(animalThreads);
+            animalThread[super.tourIndex][j].setThisThread(animalThreads);
 
         }
         super.frame.setAnimalVector(animals[super.tourIndex]);
-        TournamentThread thread = new TournamentThread(animalThread, scores, startSignal, tourIndex);
+        TournamentThread thread = new TournamentThread(animalThread, scores, startSignal, tourIndex,true);
         super.setTournamentThread(thread);
         Thread t = new Thread(thread);
         t.start();

@@ -27,7 +27,6 @@ public class CourierTournament extends Tournament {
             neededDistance = animal.calcDistance(CompetitionFrame.getEndPoint()[animalIndex]) + animal.calcDistance(CompetitionFrame.getStartPoint()[animalIndex + 1]);
         }
         return neededDistance;
-
     }
 
 
@@ -46,34 +45,37 @@ public class CourierTournament extends Tournament {
 
             animalThread[i] = new AnimalThread[animals[i].length];
 
+            AtomicBoolean[] booleansArray;
+            booleansArray = new AtomicBoolean[animals[i].length];
+
             for (int j = 0; j < animals[i].length; j++) {
 
-                AtomicBoolean endSignal = new AtomicBoolean(false);
+                booleansArray[j] = new AtomicBoolean(false);
 
                 Animal currentAnimal = animals[i][j]; // syntax sugar
 
                 Referee ref = new Referee(currentAnimal.getName(), scores, endSignal); // make a referee for the current animal
+
                 System.out.println("RegularTour setup Loop " + i + " " + j + "Build animal");
 
                 if (j % 2 == 0) {
-                    oddLocationEndSignal = endSignal;
+                    booleansArray[j+1] = endSignal;
                     animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
-                            startSignal, endSignal, ref);
+                            startSignal, endSignal, ref, false);
                 } else {
                     animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j)
-                            , oddLocationEndSignal, animalThread[i][j - 1].getFinishFlag(), ref); // todo -check
+                            , booleansArray[j], animalThread[i][j - 1].getFinishFlag(), ref, false); // todo -check
                 }
 
-
-                Thread animalThreads = new Thread(animalThread[i][j],animals[i][j].getName());
+                Thread animalThreads = new Thread(animalThread[i][j], animals[i][j].getName());
                 animalThreads.start();
-                Thread refThread = new Thread(ref,animals[i][j].getName()+"REF");
+                Thread refThread = new Thread(ref, animals[i][j].getName() + "REF");
                 refThread.start();
             }
             super.frame.setAnimalVector(animals[i]);
-            TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, i);
+            TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, i, false,booleansArray);
             super.setTournamentThread(tournamentThread);
-            Thread t = new Thread(tournamentThread,"TournamentThread");
+            Thread t = new Thread(tournamentThread, "TournamentThread");
             t.start();
         }
 
