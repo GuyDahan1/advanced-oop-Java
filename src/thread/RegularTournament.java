@@ -58,5 +58,10 @@ public class RegularTournament extends Tournament {
         t.start();
     }
 
+    @Override
+    public void notifyNextAnimal(int x) {
+
+    }
+
 
 }

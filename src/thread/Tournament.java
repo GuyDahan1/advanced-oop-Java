@@ -8,6 +8,7 @@ public abstract class Tournament {
     protected Thread tournamentThread;
     protected int tourIndex;
     protected CompetitionFrame frame;
+    protected Thread[][] animalActiveThread;
 
     public Tournament(Animal[][] animals, CompetitionFrame frame, int index) {
         this.frame = frame;
@@ -24,6 +25,8 @@ public abstract class Tournament {
             System.out.println(tournamentThread.isAlive());
         }
     }
+
+    public abstract void notifyNextAnimal(int index);
     public void setTournamentThread(Thread tournamentThread) {
         this.tournamentThread = tournamentThread;
     }

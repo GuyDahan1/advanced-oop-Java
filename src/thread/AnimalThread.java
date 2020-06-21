@@ -15,6 +15,8 @@ public class AnimalThread implements Runnable {
     private final Referee ref;
     private Tournament tour;
     private boolean regularTournamentBoolean;
+    int index;
+    boolean firstAnimal;
 
     public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour, Tournament tour) {
         this.participant = participant;
@@ -24,6 +26,13 @@ public class AnimalThread implements Runnable {
         this.ref = ref;
         regularTournamentBoolean = regularTour;
         this.tour = tour;
+    }
+
+    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour, Tournament tour, int index) {
+        this(participant, neededDistance, start, end, ref, regularTour, tour);
+        this.index = index;
+        firstAnimal = true;
+
     }
 
     @Override
@@ -37,14 +46,14 @@ public class AnimalThread implements Runnable {
                     System.out.println("AnimalThread Wait");
                     wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    System.out.println("ERROR IN WAIT");
+                    System.out.println("secondAnimalWake");
+                    notify();
                 }
             }
         }
         double tournamentValue = 1;
         if (regularTournamentBoolean) {
-            tournamentValue = 0.5;
+            tournamentValue =0.5 ;
         }
         while (startFlag.get()) {
             while (!finishFlag.get()) {
@@ -68,19 +77,23 @@ public class AnimalThread implements Runnable {
                     if (participant.getTotalDistance() >= this.neededDistance) {
                         synchronized (this) {
                             this.finishFlag.set(true);
-                            synchronized (ref) {
-                                ref.notify();
-                                System.out.println("ref.notify(); i am here");
-                            }
-                            System.out.println("before tour.notifyTournamentThread(); i am here");
-                            tour.notifyTournamentThread();
-                            System.out.println("after tour.notifyTournamentThread(); i am here");
+                            if (firstAnimal) {
+                                tour.notifyNextAnimal(index);
+                            } else {
+                                synchronized (ref) {
+                                    ref.notify();
+                                    System.out.println("ref.notify(); i am here");
+                                }
+                                System.out.println("before tour.notifyTournamentThread(); i am here");
+                                tour.notifyTournamentThread();
+                                System.out.println("after tour.notifyTournamentThread(); i am here");
 
-                            try {
-                                System.out.println(participant.getName() + " is waiting");
-                                wait();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                try {
+                                    System.out.println(participant.getName() + " is waiting");
+                                    wait();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                     }

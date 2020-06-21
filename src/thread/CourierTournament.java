@@ -38,42 +38,45 @@ public class CourierTournament extends Tournament {
         endSignal = new AtomicBoolean(false);
 
         AnimalThread[][] animalThread = new AnimalThread[animals.length][];
+        animalActiveThread = new Thread[animals.length][];
 
-        for (int i = 0; i < animals.length; i++) {
+        animalThread[tourIndex] = new AnimalThread[animals[tourIndex].length];
+        animalActiveThread[tourIndex] = new Thread[animals[tourIndex].length];
+
+        AtomicBoolean[] booleansArray;
+        booleansArray = new AtomicBoolean[animals[tourIndex].length];
+
+        for (int j = 0; j < animals[tourIndex].length; j++) {
+            booleansArray[j] = new AtomicBoolean(false);
+
+            Animal currentAnimal = animals[tourIndex][j]; // syntax sugar
+
+            Referee ref = new Referee(currentAnimal.getName(), scores, booleansArray[j]); // make a referee for the current animal
 
 
-            animalThread[i] = new AnimalThread[animals[i].length];
-
-            AtomicBoolean[] booleansArray;
-            booleansArray = new AtomicBoolean[animals[i].length];
-
-            for (int j = 0; j < animals[i].length; j++) {
-                booleansArray[j] = new AtomicBoolean(false);
-
-                Animal currentAnimal = animals[i][j]; // syntax sugar
-
-                Referee ref = new Referee(currentAnimal.getName(), scores, booleansArray[j]); // make a referee for the current animal
-
-
-                if (j % 2 == 0) {
-                    animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
-                            startSignal, booleansArray[j], ref, false, this);
-                } else {
-                    animalThread[i][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
-                            booleansArray[j - 1], endSignal, ref, false, this); //
-                }
-
-                Thread animalThreads = new Thread(animalThread[i][j], animals[i][j].getName());
-                animalThreads.start();
-                Thread refThread = new Thread(ref, animals[i][j].getName() + "REF");
-                refThread.start();
+            if (j % 2 == 0) {
+                animalThread[tourIndex][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
+                        startSignal, booleansArray[j], ref, false, this,j);
+            } else {
+                animalThread[tourIndex][j] = new AnimalThread(currentAnimal, calcNeededDistance(currentAnimal, j),
+                        booleansArray[j - 1], endSignal, ref, false, this); //
             }
-            super.frame.setAnimalVector(animals[i]);
-            TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, i, booleansArray);
-            t = new Thread(tournamentThread, "TournamentThread");
-            super.setTournamentThread(t);
-            t.start();
+            animalActiveThread[tourIndex][j] = new Thread(animalThread[tourIndex][j], animals[tourIndex][j].getName());
+            animalActiveThread[tourIndex][j].start();
+            Thread refThread = new Thread(ref, animals[tourIndex][j].getName() + "REF");
+            refThread.start();
         }
+        super.frame.setAnimalVector(animals[tourIndex]);
+        TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, tourIndex, booleansArray);
+        t = new Thread(tournamentThread, "TournamentThread");
+        super.setTournamentThread(t);
+        t.start();
     }
 
+    @Override
+    public void notifyNextAnimal(int index) {
+        synchronized (animalActiveThread[tourIndex][index + 1]) {
+            animalActiveThread[tourIndex][index + 1].interrupt();
+        }
+    }
 }

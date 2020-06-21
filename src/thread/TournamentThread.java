@@ -97,7 +97,6 @@ public class TournamentThread implements Runnable {
         } else
             courierTournament();
 
-
         while (true) {
             try {
                 synchronized (this) {
@@ -140,30 +139,19 @@ public class TournamentThread implements Runnable {
     }
 
     private void courierTournament() {
-        int i = 0;
-        for (int j = 0; j < animalsArray[index].length; j++) {
-            synchronized (animalsArray[index][j]) {
-                animalsArray[index][j].notifyAll();
+        synchronized (startSignal) {
+            if (!startSignal.get()) {
+                this.startSignal.set(true);
             }
-        }
-        while (true) {
-
-            if (booleans[i].get()) {
-                synchronized (animalsArray[index][i]) {
-                    animalsArray[index][i].notifyAll();
-                }
-            }
-            if (i == animalsArray[index].length - 1) {
-                synchronized (this) {
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            for (int j = 0; j < animalsArray[index].length; j++) {
+                if (j % 2 == 0) {
+                    synchronized (animalsArray[index][j]) {
+                        animalsArray[index][j].notifyAll();
+                        System.out.println("animalsArray[index][j].notifyAll(); i am here");
                     }
                 }
-                i = 0;
             }
         }
-    }
 
+    }
 }
