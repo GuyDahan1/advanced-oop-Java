@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static Graphics.CompetitionFrame.centreWindow;
 
-
 public class TournamentThread implements Runnable {
 
     private static int curFinish = 0;
@@ -116,7 +115,21 @@ public class TournamentThread implements Runnable {
                 }
             }
         }
+        displayVictoryDialog();
+    }
+
+    private void displayVictoryDialog() {
+        if (!this.regularTournamentBool)
+            return;
+
+        StringBuilder victory = new StringBuilder();
         System.out.println("finish Tournament build TABLE");//TODO open frame with the winners and update the table in the frame
+        for (int i = 0; i < animalsArray[index].length; i++) {
+            victory.append(scores.getStringVector().get(i));
+            victory.append("\n");
+        }
+        System.out.println(victory);
+        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), victory.toString());
     }
 
 

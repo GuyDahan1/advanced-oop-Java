@@ -1,3 +1,14 @@
+/*
+  This program implements the THIRD and FINAL assignment provided in
+  "Advanced Object Oriented Programming" , of year 2020
+
+   AUTHORS:
+  * * Lior Elisberg , 308032473
+  * * Guy Dahan , 208271734
+
+  ---------------------------------------------------------------------------------------------------------------------
+ */
+
 package Graphics;
 
 import animals.Animal;
@@ -238,6 +249,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         else if (e.getSource() == addCompetition.getNewCompetitionButton())
             newCompetition();
 
+
             //if table button chosen
         else if (e.getSource().equals(addCompetition.getTableButton()))
             createCompetitionTable();
@@ -258,8 +270,11 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
     private void feedChosenAnimal() {
         Object[] possibilities = new Object[animalVector.size()];
-        for (int i = 0; i < animalVector.size(); ++i)
-            possibilities[i] = animalVector.get(i).getName() + " the " + animalVector.get(i).getType(); //convert animal vector to user - optional data
+        for (int i = 0; i < animalVector.size(); ++i) {
+            Animal animal = animalVector.get(i);
+            if (animal.getCurrentEnergy() != animal.getMaxEnergy() && animal.getThisThread().isAlive())
+                possibilities[i] = animalVector.get(i).getName() + " the " + animalVector.get(i).getType(); //convert animal vector to user - optional data
+        }
 
         String chosenEater = (String) JOptionPane.showInputDialog(this, "Choose an animal to feed : ",
                 "FEED ME :(", JOptionPane.PLAIN_MESSAGE, null, possibilities, "1");
@@ -362,6 +377,10 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         addCompetition.requestFocus();
         addAnimalDialog.dispose();
         addCompetition.getOkOrNewCompetitionBtn().setEnabled(true);
+
+        if (chosenTournament.get(chosenTournament.size() - 1).contains("Courier") && animalVector.size() % 2 != 0) {
+            addCompetition.getOkOrNewCompetitionBtn().setEnabled(false);
+        }
     }
 
     private void addCompetitionNewBtn() {

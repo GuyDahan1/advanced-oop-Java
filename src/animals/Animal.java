@@ -10,9 +10,7 @@ import mobility.Point;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 /**
  * Represents animal object
@@ -343,5 +341,6 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
     public Thread getThisThread() {
         return thisThread;
     }
+
 }
 
