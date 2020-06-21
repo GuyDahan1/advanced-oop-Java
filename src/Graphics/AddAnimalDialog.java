@@ -131,6 +131,8 @@ public class AddAnimalDialog extends JDialog implements ActionListener, ChangeLi
             animalGen = gen.Male;
         else if (e.getSource().equals(hermaphroditeRadioButton))
             animalGen = gen.Hermaphrodite;
+
+
         validate();
     }
 

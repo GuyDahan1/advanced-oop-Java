@@ -6,21 +6,39 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61f2286c-994c-4448-b696-78cb6f29de0a" name="Default Changelist" comment="END THE TOUR">
+    <list default="true" id="61f2286c-994c-4448-b696-78cb6f29de0a" name="Default Changelist" comment="CourierTour fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/ActionMessageDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/ActionMessageDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/AddAnimalDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/AddAnimalDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/Graphics/CompetitionPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/AnimalThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/AnimalThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/CourierTournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/CourierTournament.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/RegularTournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/RegularTournament.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/Tournament.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Repo/thread/TournamentThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Repo/thread/TournamentThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thread/AnimalThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/AnimalThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thread/CourierTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/CourierTournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thread/RegularTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/RegularTournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thread/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/Tournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphics/ActionMessageDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/ActionMessageDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphics/AddAnimalDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/AddAnimalDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphics/AddCompetition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/AddCompetition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphics/CompetitionFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/CompetitionFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphics/CompetitionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/CompetitionPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphics/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graphics/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/thread/TournamentThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/TournamentThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,6 +141,7 @@
       <workItem from="1592656771547" duration="7780000" />
       <workItem from="1592677111823" duration="3066000" />
       <workItem from="1592717843509" duration="10896000" />
+      <workItem from="1592762882405" duration="2899000" />
     </task>
     <task id="LOCAL-00001" summary="Excited repo upload">
       <created>1592055169043</created>
@@ -392,38 +411,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" width="1536" height="824" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1592371923270" />
-    <state width="1493" height="161" key="GridCell.Tab.0.bottom" timestamp="1592735138934">
+    <state width="1493" height="256" key="GridCell.Tab.0.bottom" timestamp="1592765727306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="161" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592735138934" />
-    <state width="1493" height="161" key="GridCell.Tab.0.center" timestamp="1592735138934">
+    <state width="1493" height="256" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592765727306" />
+    <state width="1493" height="256" key="GridCell.Tab.0.center" timestamp="1592765727306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="161" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592735138934" />
-    <state width="1493" height="161" key="GridCell.Tab.0.left" timestamp="1592735138933">
+    <state width="1493" height="256" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592765727306" />
+    <state width="1493" height="256" key="GridCell.Tab.0.left" timestamp="1592765727305">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="161" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592735138933" />
-    <state width="1493" height="161" key="GridCell.Tab.0.right" timestamp="1592735138934">
+    <state width="1493" height="256" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592765727305" />
+    <state width="1493" height="256" key="GridCell.Tab.0.right" timestamp="1592765727306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="161" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592735138934" />
-    <state width="1493" height="248" key="GridCell.Tab.1.bottom" timestamp="1592734562722">
+    <state width="1493" height="256" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592765727306" />
+    <state width="1493" height="256" key="GridCell.Tab.1.bottom" timestamp="1592765735941">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="248" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592734562722" />
-    <state width="1493" height="248" key="GridCell.Tab.1.center" timestamp="1592734562722">
+    <state width="1493" height="256" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592765735941" />
+    <state width="1493" height="256" key="GridCell.Tab.1.center" timestamp="1592765735941">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="248" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592734562722" />
-    <state width="1493" height="248" key="GridCell.Tab.1.left" timestamp="1592734562722">
+    <state width="1493" height="256" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592765735941" />
+    <state width="1493" height="256" key="GridCell.Tab.1.left" timestamp="1592765735941">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="248" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592734562722" />
-    <state width="1493" height="248" key="GridCell.Tab.1.right" timestamp="1592734562722">
+    <state width="1493" height="256" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592765735941" />
+    <state width="1493" height="256" key="GridCell.Tab.1.right" timestamp="1592765735941">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="248" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592734562722" />
+    <state width="1493" height="256" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592765735941" />
     <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1592731165278">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -456,10 +475,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="369" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1592596773777" />
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592570467650">
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592735576741">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1592570467650" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1592735576741" />
     <state x="555" y="292" key="com.intellij.uiDesigner.propertyInspector.editors.string.StringEditorDialog" timestamp="1592328668034">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -499,8 +518,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Graphics/CompetitionFrame.java</url>
-          <line>374</line>
-          <option name="timeStamp" value="126" />
+          <line>288</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Graphics/CompetitionFrame.java</url>
+          <line>233</line>
+          <option name="timeStamp" value="135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/thread/Tournament.java</url>
@@ -510,16 +534,15 @@
           </properties>
           <option name="timeStamp" value="122" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Graphics/CompetitionFrame.java</url>
+          <line>436</line>
+          <properties class="Graphics.CompetitionFrame" method="newCompetition">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="134" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="animal.getType().contains(words[1])" language="JAVA" />
-        <watch expression="tournamentThread" language="JAVA" />
-        <watch expression="tournamentThread.interrupt();" language="JAVA" />
-        <watch expression="tournamentThread.isAlive()" language="JAVA" />
-        <watch expression="tournamentThread.join();" language="JAVA" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

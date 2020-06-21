@@ -47,7 +47,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private int currentTournament = 0;
     private int userChosenTour = 0;
 
-    private Vector<String> chosenCompetition = new Vector<>();
+    private final Vector<String> chosenCompetition = new Vector<>();
     private final Vector<String> chosenTournament = new Vector<>();
     private final Vector<String> tourName = new Vector<>();
     private GameState gameState;
@@ -275,7 +275,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void startTournament() {
-        gameState = GameState.COMPETING;
+        gameState = GameState.START;
         updateBtnStatus();
 
         if (animalGroupVector.size() > 1)
@@ -372,9 +372,14 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
             String[] arrOfString = new String[8];
 
-            arrOfString[0] = tourName.get(currentTournament);
-            arrOfString[1] = chosenCompetition.get(currentTournament);
-            arrOfString[2] = chosenTournament.get(currentTournament);
+            try {
+                arrOfString[0] = tourName.get(currentTournament);
+                arrOfString[1] = chosenCompetition.get(currentTournament);
+                arrOfString[2] = chosenTournament.get(currentTournament);
+            } catch (Exception ignored) {
+                return;
+            }
+
 
             for (int i = 0; i < animalVector.size(); i++)
                 arrOfString[i + 3] = animalVector.get(i).getName();
@@ -407,8 +412,12 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         addCompetition.getRegularTourRadioBox().setEnabled(false);
         addCompetition.getCourierTourRadioBox().setEnabled(false);
         chosenTournament.add(jRadioButton.getText());
-        vectorString.add(chosenTournament.get(currentTournament));
 
+        if (chosenTournament.get(chosenTournament.size() - 1).contains("Courier"))
+            if (!chosenCompetition.get(chosenCompetition.size() - 1).contains("Terr"))
+                chosenCompetition.set(chosenCompetition.size() - 1, "Terrestrial animals");
+
+        vectorString.add(chosenTournament.get(currentTournament));
         tourName.add(addCompetition.getTextField1().getText());
 
         addCompetition.getAddAnimalButton().setEnabled(true);
@@ -426,232 +435,229 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     }
 
     private void newCompetition() {
-/*
-        if (chosenTournament.get(chosenTournament.size() - 1).contains("Courier"))
-            if (animalVector.size() % 2 != 0) {
-                JOptionPane.showMessageDialog(this,
-                        "Must have pairs to compete \nCourier tournament",
-                        "Invalid amount of participants",
-                        JOptionPane.ERROR_MESSAGE);
-                addAnimalDialog.dispose();
-                currentPosition = -1;
-                animalVector.clear();
-            }*/
-            addCompetition.getRegularTourRadioBox().setEnabled(true);
-            addCompetition.getCourierTourRadioBox().setEnabled(true);
-            addCompetition.getOkOrNewCompetitionBtn().setText("Ok");
-            addCompetition.getOkOrNewCompetitionBtn().setEnabled(true);
-            addCompetition.getAddAnimalButton().setEnabled(false);
-            addCompetition.getNewCompetitionButton().setEnabled(false);
-            addCompetition.getCompetitionTypeComboBox().setEnabled(true);
+        addCompetition.getRegularTourRadioBox().setEnabled(true);
+        addCompetition.getCourierTourRadioBox().setEnabled(true);
+        addCompetition.getOkOrNewCompetitionBtn().setText("Ok");
+        addCompetition.getOkOrNewCompetitionBtn().setEnabled(true);
+        addCompetition.getAddAnimalButton().setEnabled(false);
+        addCompetition.getNewCompetitionButton().setEnabled(false);
+        addCompetition.getCompetitionTypeComboBox().setEnabled(true);
 
-            Random randomNum = new Random();
-            String randomTourName = "EmptyName#" + randomNum.nextInt(1000);
+        Random randomNum = new Random();
+        String randomTourName = "EmptyName#" + randomNum.nextInt(1000);
 
-            addCompetition.getTextField1().setText(randomTourName);
+        addCompetition.getTextField1().setText(randomTourName);
+    }
+
+    /**
+     * Preforms the relevant function call , depending on the current state of the program.
+     */
+    private void clearCalled() {
+        if (animalVector.size() > 0) {
+            ChooseAnimalToClr();
+            addCompetition.getAddAnimalButton().setEnabled(true);
+        } else
+            clearCompetitionDialog();
+        newCompetition();
+
+        updateBtnStatus();
+    }
+
+    /**
+     * Changes the game state according to the user's choice of clearing.
+     */
+    private void clearCompetitionDialog() {
+        int choice = ActionMessageDialog.createClrCompetitionDialog(this);
+        gameState = (choice == 0 ? GameState.CHOOSING_COMP_FIRST_ANIMAL : GameState.CHOOSING_COMP_TYPE);
+    }
+
+
+    /**
+     * Clears the chosen animal from the frame and updated the game state accordingly.
+     */
+    private void ChooseAnimalToClr() {
+        if (displayClrOptions()) {
+            updateAnimalLocationPostClr();
+
+            if (animalVector.isEmpty())
+                gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
+            else
+                gameState = GameState.CHOOSING_COMP_ANIMALS;
         }
+    }
 
-        /**
-         * Preforms the relevant function call , depending on the current state of the program.
-         */
-        private void clearCalled () {
-            if (animalVector.size() > 0) {
-                ChooseAnimalToClr();
-                addCompetition.getAddAnimalButton().setEnabled(true);
-            } else
-                clearCompetitionDialog();
-            newCompetition();
+    /**
+     * Display the animals' names that can be chose to delete the animal.
+     *
+     * @return true if animal was chosen by user, else if exited- return false.
+     */
 
-            updateBtnStatus();
-        }
+    private boolean displayClrOptions() {
+        Vector<String> animalNames = new Vector<>();
+        for (Animal animal : animalVector) animalNames.add(animal.getName());
 
-        /**
-         * Changes the game state according to the user's choice of clearing.
-         */
-        private void clearCompetitionDialog () {
-            int choice = ActionMessageDialog.createClrCompetitionDialog(this);
-            gameState = (choice == 0 ? GameState.CHOOSING_COMP_FIRST_ANIMAL : GameState.CHOOSING_COMP_TYPE);
-        }
+        Object[] options = animalNames.toArray();
+        String nameToClear = ActionMessageDialog.createClrAnimalDialog(this, options);
 
-
-        /**
-         * Clears the chosen animal from the frame and updated the game state accordingly.
-         */
-        private void ChooseAnimalToClr () {
-            if (displayClrOptions()) {
-                updateAnimalLocationPostClr();
-
-                if (animalVector.isEmpty())
-                    gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
-                else
-                    gameState = GameState.CHOOSING_COMP_ANIMALS;
-            }
-        }
-
-        /**
-         * Display the animals' names that can be chose to delete the animal.
-         *
-         * @return true if animal was chosen by user, else if exited- return false.
-         */
-
-        private boolean displayClrOptions () {
-            Vector<String> animalNames = new Vector<>();
-            for (Animal animal : animalVector) animalNames.add(animal.getName());
-
-            Object[] options = animalNames.toArray();
-            String nameToClear = ActionMessageDialog.createClrAnimalDialog(this, options);
-
-            if (nameToClear != null) {
-                for (int i = 0; i < animalVector.size(); ++i)
-                    if (animalVector.get(i).getName().equals(nameToClear)) {
-                        animalVector.remove(i);
-                        break;
-                    }
-                return true;
-            } else
-                return false;
-        }
-
-        /**
-         * Updates all animals' location after an animal was cleared from the competition .S
-         */
-        private void updateAnimalLocationPostClr () {
-            String animalsType = chosenCompetition.get(currentTournament).contains("Water") ? "waterAnimals" : "otherAnimals";
-            currentPosition--;
-            switch (animalsType) {
-                case "waterAnimals":
-
-                    for (int i = 0; i < animalVector.size(); i++)
-                        animalVector.get(i).setPosition(startPointWater[i]);
+        if (nameToClear != null) {
+            for (int i = 0; i < animalVector.size(); ++i)
+                if (animalVector.get(i).getName().equals(nameToClear)) {
+                    animalVector.remove(i);
                     break;
+                }
+            return true;
+        } else
+            return false;
+    }
 
-                case "otherAnimals":
+    /**
+     * Updates all animals' location after an animal was cleared from the competition .S
+     */
+    private void updateAnimalLocationPostClr() {
+        String animalsType = chosenCompetition.get(currentTournament).contains("Water") ? "waterAnimals" : "otherAnimals";
+        currentPosition--;
+        switch (animalsType) {
+            case "waterAnimals":
 
-                    for (int i = 0; i < animalVector.size(); i++)
-                        animalVector.get(i).setPosition(startPoint[i]);
-                    break;
+                for (int i = 0; i < animalVector.size(); i++)
+                    animalVector.get(i).setPosition(startPointWater[i]);
+                break;
+
+            case "otherAnimals":
+
+                for (int i = 0; i < animalVector.size(); i++)
+                    animalVector.get(i).setPosition(startPoint[i]);
+                break;
+        }
+    }
+
+    /**
+     * Creates the Information table when the "Info" button is clicked.
+     */
+    private void createInfoTable() {
+        data = new String[tempData.size()][];
+        for (int i = 0; i < tempData.size(); i++)
+            data[i] = (String[]) tempData.get(i);
+
+        InfoTable table = new InfoTable(data);
+        table.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        table.setSize(600, 200);
+        table.setVisible(true);
+        table.setTitle("InfoTable");
+    }
+
+    private void createCompetitionTable() {
+        String[][] competitionTable = new String[competitionTableVector.size()][];
+        for (int i = 0; i < competitionTableVector.size(); i++)
+            competitionTable[i] = (String[]) competitionTableVector.get(i);
+
+        CompetitionsTable table = new CompetitionsTable(competitionTable);
+        table.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        table.setSize(1000, 200);
+        table.setVisible(true);
+        table.setTitle("Competition Table");
+    }
+
+
+    /**
+     * Updates the relevant buttons' enabling/disabling status by the current game state.
+     */
+    private void updateBtnStatus() {
+        switch (gameState) {
+            case CHOOSING_COMP_TYPE -> {  // relevant state =   CHOOSING_COMP_TYPE
+                competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
-        }
-
-        /**
-         * Creates the Information table when the "Info" button is clicked.
-         */
-        private void createInfoTable () {
-            data = new String[tempData.size()][];
-            for (int i = 0; i < tempData.size(); i++)
-                data[i] = (String[]) tempData.get(i);
-
-            InfoTable table = new InfoTable(data);
-            table.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            table.setSize(600, 200);
-            table.setVisible(true);
-            table.setTitle("InfoTable");
-        }
-
-        private void createCompetitionTable () {
-            String[][] competitionTable = new String[competitionTableVector.size()][];
-            for (int i = 0; i < competitionTableVector.size(); i++)
-                competitionTable[i] = (String[]) competitionTableVector.get(i);
-
-            CompetitionsTable table = new CompetitionsTable(competitionTable);
-            table.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            table.setSize(1000, 200);
-            table.setVisible(true);
-            table.setTitle("Competition Table");
-        }
-
-
-        /**
-         * Updates the relevant buttons' enabling/disabling status by the current game state.
-         */
-        private void updateBtnStatus () {
-            switch (gameState) {
-                case CHOOSING_COMP_TYPE -> {  // relevant state =   CHOOSING_COMP_TYPE
-                    competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
-                    competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
-                    competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
-                    competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
-                }
-                case CHOOSING_COMP_FIRST_ANIMAL -> { // relevant state =   CHOOSING_COMP_FIRST_ANIMAL
-                    competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
-                }
-                case CHOOSING_COMP_ANIMALS -> { // relevant state =    CHOOSING_COMP_ANIMALS
-                    competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
-                }
-                case COMPETING -> { // relevant state =    COMPETING
-                    competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
-                    competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(false);
-                }
-                case CLEARED -> { // relevant state =    CLEARED
-                    competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
-                    competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
-                    competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
-                    competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
-                    competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
-
-                } // invalid state
-                default -> throw new IllegalStateException("Unexpected value: " + gameState);
+            case CHOOSING_COMP_FIRST_ANIMAL -> { // relevant state =   CHOOSING_COMP_FIRST_ANIMAL
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
+            case CHOOSING_COMP_ANIMALS -> { // relevant state =    CHOOSING_COMP_ANIMALS
+                competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
+            }
+            case COMPETING -> { // relevant state =    COMPETING
+                competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
+            }
+            case START -> { // relevant state =    START
+                competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(false);
+            }
+            case CLEARED -> { // relevant state =    CLEARED
+
+                competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
+                competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getStartBtn().setEnabled(false);
+                competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
+
+            } // invalid state
+            default -> throw new IllegalStateException("Unexpected value: " + gameState);
         }
+    }
 
-        public static void centreWindow (Window frame){
-            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-            int x = (int) ((dimension.getWidth() - frame.getWidth()) / 4);
-            int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-            frame.setLocation(x, y);
-        }
+    public static void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 4);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
+    }
 
-        public Vector<Animal> getAnimalVector () {
-            return animalVector;
-        }
+    public Vector<Animal> getAnimalVector() {
+        return animalVector;
+    }
 
-        public String getChosenCompetition () {
-            return chosenCompetition.get(currentTournament);
-        }
+    public String getChosenCompetition() {
+        return chosenCompetition.get(currentTournament);
+    }
 
-        public CompetitionPanel getCompetitionPanel () {
-            return competitionPanel;
-        }
+    public CompetitionPanel getCompetitionPanel() {
+        return competitionPanel;
+    }
 
-        public static Point[] getStartPointWater () {
-            return startPointWater;
-        }
+    public static Point[] getStartPointWater() {
+        return startPointWater;
+    }
 
-        public static Point[] getStartPoint () {
-            return startPoint;
-        }
+    public static Point[] getStartPoint() {
+        return startPoint;
+    }
 
-        public static Point[] getEndPoint () {
-            return endPoint;
-        }
+    public static Point[] getEndPoint() {
+        return endPoint;
+    }
 
-        public static Point[] getEndPointWater () {
-            return endPointWater;
-        }
+    public static Point[] getEndPointWater() {
+        return endPointWater;
+    }
 
-        public void setAnimalVector (Animal[]animals){
-            this.animalVector.clear();
-            Collections.addAll(this.animalVector, animals);
-        }
+    public void setAnimalVector(Animal[] animals) {
+        this.animalVector.clear();
+        Collections.addAll(this.animalVector, animals);
+    }
 
 
-        public static void main (String[]args){
-            MainFrameSingelton.getInstance();
-
-        }
-
+    public static void main(String[] args) {
+        MainFrameSingelton.getInstance();
 
     }
+
+
+}
 

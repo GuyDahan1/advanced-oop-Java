@@ -17,9 +17,13 @@ public enum GameState {
      */
     CHOOSING_COMP_ANIMALS,
     /**
-     * "competition is on" state
+     * "competition is SETTING UP" state
      */
     COMPETING,
+    /**
+     * "competition is ON" state
+     */
+    START,
     /**
      * "*clear* button was clicked" state
      */

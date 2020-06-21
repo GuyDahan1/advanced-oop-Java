@@ -7,7 +7,6 @@ import javax.swing.*;
  */
 public class ActionMessageDialog {
 
-
     /**
      * Creates JDialog to get the user input whether or not a new competition should be chosen.
      *

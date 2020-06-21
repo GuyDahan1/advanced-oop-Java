@@ -22,7 +22,6 @@ public class AddCompetition extends JFrame implements ActionListener {
     private JButton newCompetitionButton;
     String randomTourName;
 
-
     public AddCompetition() {
         super("Add Competition");
 

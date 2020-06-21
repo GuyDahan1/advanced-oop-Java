@@ -39,7 +39,6 @@ public class TournamentThread implements Runnable {
         this.booleans = booleans;
     }
 
-
     public void startCompetitionDialog() {
         JFrame f = new JFrame();
         f.setSize(new Dimension(150, 150));
