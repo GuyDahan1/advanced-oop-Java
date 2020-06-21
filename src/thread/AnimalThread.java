@@ -8,7 +8,6 @@ import mobility.Point;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AnimalThread implements Runnable {
-    private static int currentFinish = 0;
     private final Animal participant;//this Animal
     private final double neededDistance;//the distance between the start point to the end point
     private final AtomicBoolean startFlag;//Obj boolean
@@ -17,7 +16,7 @@ public class AnimalThread implements Runnable {
     private Tournament tour;
     private boolean regularTournamentBoolean;
 
-    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour,Tournament tour) {
+    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean start, AtomicBoolean end, Referee ref, boolean regularTour, Tournament tour) {
         this.participant = participant;
         this.neededDistance = neededDistance;
         startFlag = start;
@@ -67,13 +66,23 @@ public class AnimalThread implements Runnable {
                         }
                     }
                     if (participant.getTotalDistance() >= this.neededDistance) {
-                        this.finishFlag.set(true);
-                        synchronized (ref) {
-                            ref.notify();
-                        }
-                        tour.notifyTournamentThread();
-                        System.out.println("nNOTIFY TOURNAMENTTHREAD");
+                        synchronized (this) {
+                            this.finishFlag.set(true);
+                            synchronized (ref) {
+                                ref.notify();
+                                System.out.println("ref.notify(); i am here");
+                            }
+                            System.out.println("before tour.notifyTournamentThread(); i am here");
+                            tour.notifyTournamentThread();
+                            System.out.println("after tour.notifyTournamentThread(); i am here");
 
+                            try {
+                                System.out.println(participant.getName() + " is waiting");
+                                wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                     double speed = participant.getSpeed();
                     Point position = participant.getPosition();
@@ -89,7 +98,7 @@ public class AnimalThread implements Runnable {
                     }
                     try {
                         //noinspection BusyWait
-                            Thread.sleep(15);
+                        Thread.sleep(15);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -98,11 +107,6 @@ public class AnimalThread implements Runnable {
             }
         }
         startFlag.set(false);
-    }
-
-
-    public AtomicBoolean getFinishFlag() {
-        return finishFlag;
     }
 
 

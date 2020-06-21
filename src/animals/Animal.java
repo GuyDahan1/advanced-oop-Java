@@ -315,10 +315,9 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, ILoca
             return false;
         else {
             setCurrentEnergy(energy);
-            synchronized (thisThread){
-                thisThread.notify();
-                System.out.println(thisThread.isAlive());
-            }
+//            synchronized (thisThread){
+//                thisThread.notify();
+//            }
             return true;
         }
     }

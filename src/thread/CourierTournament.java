@@ -70,15 +70,10 @@ public class CourierTournament extends Tournament {
             }
             super.frame.setAnimalVector(animals[i]);
             TournamentThread tournamentThread = new TournamentThread(animalThread, scores, startSignal, i, booleansArray);
-            super.setTournamentThread(tournamentThread);
             t = new Thread(tournamentThread, "TournamentThread");
+            super.setTournamentThread(t);
             t.start();
         }
     }
 
-    public void notifyTournamentThread() {
-        synchronized (t) {
-            t.notify();
-        }
-    }
 }

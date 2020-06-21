@@ -25,13 +25,11 @@ public class Referee implements Runnable {
                     e.printStackTrace();
                 }
             }
-            synchronized (this) {
-                scores.addRegularTour(name);
-                System.out.println("score added");
-                System.out.println(Thread.activeCount());
-                System.out.println(Thread.currentThread());
-                notify();
-            }
+        }
+        synchronized (this) {
+            scores.addRegularTour(name);
+            System.out.println("System.out.println(score added); i am here");
         }
     }
+
 }

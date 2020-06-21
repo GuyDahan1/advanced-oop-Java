@@ -1,7 +1,5 @@
 package thread;
 
-import org.w3c.dom.ls.LSOutput;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.TimerTask;
@@ -12,21 +10,24 @@ import static Graphics.CompetitionFrame.centreWindow;
 
 public class TournamentThread implements Runnable {
 
+    private static int curFinish = 0;
     private final Scores scores;
     private final AtomicBoolean startSignal;
-    AnimalThread[][] animalsArray;
+    private AnimalThread[][] animalsArray;
     private static int count = 3;
     private String[][] arrayOfScore;
     private final int index;
     private boolean regularTournamentBool;
     private AtomicBoolean[] booleans;
+    private int size;
 
-    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index, boolean regularTour) {
+    public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index, int size) {
         this.animalsArray = animalsThreads;
         this.scores = scores;
         this.startSignal = startSignal;
         this.index = index;
-        this.regularTournamentBool = regularTour;
+        this.regularTournamentBool = true;
+        this.size = size;
     }
 
     public TournamentThread(AnimalThread[][] animalsThreads, Scores scores, AtomicBoolean startSignal, int index, AtomicBoolean[] booleans) {
@@ -91,45 +92,76 @@ public class TournamentThread implements Runnable {
             }
         }
 
+        if (regularTournamentBool) {
+            regularTournament();
+        } else
+            courierTournament();
+
+
+        while (true) {
+            try {
+                synchronized (this) {
+                    System.out.println("tournamentThread wait");
+                    wait();
+                }
+            } catch (InterruptedException e) {
+                System.out.println("tournament FINSH");
+                boolean flag = false;
+                curFinish++;
+                System.out.println("tournamentThread wake");
+                if (curFinish == size) {
+                    System.out.println("FINISH TOUR");
+                    flag = true;
+                }
+                if (flag) {
+                    break;
+                }
+            }
+        }
+        System.out.println("finish Tournament build TABLE");//TODO open frame with the winners and update the table in the frame
+    }
+
+
+    private void regularTournament() {
         synchronized (startSignal) {
             if (!startSignal.get()) {
                 this.startSignal.set(true);
             }
         }
-        if (regularTournamentBool) {
-            arrayOfScore = new String[animalsArray.length][];
-            for (int j = 0; j < animalsArray[index].length; j++) {
-                synchronized (animalsArray[index][j]) {
-                    animalsArray[index][j].notifyAll();
-                }
-            }
-            arrayOfScore[index] = new String[animalsArray[index].length];
-            for (int j = 0; j < animalsArray[index].length; j++)
-                arrayOfScore[index][j] = scores.getScores().toString();
-        } else {
-            int i = 0;
-            for (int j = 0; j < animalsArray[index].length; j++) {
-                synchronized (animalsArray[index][j]) {
-                    animalsArray[index][j].notifyAll();
-                }
-            }
-            while (true) {
+        arrayOfScore = new String[animalsArray.length][];
+        System.out.println("arrayOfScore = new String[animalsArray.length][]; i am here");
+        for (int j = 0; j < animalsArray[index].length; j++) {
+            synchronized (animalsArray[index][j]) {
+                animalsArray[index][j].notifyAll();
+                System.out.println("animalsArray[index][j].notifyAll(); i am here");
 
-                if (booleans[i].get()) {
-                    synchronized (animalsArray[index][i]) {
-                        animalsArray[index][i].notifyAll();
+            }
+        }
+    }
+
+    private void courierTournament() {
+        int i = 0;
+        for (int j = 0; j < animalsArray[index].length; j++) {
+            synchronized (animalsArray[index][j]) {
+                animalsArray[index][j].notifyAll();
+            }
+        }
+        while (true) {
+
+            if (booleans[i].get()) {
+                synchronized (animalsArray[index][i]) {
+                    animalsArray[index][i].notifyAll();
+                }
+            }
+            if (i == animalsArray[index].length - 1) {
+                synchronized (this) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
-                if (i == animalsArray[index].length - 1) {
-                    synchronized (this) {
-                        try {
-                            wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    i = 0;
-                }
+                i = 0;
             }
         }
     }
